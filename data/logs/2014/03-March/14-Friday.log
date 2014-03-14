@@ -1,0 +1,311 @@
+
+
+Starting up. 14:23.05
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Unknown setting in configuration: 'metroid_delay'
+Saved mode is 'extend-a-traitormongous'
+[14:23:06]ADMIN: Loading jobban_rank
+[14:23:06]ADMIN: jobban_keylist was empty
+[14:23:06]ADMIN: Loading Banlist
+
+
+Starting up. 14:23.22
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Unknown setting in configuration: 'metroid_delay'
+Saved mode is 'extend-a-traitormongous'
+[14:23:23]ADMIN: Loading jobban_rank
+[14:23:23]ADMIN: jobban_keylist was empty
+[14:23:23]ADMIN: Loading Banlist
+
+
+Starting up. 14:26.03
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Unknown setting in configuration: 'metroid_delay'
+Saved mode is 'extend-a-traitormongous'
+[14:26:03]ADMIN: Loading jobban_rank
+[14:26:03]ADMIN: jobban_keylist was empty
+[14:26:03]ADMIN: Loading Banlist
+[14:26:04]ACCESS: Login: Guap6512/(Guap6512) from localhost-1851605342 || BYOND v504
+[14:26:14]ADMIN: Guap6512 has started the game.
+[14:26:15]DEBUG: Guap6512 had traitor enabled, so we are drafting them.
+[14:26:15]GAME: Number of traitors: 0
+[14:26:15]ACCESS: Logout: *no key*/(Guap6512)
+[14:26:15]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[14:26:18]DEBUG: Next event in 27.244 minutes.
+[14:26:22]ADMIN: Guap6512/(William Wilkerson) jumped to EVA Maintenance
+[14:26:32]ADMIN: Guap6512/(William Wilkerson) attempting to monkeyize Guap6512/(William Wilkerson)
+[14:26:37]ACCESS: Logout: *no key*/(William Wilkerson)
+[14:26:37]ACCESS: Login: Guap6512/(monkey (791)) from localhost-1851605342 || BYOND v504
+[14:28:15]ADMIN: Guap6512/(monkey (791)) has used rudimentary transformation on Guap6512/(monkey (791)). Transforming to human; deletemob=1
+[14:28:15]ACCESS: Logout: *no key*/(monkey (791))
+[14:28:15]ACCESS: Login: Guap6512/(monkey (791)) from localhost-1851605342 || BYOND v504
+[14:28:29]ACCESS: Logout: *no key*/(monkey (791))
+[14:28:29]ACCESS: Login: guap6512/(monkey (791)) from localhost-1851605342 || BYOND v504
+[14:28:29]ADMIN: Guap6512/(monkey (791)) modified monkey (791)'s ckey to guap6512
+[14:28:40]ADMIN: Guap6512/(monkey (791)) has robotized guap6512.
+[14:28:42]ACCESS: Logout: *no key*/(monkey (791))
+[14:28:42]ACCESS: Login: guap6512/(Default Cyborg-284) from localhost-1851605342 || BYOND v504
+[14:29:04]ADMIN: guap6512/(Pidorg) deleted the flash at (0,0,0)
+[14:53:35]DEBUG: Firing random event. #Engineer:0 #Medical:0 #Security:0 #Scientist:0 #AI:0 #Cyborg:0 #Janitor:0 #Botanist:0 ||| /datum/event/economic_event:300/datum/event/trivial_news:400/datum/event/mundane_news:300/datum/event/pda_spam:200/datum/event/money_lotto:50/datum/event/carp_migration:20/datum/event/brand_intelligence:20/datum/event/rogue_drone:5/datum/event/infestation:100/datum/event/communications_blackout:50/datum/event/ionstorm:1/datum/event/grid_check:25/datum/event/electrical_storm:1/datum/event/wallrot:1/datum/event/spacevine:10/datum/event/viral_infection:25/datum/event/prison_break:1|||Picked:/datum/event/mundane_news
+[14:53:35]DEBUG: Next event in 38.414 minutes.
+[15:09:20]ACCESS: Logout: guap6512/(Pidorg)
+
+
+Starting up. 15:18.55
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Unknown setting in configuration: 'metroid_delay'
+Saved mode is 'extend-a-traitormongous'
+[15:18:55]ADMIN: Loading jobban_rank
+[15:18:55]ADMIN: jobban_keylist was empty
+[15:18:55]ADMIN: Loading Banlist
+[15:18:55]ACCESS: Login: Guap6512/(Guap6512) from localhost-1851605342 || BYOND v504
+[15:19:14]ADMIN: Guap6512 has started the game.
+[15:19:23]ADMIN: Guap6512/(Guap6512) set the mode as extended.
+[15:19:29]ADMIN: Guap6512 has started the game.
+[15:19:31]DEBUG: Next event in 36.588 minutes.
+[15:19:40]ACCESS: Logout: *no key*/(Guap6512)
+[15:19:40]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[15:20:14]ADMIN: Guap6512/(William Wilkerson) has robotized Guap6512.
+[15:20:16]ACCESS: Logout: *no key*/(William Wilkerson)
+[15:20:16]ACCESS: Login: Guap6512/(Default Cyborg-413) from localhost-1851605342 || BYOND v504
+[15:29:03]ACCESS: Logout: Guap6512/(G.O.N.D.O.N.)
+
+
+Starting up. 16:04.04
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Unknown setting in configuration: 'metroid_delay'
+Saved mode is 'extended'
+[16:04:05]ADMIN: Loading jobban_rank
+[16:04:05]ADMIN: jobban_keylist was empty
+[16:04:05]ADMIN: Loading Banlist
+[16:04:05]ACCESS: Login: Guap6512/(Guap6512) from localhost-1851605342 || BYOND v504
+[16:04:10]ADMIN: Guap6512 has started the game.
+[16:04:14]DEBUG: Next event in 28.336 minutes.
+[16:04:15]ACCESS: Logout: *no key*/(Guap6512)
+[16:04:15]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[16:07:53]ADMIN: Guap6512/(William Wilkerson) jumped to 16,29,2 in Space
+[16:07:59]ADMIN: Guap6512/(William Wilkerson) jumped to 15,34,2 in Space
+[16:08:03]ADMIN: Guap6512/(William Wilkerson) jumped to 14,38,2 in Space
+[16:08:06]ADMIN: Guap6512/(William Wilkerson) jumped to 14,40,2 in Space
+[16:08:07]EMOTE: William Wilkerson/Guap6512 : <B>William Wilkerson</B> coughs up blood!
+[16:08:31]EMOTE: William Wilkerson/Guap6512 : <B>William Wilkerson</B> coughs up blood!
+[16:08:54]ACCESS: Logout: *no key*/(William Wilkerson)
+[16:08:54]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[16:09:06]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:09:08]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:09:16]ACCESS: Logout: *no key*/(William Wilkerson)
+[16:09:16]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[16:09:18]EMOTE: William Wilkerson/Guap6512 : <B>William Wilkerson</B> coughs up blood!
+[16:09:20]EMOTE: William Wilkerson/Guap6512 : <B>William Wilkerson</B> gasps for air!
+[16:09:21]ADMIN: Guap6512/(William Wilkerson) healed / revived Guap6512/(William Wilkerson)
+[16:09:24]EMOTE: William Wilkerson/Guap6512 : <B>William Wilkerson</B> gasps!
+[16:09:26]ADMIN: Guap6512/(William Wilkerson) jumped to 14,38,2 in Space
+[16:09:29]ADMIN: Guap6512/(William Wilkerson) jumped to 14,40,2 in Space
+[16:09:39]ACCESS: Logout: *no key*/(William Wilkerson)
+[16:09:39]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[16:09:53]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:09:55]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:09:55]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:09:56]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:09:57]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:09:58]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:09:58]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:09:59]ADMIN: Guap6512/(William Wilkerson) teleported @Guap6512/(William Wilkerson)
+[16:10:01]ACCESS: Logout: *no key*/(William Wilkerson)
+[16:10:01]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[16:11:49]ACCESS: Logout: Guap6512/(William Wilkerson)
+
+
+Starting up. 16:16.19
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Unknown setting in configuration: 'metroid_delay'
+Saved mode is 'extended'
+[16:16:19]ADMIN: Loading jobban_rank
+[16:16:19]ADMIN: jobban_keylist was empty
+[16:16:19]ADMIN: Loading Banlist
+[16:16:20]ACCESS: Login: Guap6512/(Guap6512) from localhost-1851605342 || BYOND v504
+[16:16:29]ADMIN: Guap6512 has started the game.
+[16:16:31]DEBUG: Next event in 26.106 minutes.
+[16:16:34]ACCESS: Logout: *no key*/(Guap6512)
+[16:16:34]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[16:16:51]ACCESS: Logout: Guap6512/(William Wilkerson)
+
+
+Starting up. 16:57.28
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Unknown setting in configuration: 'metroid_delay'
+Saved mode is 'extended'
+[16:57:29]ADMIN: Loading jobban_rank
+[16:57:29]ADMIN: jobban_keylist was empty
+[16:57:29]ADMIN: Loading Banlist
+[16:57:29]ACCESS: Login: Guap6512/(Guap6512) from localhost-1851605342 || BYOND v504
+[16:57:36]ADMIN: Guap6512 has started the game.
+[16:57:39]DEBUG: Next event in 24.524 minutes.
+[16:57:40]ACCESS: Logout: *no key*/(Guap6512)
+[16:57:40]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[16:59:29]ADMIN: Guap6512/(William Wilkerson) attempting to monkeyize Guap6512/(William Wilkerson)
+[16:59:34]ACCESS: Logout: *no key*/(William Wilkerson)
+[16:59:34]ACCESS: Login: Guap6512/(monkey (734)) from localhost-1851605342 || BYOND v504
+[17:02:34]ACCESS: Logout: Guap6512/(monkey (734))
+
+
+Starting up. 17:07.50
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Unknown setting in configuration: 'metroid_delay'
+Saved mode is 'extended'
+[17:07:50]ADMIN: Loading jobban_rank
+[17:07:50]ADMIN: jobban_keylist was empty
+[17:07:50]ADMIN: Loading Banlist
+[17:07:50]ACCESS: Login: Guap6512/(Guap6512) from localhost-1851605342 || BYOND v504
+[17:07:56]ADMIN: Guap6512 has started the game.
+[17:07:58]DEBUG: Next event in 38.342 minutes.
+[17:07:59]ACCESS: Logout: *no key*/(Guap6512)
+[17:07:59]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[17:08:28]ADMIN: Guap6512/(William Wilkerson) attempting to monkeyize Guap6512/(William Wilkerson)
+[17:08:33]ACCESS: Logout: *no key*/(William Wilkerson)
+[17:08:33]ACCESS: Login: Guap6512/(monkey (575)) from localhost-1851605342 || BYOND v504
+
+
+Starting up. 17:16.40
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Unknown setting in configuration: 'metroid_delay'
+Saved mode is 'extended'
+[17:16:40]ADMIN: Loading jobban_rank
+[17:16:40]ADMIN: jobban_keylist was empty
+[17:16:40]ADMIN: Loading Banlist
+[17:16:40]ACCESS: Login: Guap6512/(Guap6512) from localhost-1851605342 || BYOND v504
+[17:16:49]ADMIN: Guap6512 has started the game.
+[17:16:51]DEBUG: Next event in 33.46 minutes.
+[17:16:53]ACCESS: Logout: *no key*/(Guap6512)
+[17:16:53]ACCESS: Login: Guap6512/(William Wilkerson) from localhost-1851605342 || BYOND v504
+[17:17:11]ADMIN: Guap6512/(William Wilkerson) attempting to monkeyize Guap6512/(William Wilkerson)
+[17:17:16]ACCESS: Logout: *no key*/(William Wilkerson)
+[17:17:16]ACCESS: Login: Guap6512/(monkey (783)) from localhost-1851605342 || BYOND v504
+[17:19:36]ACCESS: Logout: Guap6512/(monkey (575))
+[17:19:39]ACCESS: Logout: Guap6512/(monkey (783))

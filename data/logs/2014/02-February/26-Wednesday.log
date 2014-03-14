@@ -1,0 +1,76 @@
+
+
+Starting up. 18:15.17
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Saved mode is 'extended'
+Failed to connect to database in load_admins(). Reverting to legacy system.
+Database connection failed. Reverting to the legacy ban system.
+Failed to load config/mods.txt
+
+[18:16:11]DEBUG: Next event in 36.058 minutes.
+[18:52:16]DEBUG: Next event in 32.988 minutes.
+[19:25:16]DEBUG: Next event in 26.792 minutes.
+[19:52:05]DEBUG: Next event in 31.334 minutes.
+[20:23:26]DEBUG: Next event in 27.29 minutes.
+
+
+Starting up. 23:04.56
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Saved mode is 'extended'
+Failed to connect to database in load_admins(). Reverting to legacy system.
+Database connection failed. Reverting to the legacy ban system.
+Failed to load config/mods.txt
+
+[23:05:09]DEBUG: Next event in 28.96 minutes.
+
+
+Starting up. 23:08.24
+---------------------
+Adding game mode AutoTraitor (extend-a-traitormongous) to configuration.
+Adding game mode traitor+changeling (traitorchan) to configuration.
+Adding game mode traitor (traitor) to configuration.
+Adding game mode changeling (changeling) to configuration.
+Adding game mode cult (cult) to configuration.
+Adding game mode extended (extended) to configuration.
+Adding game mode heist (heist) to configuration.
+Adding game mode AI malfunction (malfunction) to configuration.
+Adding game mode meteor (meteor) to configuration.
+Adding game mode ninja (ninja) to configuration.
+Adding game mode nuclear emergency (nuclear) to configuration.
+Adding game mode rp-revolution (rp-revolution) to configuration.
+Adding game mode revolution (revolution) to configuration.
+Adding game mode wizard (wizard) to configuration.
+Saved mode is 'extended'
+Failed to connect to database in load_admins(). Reverting to legacy system.
+Database connection failed. Reverting to the legacy ban system.
+Failed to load config/mods.txt
+
+[23:08:37]DEBUG: Next event in 43.044 minutes.
