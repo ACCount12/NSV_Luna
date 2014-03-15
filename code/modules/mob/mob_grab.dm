@@ -48,9 +48,15 @@
 /obj/item/weapon/grab/proc/synch()
 	if(affecting)
 		if(assailant.r_hand == src)
-			hud.screen_loc = ui_rhand
+			if(istype(assailant,/mob/living/carbon/alien))
+				hud.screen_loc = ui_id
+			else
+				hud.screen_loc = ui_rhand
 		else
-			hud.screen_loc = ui_lhand
+			if(istype(assailant,/mob/living/carbon/alien))
+				hud.screen_loc = ui_belt
+			else
+				hud.screen_loc = ui_lhand
 
 
 /obj/item/weapon/grab/process()

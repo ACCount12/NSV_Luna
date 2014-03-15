@@ -83,6 +83,7 @@
 	using.icon_state = "act_resist"
 	using.screen_loc = ui_resist
 	using.layer = 19
+	src.adding += using
 	src.hotkeybuttons += using
 
 	using = new /obj/screen()
@@ -120,14 +121,14 @@
 	src.adding += inv_box
 
 	using = new /obj/screen/inventory()
-	using.name = "swaphand"
+	using.name = "hand"
 	using.dir = NORTH
 	using.icon = ui_style
 	using.icon_state = "hand"
 	using.screen_loc = ui_swaphand
 	using.layer = 19
 	src.swaphands_hud_object = using
-
+	src.adding += using
 
 //Blocked Inventory Beginning
 
