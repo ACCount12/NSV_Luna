@@ -9,7 +9,7 @@
 
 	pressure_resistance = ONE_ATMOSPHERE*5
 
-	force = 5.0
+	force = 7.0
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 4
@@ -27,7 +27,7 @@
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
 
-	processing_objects.Add(src)	
+	processing_objects.Add(src)
 	return
 
 /obj/item/weapon/tank/Del()
@@ -141,8 +141,8 @@
 	data["defaultReleasePressure"] = round(TANK_DEFAULT_RELEASE_PRESSURE)
 	data["maxReleasePressure"] = round(TANK_MAX_RELEASE_PRESSURE)
 	data["valveOpen"] = using_internal ? 1 : 0
-	
-	data["maskConnected"] = 0	
+
+	data["maskConnected"] = 0
 	if(istype(loc,/mob/living/carbon))
 		var/mob/living/carbon/location = loc
 		if(location.internal == src || (location.wear_mask && (location.wear_mask.flags & MASKINTERNALS)))
