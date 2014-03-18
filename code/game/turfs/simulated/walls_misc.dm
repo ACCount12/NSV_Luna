@@ -8,4 +8,5 @@
 	thermal_conductivity = 0
 	opacity = 0
 	name = "heat shielding"
+	icon = 'icons/turf/hshield.dmi'
 	icon_state = "thermal"

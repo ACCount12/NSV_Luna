@@ -39,15 +39,18 @@
 					if (!blocked && !(areacheck.name == "Space"))
 						AM.Move(floorbelow)
 						if ( istype(AM, /mob/living/carbon/human))
-							var/mob/living/carbon/human/H = AM
-							var/damage = 15
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "groin")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "l_leg")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "r_leg")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "l_foot")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "r_foot")
-							H:weakened = max(H:weakened,2)
-							H:updatehealth()
+							if(AM:back && istype(AM:back, /obj/item/weapon/tank/jetpack))
+								return
+							else
+								var/mob/living/carbon/human/H = AM
+								var/damage = 5
+								H.apply_damage(min(rand(0,damage),0), BRUTE, "groin")
+								H.apply_damage(min(rand(0,damage),0), BRUTE, "l_leg")
+								H.apply_damage(min(rand(0,damage),0), BRUTE, "r_leg")
+								H.apply_damage(min(rand(0,damage),0), BRUTE, "l_foot")
+								H.apply_damage(min(rand(0,damage),0), BRUTE, "r_foot")
+								H:weakened = max(H:weakened,2)
+								H:updatehealth()
 		return ..()
 
 /turf/simulated/floor/open/proc/getbelow()

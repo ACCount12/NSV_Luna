@@ -54,9 +54,9 @@
 /obj/item/projectile/energy/neurotoxin
 	name = "neuro"
 	icon_state = "neurotoxin"
-	damage = 5
+	damage = 10
 	damage_type = TOX
-	weaken = 5
+	weaken = 8
 
 /obj/item/projectile/energy/plasma
 	name = "plasma bolt"
