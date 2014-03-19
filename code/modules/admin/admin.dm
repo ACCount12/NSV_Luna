@@ -119,6 +119,25 @@ var/global/floorIsLava = 0
 			else
 				body += "<A href='?src=\ref[src];makeanimal=\ref[M]'>Animalize</A> | "
 
+			// DNA2 - Admin Hax
+			if(iscarbon(M))
+				body += "<br><br>"
+				body += "<b>DNA Blocks:</b><br><table border='0'><tr><th>&nbsp;</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>"
+				var/bname
+				for(var/block=1;block<=27;block++)
+					if(((block-1)%5)==0)
+						body += "</tr><tr><th>[block-1]</th>"
+					bname = assigned_blocks[block]
+					body += "<td>"
+					if(bname)
+						var/bstate=M.dna.GetSEState(block)
+						var/bcolor="[(bstate)?"#006600":"#ff0000"]"
+						body += "<A href='?src=\ref[src];togmutate=\ref[M];block=[block]' style='color:[bcolor];'>[bname]</A><sub>[block]</sub>"
+					else
+						body += "[block]"
+					body+="</td>"
+				body += "</tr></table>"
+
 			body += {"<br><br>
 				<b>Rudimentary transformation:</b><font size=2><br>These transformations only create a new mob type and copy stuff over. They do not take into account MMIs and similar mob-specific things. The buttons in 'Transformations' are preferred, when possible.</font><br>
 				<A href='?src=\ref[src];simplemake=observer;mob=\ref[M]'>Observer</A> |
@@ -141,7 +160,7 @@ var/global/floorIsLava = 0
 				\[ Construct: <A href='?src=\ref[src];simplemake=constructarmoured;mob=\ref[M]'>Armoured</A> ,
 				<A href='?src=\ref[src];simplemake=constructbuilder;mob=\ref[M]'>Builder</A> ,
 				<A href='?src=\ref[src];simplemake=constructwraith;mob=\ref[M]'>Wraith</A> \]
-				<A href='?src=\ref[src];simplemake=shade;mob=\ref[M]'>Shade</A>
+				<A href='?src=\ref[src];simplemake=shade;mob=\ref[M]'>Shade</A> |
 				<br>
 			"}
 
@@ -686,7 +705,7 @@ var/global/floorIsLava = 0
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))	return
 
-	var/message = input("Global message to send:", "Admin Announce", null, null)  as message
+	var/message = sanitize_multi(input("Global message to send:", "Admin Announce", null, null) as message)
 	if(message)
 		if(!check_rights(R_SERVER,0))
 			message = adminscrub(message,500)
@@ -707,7 +726,6 @@ var/global/floorIsLava = 0
 	message_admins("[key_name_admin(usr)] toggled OOC.", 1)
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-
 /datum/admins/proc/toggledsay()
 	set category = "Server"
 	set desc="Globally Toggles DSAY"
@@ -719,7 +737,7 @@ var/global/floorIsLava = 0
 		world << "<B>Deadchat has been globally disabled!</B>"
 	log_admin("[key_name(usr)] toggled deadchat.")
 	message_admins("[key_name_admin(usr)] toggled deadchat.", 1)
-	feedback_add_details("admin_verb","TDSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
+	feedback_add_details("admin_verb","TDSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleoocdead()
 	set category = "Server"
@@ -821,7 +839,7 @@ var/global/floorIsLava = 0
 	set desc="Delay the game start/end"
 	set name="Delay"
 
-	if(!check_rights(R_SERVER))	return
+	if(!check_rights(R_ADMIN))	return
 	if (!ticker || ticker.current_state != GAME_STATE_PREGAME)
 		ticker.delay_end = !ticker.delay_end
 		log_admin("[key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
@@ -1032,6 +1050,14 @@ var/global/floorIsLava = 0
 	log_admin("[key_name(usr)] toggled guests game entering [guests_allowed?"":"dis"]allowed.")
 	message_admins("\blue [key_name_admin(usr)] toggled guests game entering [guests_allowed?"":"dis"]allowed.", 1)
 	feedback_add_details("admin_verb","TGU") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/unjobban_panel()
+	set name = "Unjobban Panel"
+	set category = "Admin"
+	if (src.holder)
+		src.holder.unjobbanpanel()
+	feedback_add_details("admin_verb","UJBP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	return
 
 /datum/admins/proc/output_ai_laws()
 	var/ai_number = 0

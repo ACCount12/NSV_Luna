@@ -98,7 +98,7 @@ var/list/civilian_positions = list(
 	"Chaplain",
 	"Clown",
 	"Mime",
-	"Assistant"
+	"Unassigned"
 )
 
 

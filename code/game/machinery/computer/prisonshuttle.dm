@@ -205,7 +205,11 @@ var/prison_shuttle_timeleft = 0
 						AM.Move(D)
 					if(istype(T, /turf/simulated))
 						del(T)
-				start_location.move_contents_to(end_location)
+				start_location.move_contents_to(end_location, /turf/space)
+/*				for(var/turf/t in end_location)
+					air_master.tiles_to_update |= t
+				for(var/turf/t in start_location)
+					air_master.tiles_to_update |= t			*/
 
 			if(1)
 				prison_shuttle_at_station = 0
@@ -242,5 +246,9 @@ var/prison_shuttle_timeleft = 0
 				for(var/mob/living/simple_animal/pest in end_location) // And for the other kind of bug...
 					pest.gib()
 
-				start_location.move_contents_to(end_location)		//, /turf/simulated/floor/engine/vacuum/hull)
+				start_location.move_contents_to(end_location, /turf/space)
+/*				for(var/turf/t in end_location)
+					air_master.tiles_to_update |= t
+				for(var/turf/t in start_location)
+					air_master.tiles_to_update |= t			*/
 		return

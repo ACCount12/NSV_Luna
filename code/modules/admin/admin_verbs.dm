@@ -29,7 +29,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_check_contents,	/*displays the contents of an instance*/
 	/datum/admins/proc/access_news_network,	/*allows access of newscasters*/
 	/client/proc/giveruntimelog,		/*allows us to give access to runtime logs to somebody*/
-	/client/proc/getruntimelog,			/*allows us to access runtime logs to somebody*/
 	/client/proc/getserverlog,			/*allows us to fetch server logs (diary) for other days*/
 	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
 	/client/proc/Getmob,				/*teleports a mob to our location*/
@@ -55,7 +54,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/secrets,
 	/datum/admins/proc/toggleooc,		/*toggles ooc on/off for everyone*/
 	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
-	/datum/admins/proc/toggledsay,		/*toggles dsay on/off for everyone*/
+	/datum/admins/proc/toggledsay,    /*toggles dsay on/off for everyone*/
 	/client/proc/game_panel,			/*game panel, allows to change game-mode etc*/
 	/client/proc/cmd_admin_say,			/*admin-only ooc chat*/
 	/datum/admins/proc/PlayerNotes,
@@ -78,7 +77,10 @@ var/list/admin_verbs_admin = list(
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
-	/client/proc/jobbans
+	/client/proc/jobbans,
+	/client/proc/unjobban_panel,
+	// /client/proc/late_ban,
+	// /client/proc/DB_ban_panel
 	)
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
@@ -89,6 +91,7 @@ var/list/admin_verbs_fun = list(
 	/client/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
+	/client/proc/everyone_random,
 	/client/proc/cinematic,
 	/client/proc/one_click_antag,
 	/datum/admins/proc/toggle_aliens,
@@ -124,9 +127,10 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/toggle_random_events,
-	/client/proc/check_customitem_activity
+	/client/proc/check_customitem_activity,
 	)
 var/list/admin_verbs_debug = list(
+	/client/proc/getruntimelog,                     /*allows us to access runtime logs to somebody*/
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/Debug2,
 	/client/proc/kill_air,
@@ -143,9 +147,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/restart_controller,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
-	/client/proc/toggledebuglogs,
-	/client/proc/SDQL_query,
-	/client/proc/SDQL2_query
+	/client/proc/toggledebuglogs
 	)
 var/list/admin_verbs_possess = list(
 	/proc/possess,
@@ -226,6 +228,7 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cmd_debug_tog_aliens,
 	/client/proc/air_report,
 	/client/proc/enable_debug_verbs,
+	/client/proc/late_ban,
 	/proc/possess,
 	/proc/release
 	)
@@ -239,9 +242,8 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/player_panel_new,
-	/client/proc/dsay,
 	/datum/admins/proc/show_skills,
-	/client/proc/jobbans,
+	/client/proc/dsay,
 	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
 )
 /client/proc/add_admin_verbs()
@@ -294,8 +296,63 @@ var/list/admin_verbs_mod = list(
 		/client/proc/cmd_admin_grantfullaccess,
 		/client/proc/kaboom,
 		/client/proc/splash,
-		/client/proc/cmd_admin_areatest
+		/client/proc/cmd_admin_areatest,
+		/client/proc/late_ban
 		)
+
+/client/proc/late_ban()
+	set name = "Late Ban"
+	set category = "Admin"
+
+	if(!check_rights(R_BAN))	return
+	var/ban_key = input(usr, "Type in key for late ban?","Key", "") as text|null
+	if (!ban_key) return
+	var/ban_comp_id = input(usr, "Type in computer id","Computer ID", "") as text|null
+
+	switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
+		if("Yes")
+			var/mins = input(usr,"How long (in minutes)?","Ban time",1440) as num|null
+			if(!mins)
+				return
+			if(mins >= 525600) mins = 525599
+			var/reason = input(usr,"Reason?","reason","Griefer") as text|null
+			if(!reason)
+				return
+			AddBan(ban_key, ban_comp_id, reason, usr.ckey, 1, mins)
+			ban_unban_log_save("[usr.client.ckey] has banned [ban_key] (not in game). - Reason: [reason] - This will be removed in [mins] minutes.")
+			feedback_inc("ban_tmp",1)
+//			DB_ban_record(BANTYPE_TEMP, 0, mins, reason, banckey = ban_key)
+			feedback_inc("ban_tmp_mins",mins)
+			log_admin("[usr.client.ckey] has banned [ban_key] (not in game).\nReason: [reason]\nThis will be removed in [mins] minutes.")
+			message_admins("\blue[usr.client.ckey] has banned [ban_key] (not in game).\nReason: [reason]\nThis will be removed in [mins] minutes.")
+
+		if("No")
+			var/reason = input(usr,"Reason?","reason","Griefer") as text|null
+			if(!reason)
+				return
+			switch(alert(usr,"IP ban?",,"Yes","No","Cancel"))
+				if("Cancel")	return
+				if("Yes")
+					var/ban_ip = input(usr, "Type in ip for late ban", "IP", "") as text|null
+					if (!ban_ip) return
+					AddBan(ban_key, ban_comp_id, reason, usr.ckey, 0, 0, ban_ip)
+				if("No")
+					AddBan(ban_key, ban_comp_id, reason, usr.ckey, 0, 0)
+			ban_unban_log_save("[usr.client.ckey] has permabanned [ban_key] (not in game). - Reason: [reason] - This is a permanent ban.")
+			log_admin("[usr.client.ckey] has banned [ban_key] (not in game).\nReason: [reason]\nThis is a permanent ban.")
+			message_admins("\blue[usr.client.ckey] has banned [ban_key] (not in game).\nReason: [reason]\nThis is a permanent ban.")
+			feedback_inc("ban_perma",1)
+//			DB_ban_record(BANTYPE_PERMA, ban_key, -1, reason, banckey = ban_key)
+		if("Cancel")
+			return
+
+/client/proc/shuttle_availability()
+	set category = "Events"
+	set name = "Edit shuttle availability"
+
+	if(!holder) return
+	if(!check_rights(R_SERVER))	return
+
 
 /client/proc/hide_most_verbs()//Allows you to keep some functionality while hiding some verbs
 	set name = "Adminverbs - Hide Most"
@@ -398,10 +455,7 @@ var/list/admin_verbs_mod = list(
 	set name = "Display Job bans"
 	set category = "Admin"
 	if(holder)
-		if(config.ban_legacy_system)
-			holder.Jobbans()
-		else
-			holder.DB_ban_panel()
+		holder.Jobbans()
 	feedback_add_details("admin_verb","VJB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
@@ -409,10 +463,7 @@ var/list/admin_verbs_mod = list(
 	set name = "Unban Panel"
 	set category = "Admin"
 	if(holder)
-		if(config.ban_legacy_system)
-			holder.unbanpanel()
-		else
-			holder.DB_ban_panel()
+		holder.unbanpanel()
 	feedback_add_details("admin_verb","UBP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
@@ -460,10 +511,10 @@ var/list/admin_verbs_mod = list(
 	feedback_add_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 #define MAX_WARNS 3
-#define AUTOBANTIME 10
+#define AUTOBANTIME 30
 
 /client/proc/warn(warned_ckey)
-	if(!check_rights(R_ADMIN))	return
+	if(!check_rights(R_MOD))	return
 
 	if(!warned_ckey || !istext(warned_ckey))	return
 	if(warned_ckey in admin_datums)
@@ -491,7 +542,7 @@ var/list/admin_verbs_mod = list(
 		feedback_inc("ban_warn",1)
 	else
 		if(C)
-			C << "<font color='red'><BIG><B>You have been formally warned by an administrator.</B></BIG><br>Further warnings will result in an autoban.</font>"
+			C << "<font color='red'><BIG><B>You have been formally warned by a[src.holder.rights & R_ADMIN?"n administrator":" moderator"].</B></BIG><br>Further warnings will result in an autoban.</font>"
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)]. They have [MAX_WARNS-D.warns] strikes remaining.")
 		else
 			message_admins("[key_name_admin(src)] has warned [warned_ckey] (DC). They have [MAX_WARNS-D.warns] strikes remaining.")
@@ -558,7 +609,7 @@ var/list/admin_verbs_mod = list(
 		if(!message)
 			return
 		for (var/mob/V in hearers(O))
-			V.show_message(message, 2)
+			V.show_message(sanitize_multi(html_decode(message)), 2)
 		log_admin("[key_name(usr)] made [O] at [O.x], [O.y], [O.z]. make a sound")
 		message_admins("\blue [key_name_admin(usr)] made [O] at [O.x], [O.y], [O.z]. make a sound", 1)
 		feedback_add_details("admin_verb","MS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -740,7 +791,6 @@ var/list/admin_verbs_mod = list(
 			config.cult_ghostwriter = 1
 			src << "<b>Enabled ghost writers.</b>"
 			message_admins("Admin [key_name_admin(usr)] has enabled ghost writers.", 1)
-
 
 /client/proc/toggledebuglogs()
 	set name = "Toggle Debug Log Messages"

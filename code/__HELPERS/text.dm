@@ -34,31 +34,37 @@
 			index = findtext(t, char)
 	return t
 
-//Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ï¿½"="ï¿½","ÿ"="____255_"))
-	for(var/char in repl_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
-			index = findtext(t, char)
-	t = html_encode(t)
-	var/index = findtext(t, "____255_")
+proc/sanitize_russian(var/msg)
+	var/index = findtext(msg, "ÿ")
 	while(index)
-		t = copytext(t, 1, index) + "&#255;" + copytext(t, index+8)
-		index = findtext(t, "____255_")
-	return t
+		msg = copytext(msg, 1, index) + "&#255;" + copytext(msg, index+1)
+		index = findtext(msg, "ÿ")
+	return msg
 
-/proc/sanitize_simple_uni(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ÿ"="____255_"))
+//Removes a few problematic characters
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ï¿½"="ï¿½"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
 			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
 			index = findtext(t, char)
-	t = html_encode(t)
-	var/index = findtext(t, "____255_")
-	while(index)
-		t = copytext(t, 1, index) + "&#1103;" + copytext(t, index+8)
-		index = findtext(t, "____255_")
+	return html_encode(t)
+
+/proc/sanitize_simple_uni(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
+	for(var/char in repl_chars)
+		var/index = findtext(t, char)
+		while(index)
+			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
+			index = findtext(t, char)
+	return html_encode(t)
+
+/proc/sanitize_multi(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ï¿½"="ï¿½"))
+	t = sanitize_russian(t)
+	for(var/char in repl_chars)
+		var/index = findtext(t, char)
+		while(index)
+			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
+			index = findtext(t, char)
 	return t
 
 //Runs byond's sanitization proc along-side sanitize_simple
@@ -66,7 +72,7 @@
 	return sanitize_simple(t,repl_chars)
 
 /proc/sanitize_uni(var/t,var/list/repl_chars = null)
-	return sanitize_simple_uni(t,repl_chars)
+	return sanitize_simple(t,repl_chars)
 
 //Runs sanitize and strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
@@ -76,7 +82,7 @@
 //Runs byond's sanitization proc along-side strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
 /proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((html_encode(strip_html_simple(t))),1,limit)
+	return copytext((sanitize(strip_html_simple(t))),1,limit)
 
 
 //Returns null if there is any bad text in the string
@@ -325,35 +331,3 @@ proc/checkhtml(var/t)
 	for(var/i = length(text); i > 0; i--)
 		new_text += copytext(text, i, i+1)
 	return new_text
-
-
-// For drunken speak, etc
-proc/slurring(phrase) // using cp1251!
-	phrase = html_decode(phrase)
-	var/index = findtext(phrase, "ÿ")
-	while(index)
-		phrase = copytext(phrase, 1, index) + "ß" + copytext(phrase, index+1)
-		index = findtext(phrase, "ÿ")
-	var
-		leng=lentext(phrase)
-		counter=lentext(phrase)
-		newphrase=""
-		newletter=""
-
-	while(counter>=1)
-		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
-		if(prob(33))
-			if(lowertext(newletter)=="o")	newletter="u"
-			if(lowertext(newletter)=="s")	newletter="ch"
-			if(lowertext(newletter)=="a")	newletter="ah"
-			if(lowertext(newletter)=="c")	newletter="k"
-		switch(rand(1,15))
-			if(1,3,5,8)	newletter="[lowertext(newletter)]"
-			if(2,4,6,15)	newletter="[uppertext(newletter)]"
-			if(7)	newletter+="'"
-			if(9,10)	newletter="<b>[newletter]</b>"
-			if(11,12)	newletter="<big>[newletter]</big>"
-			if(13)	newletter="<small>[newletter]</small>"
-		newphrase+="[newletter]"
-		counter-=1
-	return newphrase

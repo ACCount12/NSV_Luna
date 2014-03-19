@@ -109,7 +109,7 @@
 				assignedToBlock=blocks_assigned[G.block]
 			assignedToBlock.Add(G.name)
 			blocks_assigned[G.block]=assignedToBlock
-			testing("DNA2: Gene [G.name] assigned to block [G.block].")
+//			testing("DNA2: Gene [G.name] assigned to block [G.block].")
 
 	// HIDDEN MUTATIONS / SUPERPOWERS INITIALIZTION
 

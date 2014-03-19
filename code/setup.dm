@@ -68,7 +68,7 @@
 #define PRESSURE_HEAD_REDUCTION_COEFFICIENT 0.4 //This is how much (percentual) a helmet/hat with the flag STOPSPRESSUREDMAGE reduces pressure.
 
 // Doors!
-#define DOOR_CRUSH_DAMAGE 10
+#define DOOR_CRUSH_DAMAGE 20
 
 // Factor of how fast mob nutrition decreases
 #define HUNGER_FACTOR 0.25

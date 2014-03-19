@@ -59,10 +59,10 @@
 	if(usr)
 		if (usr.client)
 			if(usr.client.holder)
-				M << "\bold You hear a voice in your head... \italic [msg]"
+				M << "\bold You hear a voice in your head... \italic [sanitize(html_decode(msg))]"
 
 	log_admin("SubtlePM: [key_name(usr)] -> [key_name(M)] : [msg]")
-	message_admins("\blue \bold SubtleMessage: [key_name_admin(usr)] -> [key_name_admin(M)] : [msg]", 1)
+	message_admins("\blue \bold SubtleMessage: [key_name_admin(usr)] -> [key_name_admin(M)] : [sanitize(html_decode(msg))]", 1)
 	feedback_add_details("admin_verb","SMS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_world_narrate() // Allows administrators to fluff events a little easier -- TLE
@@ -77,9 +77,9 @@
 
 	if (!msg)
 		return
-	world << "[msg]"
+	world << "[sanitize(html_decode(msg))]"
 	log_admin("GlobalNarrate: [key_name(usr)] : [msg]")
-	message_admins("\blue \bold GlobalNarrate: [key_name_admin(usr)] : [msg]<BR>", 1)
+	message_admins("\blue \bold GlobalNarrate: [key_name_admin(usr)] : [sanitize(html_decode(msg))]<BR>", 1)
 	feedback_add_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_direct_narrate(var/mob/M)	// Targetted narrate -- TLE
@@ -101,9 +101,9 @@
 	if( !msg )
 		return
 
-	M << msg
+	M << sanitize(html_decode(msg))
 	log_admin("DirectNarrate: [key_name(usr)] to ([M.name]/[M.key]): [msg]")
-	message_admins("\blue \bold DirectNarrate: [key_name(usr)] to ([M.name]/[M.key]): [msg]<BR>", 1)
+	message_admins("\blue \bold DirectNarrate: [key_name(usr)] to ([M.name]/[M.key]): [sanitize(html_decode(msg))]<BR>", 1)
 	feedback_add_details("admin_verb","DIRN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_godmode(mob/M as mob in mob_list)
@@ -132,7 +132,7 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 		if(!M.client)
 			usr << "<font color='red'>Error: cmd_admin_mute: This mob doesn't have a client tied to it.</font>"
 		if(M.client.holder)
-			usr << "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin/mod.</font>"
+			usr << "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin.</font>"
 	if(!M.client)		return
 	if(M.client.holder)	return
 
@@ -228,7 +228,7 @@ Ccomp's first proc.
 
 /client/proc/get_ghosts(var/notify = 0,var/what = 2)
 	// what = 1, return ghosts ass list.
-	// what = 2, return mob list
+	// what = 2, return mob list	
 
 	var/list/mobs = list()
 	var/list/ghosts = list()
@@ -264,22 +264,22 @@ Ccomp's first proc.
 		src << "Hrm, appears you didn't select a ghost"		// Sanity check, if no ghosts in the list we don't want to edit a null variable and cause a runtime error.
 		return
 
-	var/mob/dead/observer/G = ghosts[target]
-	if(G.has_enabled_antagHUD && config.antag_hud_restricted)
+	var/mob/dead/observer/G = ghosts[target]					
+	if(G.has_enabled_antagHUD && config.antag_hud_restricted)	
 		var/response = alert(src, "Are you sure you wish to allow this individual to play?","Ghost has used AntagHUD","Yes","No")
-		if(response == "No") return
+		if(response == "No") return	
 	G.timeofdeath=-19999						/* time of death is checked in /mob/verb/abandon_mob() which is the Respawn verb.
 									   timeofdeath is used for bodies on autopsy but since we're messing with a ghost I'm pretty sure
 									   there won't be an autopsy.
 									*/
-	G.has_enabled_antagHUD = 2
+	G.has_enabled_antagHUD = 2	
 	G.can_reenter_corpse = 1
 
 	G:show_message(text("\blue <B>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</B>"), 1)
 	log_admin("[key_name(usr)] allowed [key_name(G)] to bypass the 30 minute respawn limit")
 	message_admins("Admin [key_name_admin(usr)] allowed [key_name_admin(G)] to bypass the 30 minute respawn limit", 1)
 
-
+	 
 /client/proc/toggle_antagHUD_use()
 	set category = "Server"
 	set name = "Toggle antagHUD usage"
@@ -295,7 +295,7 @@ Ccomp's first proc.
 			if(g.antagHUD)
 				g.antagHUD = 0						// Disable it on those that have it enabled
 				g.has_enabled_antagHUD = 2				// We'll allow them to respawn
-				g << "\red <B>The Administrator has disabled AntagHUD </B>"
+				g << "\red <B>The Administrator has disabled AntagHUD </B>"    
 		config.antag_hud_allowed = 0
 		src << "\red <B>AntagHUD usage has been disabled</B>"
 		action = "disabled"
@@ -307,8 +307,8 @@ Ccomp's first proc.
 		config.antag_hud_allowed = 1
 		action = "enabled"
 		src << "\blue <B>AntagHUD usage has been enabled</B>"
-
-
+		
+	
 	log_admin("[key_name(usr)] has [action] antagHUD usage for observers")
 	message_admins("Admin [key_name_admin(usr)] has [action] antagHUD usage for observers", 1)
 
@@ -325,7 +325,7 @@ Ccomp's first proc.
 		for(var/mob/dead/observer/g in get_ghosts())
 			g << "\blue <B>The administrator has lifted restrictions on joining the round if you use AntagHUD</B>"
 		action = "lifted restrictions"
-		config.antag_hud_restricted = 0
+		config.antag_hud_restricted = 0		
 		src << "\blue <B>AntagHUD restrictions have been lifted</B>"
 	else
 		for(var/mob/dead/observer/g in get_ghosts())
@@ -339,7 +339,7 @@ Ccomp's first proc.
 
 	log_admin("[key_name(usr)] has [action] on joining the round if they use AntagHUD")
 	message_admins("Admin [key_name_admin(usr)] has [action] on joining the round if they use AntagHUD", 1)
-
+	
 
 
 
@@ -447,9 +447,13 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(record_found)//Pull up their name from database records if they did have a mind.
 		new_character.dna = new()//Let's first give them a new DNA.
 		new_character.dna.unique_enzymes = record_found.fields["b_dna"]//Enzymes are based on real name but we'll use the record for conformity.
-		new_character.dna.SE = record_found.fields["enzymes"]//This is the default of enzymes so I think it's safe to go with.
+
+		// I HATE BYOND.  HATE.  HATE. - N3X
+		var/list/newSE= record_found.fields["enzymes"]
+		var/list/newUI = record_found.fields["identity"]
+		new_character.dna.SE = newSE.Copy() //This is the default of enzymes so I think it's safe to go with.
 		new_character.dna.UpdateSE()
-		new_character.UpdateAppearance(record_found.fields["identity"])//Now we configure their appearance based on their unique identity, same as with a DNA machine or somesuch.
+		new_character.UpdateAppearance(newUI.Copy())//Now we configure their appearance based on their unique identity, same as with a DNA machine or somesuch.
 	else//If they have no records, we just do a random DNA for them, based on their random appearance/savefile.
 		new_character.dna.ready_dna(new_character)
 
@@ -536,7 +540,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
-	var/input = input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null
+	var/input = sanitize(input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null)
 	if(!input)
 		return
 	for(var/mob/living/silicon/ai/M in mob_list)
@@ -584,8 +588,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
-	var/input = input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null
-	var/customname = input(usr, "Pick a title for the report.", "Title") as text|null
+	var/input = sanitize(input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null)
+	var/customname = sanitize(input(usr, "Pick a title for the report.", "Title") as text|null)
 	if(!input)
 		return
 	if(!customname)
@@ -721,6 +725,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		log_admin("[key_name(usr)] used gibself.")
 		message_admins("\blue [key_name_admin(usr)] used gibself.", 1)
 		feedback_add_details("admin_verb","GIBS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /*
 /client/proc/cmd_manual_ban()
 	set name = "Manual Ban"
@@ -841,7 +846,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/admin_call_shuttle()
 
 	set category = "Admin"
-	set name = "Launch Pods"
+	set name = "Call Shuttle"
 
 	if ((!( ticker ) || emergency_shuttle.location))
 		return
@@ -859,16 +864,16 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			return
 
 	emergency_shuttle.incall()
-	captain_announce("The escape pods launch has been initiated. They will be launched in [round(emergency_shuttle.timeleft()/60)] minutes.")
+	captain_announce("Вызван эвакуационный шаттл. Он прибудет на станцию через [round(emergency_shuttle.timeleft()/60)] минут.")
 	world << sound('sound/AI/shuttlecalled.ogg')
 	feedback_add_details("admin_verb","CSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] admin-launched the Escape Pods")
-	message_admins("\blue [key_name_admin(usr)] admin-launched the Escape Pods", 1)
+	log_admin("[key_name(usr)] admin-called the emergency shuttle.")
+	message_admins("\blue [key_name_admin(usr)] admin-called the emergency shuttle.", 1)
 	return
 
 /client/proc/admin_cancel_shuttle()
 	set category = "Admin"
-	set name = "Cancel Pods"
+	set name = "Cancel Shuttle"
 
 	if(!check_rights(R_ADMIN))	return
 
@@ -879,14 +884,14 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	emergency_shuttle.recall()
 	feedback_add_details("admin_verb","CCSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] admin-canseled the Escape Pods.")
-	message_admins("\blue [key_name_admin(usr)] admin-canseled the Escape Pods.", 1)
+	log_admin("[key_name(usr)] admin-recalled the emergency shuttle.")
+	message_admins("\blue [key_name_admin(usr)] admin-recalled the emergency shuttle.", 1)
 
 	return
 
 /client/proc/admin_deny_shuttle()
 	set category = "Admin"
-	set name = "Toggle Deny Pods"
+	set name = "Toggle Deny Shuttle"
 
 	if (!ticker)
 		return
@@ -895,8 +900,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	emergency_shuttle.deny_shuttle = !emergency_shuttle.deny_shuttle
 
-	log_admin("[key_name(src)] has [emergency_shuttle.deny_shuttle ? "denied" : "allowed"] pods to be launched.")
-	message_admins("[key_name_admin(usr)] has [emergency_shuttle.deny_shuttle ? "denied" : "allowed"] pods to be launched.")
+	log_admin("[key_name(src)] has [emergency_shuttle.deny_shuttle ? "denied" : "allowed"] the shuttle to be called.")
+	message_admins("[key_name_admin(usr)] has [emergency_shuttle.deny_shuttle ? "denied" : "allowed"] the shuttle to be called.")
 
 /client/proc/cmd_admin_attack_log(mob/M as mob in mob_list)
 	set category = "Special Verbs"

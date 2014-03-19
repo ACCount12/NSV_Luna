@@ -42,7 +42,7 @@
 
 
 /datum/job/engineer
-	title = "ngineer"
+	title = "Vessel Engineer"
 	flag = ENGINEER
 	department_flag = ENGSEC
 	faction = "Station"
