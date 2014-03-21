@@ -2,34 +2,30 @@
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
 
-	var/nudge_script_path = "nudge.py"  // where the nudge.py script is located
-
-	var/log_ooc = 0						// log OOC channel
+	var/log_ooc = 1						// log OOC channel
 	var/log_access = 0					// log login/logout
-	var/log_say = 0						// log client say
-	var/log_admin = 0					// log admin actions
+	var/log_say = 1						// log client say
+	var/log_admin = 1					// log admin actions
 	var/log_debug = 1					// log debug output
-	var/log_game = 0					// log game events
+	var/log_game = 1					// log game events
 	var/log_vote = 0					// log voting
-	var/log_whisper = 0					// log client whisper
-	var/log_emote = 0					// log emotes
+	var/log_whisper = 1					// log client whisper
+	var/log_emote = 1					// log emotes
 	var/log_attack = 0					// log attack messages
 	var/log_adminchat = 0				// log admin chat messages
 	var/log_adminwarn = 0				// log warnings admins get about bomb construction and such
 	var/log_pda = 0						// log pda messages
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
-	var/log_runtime = 0					// logs world.log to a file
-	var/sql_enabled = 1					// for sql switching
-	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
+	var/allow_admin_ooccolor = 1		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
 	var/allow_vote_mode = 0				// allow votes to change mode
 	var/allow_admin_jump = 1			// allows admin jumping
 	var/allow_admin_spawning = 1		// allows admin item spawning
 	var/allow_admin_rev = 1				// allows admin revives
-	var/vote_delay = 6000				// minimum time between voting sessions (deciseconds, 10 minute default)
-	var/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
-	var/vote_autotransfer_initial = 108000 // Length of time before the first autotransfer vote is called
-	var/vote_autotransfer_interval = 36000 // length of time before next sequential autotransfer vote
+	var/vote_delay = 22000				// minimum time between voting sessions (deciseconds, 10 minute default)
+	var/vote_period = 2200				// length of voting period (deciseconds, default 1 minute)
+	var/vote_autotransfer_initial = 308000 // Length of time before the first autotransfer vote is called
+	var/vote_autotransfer_interval = 66000 // length of time before next sequential autotransfer vote
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 //	var/enable_authentication = 0		// goon authentication
@@ -40,9 +36,9 @@
 	var/continous_rounds = 1			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/allow_Metadata = 0				// Metadata is supported.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
-	var/Ticklag = 0.9
+	var/Ticklag = 0.4
 	var/Tickcomp = 0
-	var/socket_talk	= 0					// use socket_talk to communicate with other processes
+
 	var/list/resource_urls = null
 	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
 	var/antag_hud_restricted = 0                    // Ghosts that turn on Antagovision cannot rejoin the round.
@@ -68,15 +64,14 @@
 
 	var/disable_player_mice = 0
 	var/uneducated_mice = 0 //Set to 1 to prevent newly-spawned mice from understanding human speech
-
 	var/usealienwhitelist = 0
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
 
 	var/server
 	var/banappeals
-	var/wikiurl
-	var/forumurl
+	var/wikiurl = "http://wiki.ss13.ru"
+	var/forumurl = "http://forum.ss13.ru"
 
 	//Alert level description
 	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
@@ -97,8 +92,8 @@
 	var/organ_health_multiplier = 1
 	var/organ_regeneration_multiplier = 1
 
-	var/bones_can_break = 0
-	var/limbs_can_break = 0
+	var/bones_can_break = 1
+	var/limbs_can_break = 1
 
 	var/revival_pod_plants = 1
 	var/revival_cloning = 1
@@ -106,19 +101,18 @@
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
-	var/run_speed = 0
-	var/walk_speed = 0
+	var/run_speed = 3.5
+	var/walk_speed = 5
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
 	var/robot_delay = 0
-	var/monkey_delay = 0
-	var/alien_delay = 0
+	var/monkey_delay = -0.1
+	var/alien_delay = -0.3
 	var/slime_delay = 0
 	var/animal_delay = 0
 
 	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in config.txt
-	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
 	var/use_age_restriction_for_jobs = 0 //Do jobs use account age restrictions? --requires database
 
 	var/simultaneous_pm_warning_timeout = 100
@@ -127,11 +121,16 @@
 
 	var/assistant_maint = 0 //Do assistants get maint access?
 	var/gateway_delay = 18000 //How long the gateway takes before it activates. Default is half an hour.
-	var/ghost_interaction = 0
+	var/ghost_interaction = 1
 
 	var/comms_password = ""
-
-
+/*
+	var/use_irc_bot = 0
+	var/irc_bot_host = ""
+	var/main_irc = ""
+	var/admin_irc = ""
+	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
+*/
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -183,9 +182,6 @@
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
 
-				if ("ban_legacy_system")
-					config.ban_legacy_system = 1
-
 				if ("use_age_restriction_for_jobs")
 					config.use_age_restriction_for_jobs = 1
 
@@ -200,9 +196,6 @@
 
 				if ("log_access")
 					config.log_access = 1
-
-				if ("sql_enabled")
-					config.sql_enabled = text2num(value)
 
 				if ("log_say")
 					config.log_say = 1
@@ -239,10 +232,10 @@
 
 				if ("log_hrefs")
 					config.log_hrefs = 1
-
+/*
 				if ("log_runtime")
 					config.log_runtime = 1
-
+*/
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1
 
@@ -293,10 +286,10 @@
 
 				if ("serversuffix")
 					config.server_suffix = 1
-
+/*
 				if ("nudge_script_path")
 					config.nudge_script_path = value
-
+*/
 				if ("hostedby")
 					config.hostedby = value
 
@@ -383,7 +376,10 @@
 
 				if("allow_holidays")
 					Holiday = 1
-
+/*
+				if("use_irc_bot")
+					use_irc_bot = 1
+*/
 				if("ticklag")
 					Ticklag = text2num(value)
 
@@ -391,10 +387,10 @@
 					config.antag_hud_allowed = 1
 				if("antag_hud_restricted")
 					config.antag_hud_restricted = 1
-
+/*
 				if("socket_talk")
 					socket_talk = text2num(value)
-
+*/
 				if("tickcomp")
 					Tickcomp = 1
 
@@ -434,7 +430,25 @@
 
 				if("comms_password")
 					config.comms_password = value
+/*
+				if("irc_bot_host")
+					config.irc_bot_host = value
 
+				if("main_irc")
+					config.main_irc = value
+
+				if("admin_irc")
+					config.admin_irc = value
+
+				if("python_path")
+					if(value)
+						config.python_path = value
+					else
+						if(world.system_type == UNIX)
+							config.python_path = "/usr/bin/env python2"
+						else //probably windows, if not this should work anyway
+							config.python_path = "python"
+*/
 				if("allow_cult_ghostwriter")
 					config.cult_ghostwriter = 1
 
@@ -443,6 +457,7 @@
 
 				else
 					diary << "Unknown setting in configuration: '[name]'"
+
 
 		else if(type == "game_options")
 			if(!value)
@@ -524,17 +539,9 @@
 				sqllogin = value
 			if ("password")
 				sqlpass = value
-			if ("feedback_database")
-				sqlfdbkdb = value
-			if ("feedback_login")
-				sqlfdbklogin = value
-			if ("feedback_password")
-				sqlfdbkpass = value
-			if ("enable_stat_tracking")
-				sqllogging = 1
 			else
 				diary << "Unknown setting in configuration: '[name]'"
-
+/*
 /datum/configuration/proc/loadforumsql(filename)  // -- TLE
 	var/list/Lines = file2list(filename)
 	for(var/t in Lines)
@@ -576,7 +583,7 @@
 				forum_authenticated_group = value
 			else
 				diary << "Unknown setting in configuration: '[name]'"
-
+*/
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).
