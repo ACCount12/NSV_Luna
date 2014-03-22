@@ -224,4 +224,3 @@ var/custom_event_msg = null
 //Database connections
 //A connection is established on world creation. Ideally, the connection dies when the server restarts (After feedback logging.).
 var/DBConnection/dbcon = new()
-var/DBConnection/dbcon_old = new()
