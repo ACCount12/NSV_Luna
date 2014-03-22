@@ -76,7 +76,7 @@ var/blobevent = 0
 var/diary = null
 var/diaryofmeanpeople = null
 var/href_logfile = null
-var/station_name = "NSV Luna"
+var/station_name = "NSS Exodus"
 var/game_version = "Baystation12"
 var/changelog_hash = ""
 var/game_year = (text2num(time2text(world.realtime, "YYYY")) + 544)
@@ -216,15 +216,6 @@ var/sqldb = "tgstation"
 var/sqllogin = "root"
 var/sqlpass = ""
 
-	// Feedback gathering sql connection
-
-var/sqlfdbkdb = "test"
-var/sqlfdbklogin = "root"
-var/sqlfdbkpass = ""
-
-var/sqllogging = 0 // Should we log deaths, population stats, etc?
-
-
 	// For FTP requests. (i.e. downloading runtime logs.)
 	// However it'd be ok to use for accessing attack logs and such too, which are even laggier.
 var/fileaccess_timer = 0
@@ -232,5 +223,5 @@ var/custom_event_msg = null
 
 //Database connections
 //A connection is established on world creation. Ideally, the connection dies when the server restarts (After feedback logging.).
-var/DBConnection/dbcon = new()	//Feedback database (New database)
-var/DBConnection/dbcon_old = new()	//Tgstation database (Old database) - See the files in the SQL folder for information what goes where.
+var/DBConnection/dbcon = new()
+var/DBConnection/dbcon_old = new()

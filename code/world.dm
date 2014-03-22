@@ -11,12 +11,13 @@
 /world/New()
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
+	log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM")].log")		//funtimelog
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
 	diaryofmeanpeople = file("data/logs/[date_string] Attack.log")
 	diary << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
 	diaryofmeanpeople << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
-	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
+	changelog_hash = md5('html/changelog_animus.html')					//used for telling if the changelog has changed recently
 
 	if(byond_version < RECOMMENDED_VERSION)
 		world.log << "Your server's byond version does not meet the recommended requirements for this server. Please update BYOND"
@@ -26,10 +27,13 @@
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
-
-
+/*
+	if(config && config.log_runtime)
+		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
+*/
 	callHook("startup")
 	//Emergency Fix
+	load_admins()
 	load_mods()
 	//end-emergency fix
 
@@ -152,7 +156,6 @@
 	fdel(F)
 	F << the_mode
 
-
 /hook/startup/proc/loadMOTD()
 	world.load_motd()
 	return 1
@@ -160,20 +163,18 @@
 /world/proc/load_motd()
 	join_motd = sanitize_russian(file2text("config/motd.txt"))
 
-
 /world/proc/load_configuration()
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
 	config.loadsql("config/dbconfig.txt")
+//	config.loadforumsql("config/forumdbconfig.txt")
 	// apply some settings from config..
 	abandon_allowed = config.respawn
-
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
 	return 1
-
 /world/proc/load_mods()
 	if(config.admin_legacy_system)
 		var/text = file2text("config/moderators.txt")
@@ -262,7 +263,6 @@ var/failed_old_db_connections = 0
 	else
 		world.log << "Feedback database connection established."
 	return 1
-
 proc/setup_database_connection()
 
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
@@ -271,9 +271,9 @@ proc/setup_database_connection()
 	if(!dbcon)
 		dbcon = new()
 
-	var/user = sqlfdbklogin
-	var/pass = sqlfdbkpass
-	var/db = sqlfdbkdb
+	var/user = sqllogin
+	var/pass = sqlpass
+	var/db = sqldb
 	var/address = sqladdress
 	var/port = sqlport
 
@@ -283,7 +283,6 @@ proc/setup_database_connection()
 		failed_db_connections = 0	//If this connection succeeded, reset the failed connections counter.
 	else
 		failed_db_connections++		//If it failed, increase the failed connections counter.
-		world.log << dbcon.ErrorMsg()
 
 	return .
 
