@@ -109,6 +109,7 @@
 	storage_slots = 7
 	max_w_class = 3
 	max_combined_w_class = 21
+	var/obj/item/weapon/gun/holstered = null
 	can_hold = list(
 		"/obj/item/weapon/grenade/flashbang",
 		"/obj/item/weapon/reagent_containers/spray/pepper",
@@ -171,12 +172,7 @@
 /obj/item/weapon/storage/belt/security/tactical
 	name = "combat belt"
 	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
-	icon_state = "swatbelt"
-	item_state = "swatbelt"
-	var/obj/item/weapon/gun/holstered = null
 	storage_slots = 9
-	max_w_class = 3
-	max_combined_w_class = 21
 	can_hold = list(
 		"/obj/item/weapon/grenade/flashbang",
 		"/obj/item/weapon/reagent_containers/spray/pepper",
@@ -201,7 +197,7 @@
 		)
 
 
-	/obj/item/weapon/storage/belt/security/tactical/verb/holster()
+	/obj/item/weapon/storage/belt/security/verb/holster()
 		set name = "Holster"
 		set category = "Object"
 		set src in usr

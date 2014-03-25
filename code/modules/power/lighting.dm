@@ -215,7 +215,7 @@
 	icon_state = "bulb1"
 	base_state = "bulb"
 	fitting = "bulb"
-	brightness = 4
+	brightness = 5
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 

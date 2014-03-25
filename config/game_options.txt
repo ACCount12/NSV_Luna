@@ -4,7 +4,7 @@
 HEALTH_THRESHOLD_SOFTCRIT 0
 
 ## level of health at which a mob becomes unconscious (crit)
-HEALTH_THRESHOLD_CRIT -50
+HEALTH_THRESHOLD_CRIT -80
 
 ## level of health at which a mob becomes dead
 HEALTH_THRESHOLD_DEAD -100
@@ -18,7 +18,7 @@ LIMBS_CAN_BREAK 1
 
 ## multiplier which enables organs to take more damage before bones breaking or limbs being destroyed
 ## 100 means normal, 50 means half
-ORGAN_HEALTH_MULTIPLIER 100
+ORGAN_HEALTH_MULTIPLIER 150
 
 ## multiplier which influences how fast organs regenerate naturally
 ## 100 means normal, 50 means half
@@ -45,8 +45,8 @@ REVIVAL_BRAIN_LIFE -1
 
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied. 
-RUN_SPEED 2
-WALK_SPEED 5
+RUN_SPEED 0
+WALK_SPEED 2
 
 
 ## The variables below affect the movement of specific mob types.

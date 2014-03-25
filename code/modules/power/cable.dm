@@ -30,7 +30,7 @@
 	var/datum/powernet/powernet
 	name = "power cable"
 	desc = "A flexible superconducting cable for heavy-duty power transfer"
-	icon = 'icons/obj/power_cond_white.dmi'
+	icon = 'icons/obj/power_cond_red.dmi'
 	icon_state = "0-1"
 	var/d1 = 0
 	var/d2 = 1

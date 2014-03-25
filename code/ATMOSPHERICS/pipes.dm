@@ -266,7 +266,7 @@ obj/machinery/atmospherics/pipe
 		icon_state = ""
 
 	simple/general
-		name="Pipe"
+		name="pipe"
 		pipe_color=""
 		icon_state = ""
 

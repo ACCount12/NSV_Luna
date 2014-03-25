@@ -18,8 +18,9 @@ var/list/plating_icons = list("plating","platingdmg1","platingdmg2","platingdmg3
 				"ironsand12", "ironsand13", "ironsand14", "ironsand15")
 var/list/wood_icons = list("wood","wood-broken")
 
-/turf/simulated/floor
+var/list/dirty_tiles_suff = list("_g1", "_g2")
 
+/turf/simulated/floor
 	//Note to coders, the 'intact' var can no longer be used to determine if the floor is a plating or not.
 	//Use the is_plating(), is_plasteel_floor() and is_light_floor() procs instead. --Errorage
 	name = "floor"
@@ -36,6 +37,17 @@ var/list/wood_icons = list("wood","wood-broken")
 	var/mineral = "metal"
 	var/obj/item/stack/tile/floor_tile = new/obj/item/stack/tile/plasteel
 
+/turf/proc/Clean(var/power)
+	return
+
+/turf/simulated/Clean(var/power)
+	var/suff = copytext(icon_state, -3)
+	if(suff in dirty_tiles_suff)
+		icon_state = copytext(icon_state, 1, length(icon_state)-3)
+
+	if(power)
+		for(var/turf/simulated/T in orange(1))
+			T.Clean()
 
 /turf/simulated/floor/New()
 	..()
@@ -43,6 +55,9 @@ var/list/wood_icons = list("wood","wood-broken")
 		icon_regular_floor = "floor"
 	else
 		icon_regular_floor = icon_state
+
+	if(copytext(icon_state, -3) in dirty_tiles_suff)
+		icon_regular_floor = copytext(icon_state, 1, length(icon_state)-3)
 
 //turf/simulated/floor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 //	if ((istype(mover, /obj/machinery/vehicle) && !(src.burnt)))

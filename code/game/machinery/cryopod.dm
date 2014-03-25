@@ -108,26 +108,14 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 //Decorative structures to go alongside cryopods.
 /obj/structure/cryofeed
-
 	name = "\improper cryogenic feed"
 	desc = "A bewildering tangle of machinery and pipes."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cryo_rear"
 	anchored = 1
 
-	var/orient_right = null //Flips the sprite.
-
-/obj/structure/cryofeed/right
-	orient_right = 1
-	icon_state = "cryo_rear-r"
-
-/obj/structure/cryofeed/New()
-
-	if(orient_right)
-		icon_state = "cryo_rear-r"
-	else
-		icon_state = "cryo_rear"
-	..()
+/obj/structure/cryofeed/pipe
+	icon_state = "cryo_rear_pipe"
 
 //Cryopods themselves.
 /obj/machinery/cryopod
