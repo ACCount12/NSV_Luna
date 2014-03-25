@@ -15,7 +15,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "pen"
 	item_state = "pen"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 0
 	w_class = 1.0
@@ -62,7 +62,7 @@
  */
 /obj/item/weapon/pen/sleepypen
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\""
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = FPRINT | OPENCONTAINER
 	origin_tech = "materials=2;syndicate=5"
 
 
@@ -89,7 +89,7 @@
  */
  /obj/item/weapon/pen/paralysis
  	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\""
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = FPRINT | OPENCONTAINER
 	origin_tech = "materials=2;syndicate=5"
 
 

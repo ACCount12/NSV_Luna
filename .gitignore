@@ -3,6 +3,9 @@
 *.rsc
 *.dmb
 *.lk
+*.backup
+
+thumbs.db
 info.json
 /config/admins.txt
 /config/moderators.txt
@@ -13,3 +16,4 @@ info.json
 /data/player_saves
 /data/ban_unban_log.txt
 /data/investigate
+/maps/backup

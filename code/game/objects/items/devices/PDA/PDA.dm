@@ -11,7 +11,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda"
 	item_state = "electronic"
 	w_class = 1.0
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	slot_flags = SLOT_ID | SLOT_BELT
 
 	//Main variables
@@ -41,7 +41,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/active_conversation = null // New variable that allows us to only view a single conversation.
 	var/list/conversations = list()    // For keeping up with who we have PDA messsages from.
 	var/newmessage = 0			//To remove hackish overlay check
-	
+
 	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above
 
@@ -321,7 +321,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/title = "Personal Data Assistant"
-	
+
 	var/data[0]  // This is the data that will be sent to the PDA
 
 
@@ -336,7 +336,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	data["silent"] = silent					// does the pda make noise when it receives a message?
 	data["toff"] = toff					// is the messenger function turned off?
 	data["active_conversation"] = active_conversation	// Which conversation are we following right now?
-	
+
 
 	data["idInserted"] = (id ? 1 : 0)
 	data["idLink"] = (id ? text("[id.registered_name], [id.assignment]") : "--------")
@@ -375,10 +375,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		cartdata["type"] = cartridge.type
 		cartdata["charges"] = cartridge.charges ? cartridge.charges : 0
 		data["cartridge"] = cartdata
-		
+
 	data["stationTime"] = worldtime2text()
 	data["newMessage"] = newmessage
-	
+
 	if(mode==2)
 		var/convopdas[0]
 		var/pdas[0]
@@ -388,7 +388,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if(conversations.Find("\ref[P]"))
 				convopdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "1")))
 			else
-				pdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "0")))	
+				pdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "0")))
 			count++
 
 		data["convopdas"] = convopdas
@@ -411,7 +411,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(mode==41)
 		data["manifest"] = data_core.get_manifest_json()
 
-	
+
 	if(mode==3)
 		var/turf/T = get_turf_or_move(user.loc)
 		if(!isnull(T) || mode!=3)
@@ -438,15 +438,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					)
 		if(isnull(data["aircontents"]))
 			data["aircontents"] = list("reading" = 0)
-		
+
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "pda.tmpl", title, 630, 600)
 		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)		
+		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
 		// auto update every Master Controller tick
@@ -484,17 +484,17 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		U.unset_machine()
 		ui.close()
 		return 0
-		
+
 	add_fingerprint(U)
 	U.set_machine(src)
 
 	switch(href_list["choice"])
-	
+
 //BASIC FUNCTIONS===================================
 
 		if("Close")//Self explanatory
 			U.unset_machine()
-			ui.close()				
+			ui.close()
 			return 0
 		if("Refresh")//Refresh, goes to the end of the proc.
 		if("Return")//Return
@@ -518,7 +518,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				var/turf/T = loc
 				if(ismob(T))
 					T = T.loc
-				cartridge.loc = T					
+				cartridge.loc = T
 				mode = 0
 				scanmode = 0
 				if (cartridge.radio)
@@ -774,7 +774,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if(!can_use())
 		return
-	
+
 	last_text = world.time
 	// check if telecomms I/O route 1459 is stable
 	//var/telecomms_intact = telecomms_process(P.owner, owner, t)
@@ -821,7 +821,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if(ai.aiPDA != P && ai.aiPDA != src)
 					ai.show_message("<i>Intercepted message from <b>[who]</b>: [t]</i>")
 
-	
+
 		if (!P.silent)
 			playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		for (var/mob/O in hearers(3, P.loc))
@@ -838,7 +838,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(L)
 			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
 			nanomanager.update_user_uis(L, P) // Update the recieving user's PDA UI so that they can see the new message
-			
+
 		nanomanager.update_user_uis(U, P) // Update the sending user's PDA UI so that they can see the new message
 
 		log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
@@ -920,7 +920,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		user << "<span class='notice'>You insert [cartridge] into [src].</span>"
 		nanomanager.update_uis(src) // update all UIs attached to src
 		if(cartridge.radio)
-			cartridge.radio.hostpda = src		
+			cartridge.radio.hostpda = src
 
 	else if(istype(C, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/idcard = C

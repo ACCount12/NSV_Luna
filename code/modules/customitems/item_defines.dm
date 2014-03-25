@@ -705,7 +705,7 @@
 	item_color = "jane_sid_suit"
 	has_sensor = 2
 	sensor_mode = 3
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 
 //Suit roll-down toggle.
 /obj/item/clothing/under/fluff/jane_sidsuit/verb/toggle_zipper()
@@ -951,7 +951,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
 	icon = 'icons/obj/chemical.dmi'
-	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
+	flags = FPRINT //Starting them with lids on them.  Safety first!
 	New(loc, var/color, var/labeled)
 		..()
 		name = "[labeled] bottle"

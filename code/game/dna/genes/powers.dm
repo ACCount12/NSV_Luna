@@ -121,19 +121,14 @@
 	New()
 		block=SMALLSIZEBLOCK
 
-	can_activate(var/mob/M,var/flags)
-		// Can't be big and small.
-		if(HULK in M.mutations)
-			return 0
-		return ..(M,flags)
-
 	activate(var/mob/M, var/connected, var/flags)
 		..(M,connected,flags)
 		M.pass_flags |= 1
 
 	deactivate(var/mob/M, var/connected, var/flags)
 		..(M,connected,flags)
-		M.pass_flags &= ~1 //This may cause issues down the track, but offhand I can't think of any other way for humans to get passtable short of varediting so it should be fine. ~Z
+		M.pass_flags &= ~1
+//This may cause issues down the track, but offhand I can't think of any other way for humans to get passtable short of varediting so it should be fine. ~Z
 
 /datum/dna/gene/basic/hulk
 	name="Hulk"
@@ -142,12 +137,6 @@
 
 	New()
 		block=HULKBLOCK
-
-	can_activate(var/mob/M,var/flags)
-		// Can't be big and small.
-		if(mSmallsize in M.mutations)
-			return 0
-		return ..(M,flags)
 
 /datum/dna/gene/basic/xray
 	name="X-Ray Vision"

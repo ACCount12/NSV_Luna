@@ -7,6 +7,14 @@
 	dir = 1
 	explosion_resistance = 25
 
+/obj/machinery/door/poddoor/blast
+	name = "blast door"
+	icon = 'icons/obj/doors/blastdoor.dmi'
+	explosion_resistance = 50
+
+/obj/machinery/door/poddoor/blast/dark
+	icon = 'icons/obj/doors/blastdoor_dark.dmi'
+
 /obj/machinery/door/poddoor/Bumped(atom/AM)
 	if(!density)
 		return ..()

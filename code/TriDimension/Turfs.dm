@@ -49,8 +49,8 @@
 								H.apply_damage(min(rand(0,damage),0), BRUTE, "r_leg")
 								H.apply_damage(min(rand(0,damage),0), BRUTE, "l_foot")
 								H.apply_damage(min(rand(0,damage),0), BRUTE, "r_foot")
-								H:weakened = max(H:weakened,2)
-								H:updatehealth()
+								H.Weaken(2)
+								H.updatehealth()
 		return ..()
 
 /turf/simulated/floor/open/proc/getbelow()

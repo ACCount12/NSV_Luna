@@ -17,7 +17,7 @@
 	name = "pack of seeds"
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "seed" // unknown plant seed - these shouldn't exist in-game
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	w_class = 1.0 // Makes them pocketable
 	var/mypath = "/obj/item/seeds"
 	var/plantname = "Plants"
@@ -1365,7 +1365,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hoe"
 	item_state = "hoe"
-	flags = FPRINT | TABLEPASS | CONDUCT | NOBLUDGEON
+	flags = FPRINT | CONDUCT | NOBLUDGEON
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0

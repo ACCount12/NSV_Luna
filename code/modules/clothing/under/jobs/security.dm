@@ -15,7 +15,7 @@
 	item_state = "r_suit"
 	item_color = "warden"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/security
@@ -25,7 +25,7 @@
 	item_state = "r_suit"
 	item_color = "secred"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/dispatch
@@ -35,7 +35,7 @@
 	item_state = "dispatch"
 	item_color = "dispatch"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/security2
@@ -45,7 +45,7 @@
 	item_state = "r_suit"
 	item_color = "redshirt2"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/security/corp
@@ -65,7 +65,7 @@
 	item_state = "swatunder"
 	item_color = "swatunder"
 	armor = list(melee = 10, bullet = 5, laser = 5,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	siemens_coefficient = 0.9
 
 /*
@@ -78,7 +78,7 @@
 	item_state = "det"
 	item_color = "detective"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/det/black
@@ -120,7 +120,7 @@
 	item_state = "r_suit"
 	item_color = "hosred"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/under/rank/head_of_security/corp
@@ -132,7 +132,7 @@
 	name = "Head of Security Hat"
 	desc = "The hat of the Head of Security. For showing the officers who's in charge."
 	icon_state = "hoscap"
-	flags = FPRINT | TABLEPASS | HEADCOVERSEYES
+	flags = FPRINT | HEADCOVERSEYES
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 10, bomb = 25, bio = 10, rad = 0)
 	flags_inv = 0
 	flags_inv = HIDEEARS

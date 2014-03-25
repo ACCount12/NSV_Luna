@@ -834,7 +834,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS|HEAD
 	slowdown = 1.0
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL | STOPSPRESSUREDMAGE
+	flags = FPRINT | ONESIZEFITSALL | STOPSPRESSUREDMAGE
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS | HEAD
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS | HEAD
@@ -888,7 +888,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 	desc = "a golem's head"
 	canremove = 0
 	unacidable = 1
-	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE
+	flags = FPRINT | STOPSPRESSUREDMAGE
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE
 	armor = list(melee = 80, bullet = 20, laser = 20, energy = 10, bomb = 0, bio = 0, rad = 0)

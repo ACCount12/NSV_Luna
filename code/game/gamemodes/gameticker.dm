@@ -144,6 +144,9 @@ var/global/datum/controller/gameticker/ticker
 
 	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
+	return 1
+
+
 /datum/controller/gameticker
 	//station_explosion used to be a variable for every mob's hud. Which was a waste!
 	//Now we have a general cinematic centrally held within the gameticker....far more efficient!

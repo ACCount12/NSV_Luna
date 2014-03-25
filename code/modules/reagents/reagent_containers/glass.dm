@@ -12,7 +12,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25,30,50)
 	volume = 50
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = FPRINT | OPENCONTAINER
 
 	var/label_text = ""
 
@@ -202,7 +202,7 @@
 	volume = 100
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25,30,50,100)
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = FPRINT | OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/beaker/noreact
 	name = "cryostasis beaker"
@@ -211,7 +211,7 @@
 	g_amt = 500
 	volume = 50
 	amount_per_transfer_from_this = 10
-	flags = FPRINT | TABLEPASS | OPENCONTAINER | NOREACT
+	flags = FPRINT | OPENCONTAINER | NOREACT
 
 /obj/item/weapon/reagent_containers/glass/beaker/bluespace
 	name = "bluespace beaker"
@@ -221,7 +221,7 @@
 	volume = 300
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25,30,50,100,300)
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = FPRINT | OPENCONTAINER
 
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial
@@ -232,7 +232,7 @@
 	volume = 25
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25)
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = FPRINT | OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone
 	New()
@@ -284,7 +284,7 @@
 	volume = 15
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(1,5,15)
-	flags = FPRINT | TABLEPASS | OPENCONTAINER */
+	flags = FPRINT | OPENCONTAINER */
 
 /*
 /obj/item/weapon/reagent_containers/glass/blender_jug
@@ -324,7 +324,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker0"
 	amount_per_transfer_from_this = 10
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = FPRINT | OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/dispenser/surfactant
 	name = "reagent glass (surfactant)"

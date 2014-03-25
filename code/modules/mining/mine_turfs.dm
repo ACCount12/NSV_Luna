@@ -5,15 +5,12 @@ datum/controller/game_controller/var/list/artifact_spawning_turfs = list()
 var/list/artifact_spawn = list() // Runtime fix for geometry loading before controller is instantiated.
 
 /turf/simulated/mineral //wall piece
-	name = "Rock"
+	name = "rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock"
-	oxygen = 0
-	nitrogen = 0
 	opacity = 1
 	density = 1
 	blocks_air = 1
-	temperature = TCMB
 	var/mineral/mineral
 	var/mined_ore = 0
 	var/last_act = 0
@@ -97,10 +94,10 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 	proc/UpdateMineral()
 		if(!mineral)
-			name = "\improper Rock"
+			name = "rock"
 			icon_state = "rock"
 			return
-		name = "\improper [mineral.display_name] deposit"
+		name = "[lowertext(mineral.display_name)] deposit"
 		icon_state = "rock_[mineral.name]"
 
 
@@ -280,7 +277,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 						M.Stun(5)
 				M.apply_effect(25, IRRADIATE)
 
-		var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
+		var/turf/simulated/floor/plating/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/asteroid)
 		N.fullUpdateMineralOverlays()
 
 		if(rand(1,500) == 1)
@@ -357,7 +354,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 
 /turf/simulated/mineral/random
-	name = "Mineral deposit"
+	name = "mineral deposit"
 	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25)//Currently, Adamantine won't spawn as it has no uses. -Durandan
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
@@ -368,7 +365,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 			if(!name_to_mineral)
 				SetupMinerals()
 
-			if (mineral_name && mineral_name in name_to_mineral)
+			if (mineral_name && (mineral_name in name_to_mineral))
 				mineral = name_to_mineral[mineral_name]
 				UpdateMineral()
 
@@ -383,17 +380,13 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 /**********************Asteroid**************************/
 
 
-/turf/simulated/floor/plating/airless/asteroid //floor piece
-	name = "Asteroid"
+/turf/simulated/floor/plating/asteroid //floor piece
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "asteroid"
-	oxygen = 0.01
-	nitrogen = 0.01
-	temperature = TCMB
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 
-/turf/simulated/floor/plating/airless/asteroid/New()
+/turf/simulated/floor/plating/asteroid/New()
 	var/proper_name = name
 	..()
 	name = proper_name
@@ -405,7 +398,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	spawn(2)
 		updateMineralOverlays()
 
-/turf/simulated/floor/plating/airless/asteroid/ex_act(severity)
+/turf/simulated/floor/plating/asteroid/ex_act(severity)
 	switch(severity)
 		if(3.0)
 			return
@@ -416,7 +409,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 			gets_dug()
 	return
 
-/turf/simulated/floor/plating/airless/asteroid/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/turf/simulated/floor/plating/asteroid/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if(!W || !user)
 		return 0
@@ -483,7 +476,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 		..(W,user)
 	return
 
-/turf/simulated/floor/plating/airless/asteroid/proc/gets_dug()
+/turf/simulated/floor/plating/asteroid/proc/gets_dug()
 	if(dug)
 		return
 	new/obj/item/weapon/ore/glass(src)
@@ -496,7 +489,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	icon_state = "asteroid_dug"
 	return
 
-/turf/simulated/floor/plating/airless/asteroid/proc/updateMineralOverlays()
+/turf/simulated/floor/plating/asteroid/proc/updateMineralOverlays()
 
 	overlays.Cut()
 
@@ -509,37 +502,37 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	if(istype(get_step(src, WEST), /turf/simulated/mineral))
 		overlays += image('icons/turf/walls.dmi', "rock_side_w", layer=6)
 
-/turf/simulated/floor/plating/airless/asteroid/proc/fullUpdateMineralOverlays()
-	var/turf/simulated/floor/plating/airless/asteroid/A
-	if(istype(get_step(src, WEST), /turf/simulated/floor/plating/airless/asteroid))
+/turf/simulated/floor/plating/asteroid/proc/fullUpdateMineralOverlays()
+	var/turf/simulated/floor/plating/asteroid/A
+	if(istype(get_step(src, WEST), /turf/simulated/floor/plating/asteroid))
 		A = get_step(src, WEST)
 		A.updateMineralOverlays()
-	if(istype(get_step(src, EAST), /turf/simulated/floor/plating/airless/asteroid))
+	if(istype(get_step(src, EAST), /turf/simulated/floor/plating/asteroid))
 		A = get_step(src, EAST)
 		A.updateMineralOverlays()
-	if(istype(get_step(src, NORTH), /turf/simulated/floor/plating/airless/asteroid))
+	if(istype(get_step(src, NORTH), /turf/simulated/floor/plating/asteroid))
 		A = get_step(src, NORTH)
 		A.updateMineralOverlays()
-	if(istype(get_step(src, NORTHWEST), /turf/simulated/floor/plating/airless/asteroid))
+	if(istype(get_step(src, NORTHWEST), /turf/simulated/floor/plating/asteroid))
 		A = get_step(src, NORTHWEST)
 		A.updateMineralOverlays()
-	if(istype(get_step(src, NORTHEAST), /turf/simulated/floor/plating/airless/asteroid))
+	if(istype(get_step(src, NORTHEAST), /turf/simulated/floor/plating/asteroid))
 		A = get_step(src, NORTHEAST)
 		A.updateMineralOverlays()
-	if(istype(get_step(src, SOUTHWEST), /turf/simulated/floor/plating/airless/asteroid))
+	if(istype(get_step(src, SOUTHWEST), /turf/simulated/floor/plating/asteroid))
 		A = get_step(src, SOUTHWEST)
 		A.updateMineralOverlays()
-	if(istype(get_step(src, SOUTHEAST), /turf/simulated/floor/plating/airless/asteroid))
+	if(istype(get_step(src, SOUTHEAST), /turf/simulated/floor/plating/asteroid))
 		A = get_step(src, SOUTHEAST)
 		A.updateMineralOverlays()
-	if(istype(get_step(src, SOUTH), /turf/simulated/floor/plating/airless/asteroid))
+	if(istype(get_step(src, SOUTH), /turf/simulated/floor/plating/asteroid))
 		A = get_step(src, SOUTH)
 		A.updateMineralOverlays()
 	updateMineralOverlays()
 
 
 
-/turf/simulated/floor/plating/airless/asteroid/Entered(atom/movable/M as mob|obj)
+/turf/simulated/floor/plating/asteroid/Entered(atom/movable/M as mob|obj)
 	..()
 	if(istype(M,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M

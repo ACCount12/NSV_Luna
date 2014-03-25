@@ -15,7 +15,7 @@
 	name = "welding helmet"
 	desc = "A head-mounted face cover designed to protect the wearer completely from space-arc eye."
 	icon_state = "welding"
-	flags = (FPRINT | TABLEPASS | HEADCOVERSEYES | HEADCOVERSMOUTH)
+	flags = (FPRINT | HEADCOVERSEYES | HEADCOVERSMOUTH)
 	item_state = "welding"
 	m_amt = 3000
 	g_amt = 1000
@@ -121,7 +121,7 @@
 	icon_state = "hardhat0_pumpkin"//Could stand to be renamed
 	item_state = "hardhat0_pumpkin"
 	item_color = "pumpkin"
-	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | HEADCOVERSMOUTH | BLOCKHAIR
+	flags = FPRINT | HEADCOVERSEYES | HEADCOVERSMOUTH | BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	var/brightness_on = 2 //luminosity when on
 	var/on = 0
@@ -156,7 +156,7 @@
 	name = "kitty ears"
 	desc = "A pair of kitty ears. Meow!"
 	icon_state = "kitty"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	var/icon/mob
 	var/icon/mob2
 	siemens_coefficient = 1.5

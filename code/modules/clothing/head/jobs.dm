@@ -6,7 +6,7 @@
 	icon_state = "chef"
 	item_state = "chef"
 	desc = "The commander in chef's head wear."
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	siemens_coefficient = 0.9
 
 //Captain: This probably shouldn't be space-worthy
@@ -50,7 +50,7 @@
 	name = "beret"
 	desc = "A beret, an artists favorite headwear."
 	icon_state = "beret"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 	siemens_coefficient = 0.9
 
 //Security
@@ -58,19 +58,19 @@
 	name = "security beret"
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
 	icon_state = "beret_badge"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 /obj/item/clothing/head/beret/eng
 	name = "engineering beret"
 	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
 	icon_state = "e_beret_badge"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT
 
 //Medical
 /obj/item/clothing/head/surgery
 	name = "surgical cap"
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs."
 	icon_state = "surgcap_blue"
-	flags = FPRINT | TABLEPASS | BLOCKHEADHAIR
+	flags = FPRINT | BLOCKHEADHAIR
 
 /obj/item/clothing/head/surgery/purple
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is deep purple."
