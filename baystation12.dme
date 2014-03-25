@@ -1340,7 +1340,6 @@
 #include "code\WorkInProgress\periodic_news.dm"
 #include "code\WorkInProgress\animusstation\donations_panel.dm"
 #include "code\WorkInProgress\animusstation\emotions.dm"
-#include "code\WorkInProgress\animusstation\turntable.dm"
 #include "code\WorkInProgress\Apples\artifacts.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Jungle\falsewall.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Jungle\jungle.dm"

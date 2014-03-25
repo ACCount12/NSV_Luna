@@ -897,7 +897,7 @@
 "rm" = (/obj/machinery/atmospherics/pipe/manifold{pipe_color = "blue"; icon_state = "manifold-b-f"; level = 1; name = "pipe manifold"},/turf/simulated/wall,/area)
 "rn" = (/obj/structure/morgue,/turf/simulated/floor{icon_state = "dark"},/area/medical/morgue)
 "ro" = (/obj/machinery/atmospherics/pipe/simple{dir = 4},/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor/border_only{dir = 2},/turf/simulated/floor/plating,/area/medical/medbay)
-"rp" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/drinks/britcup{pixel_x = 4; pixel_y = 5},/obj/machinery/atmospherics/unary/vent_pump{dir = 4; on = 1},/obj/machinery/camera{c_tag = "Medbay Break Room"; dir = 8; network = list("SS13","Medical"); pixel_x = 0; pixel_y = -22},/turf/simulated/floor{icon_state = "cafeteria"; dir = 5},/area/medical/medbay)
+"rp" = (/obj/structure/table,/obj/machinery/atmospherics/unary/vent_pump{dir = 4; on = 1},/obj/machinery/camera{c_tag = "Medbay Break Room"; dir = 8; network = list("SS13","Medical"); pixel_x = 0; pixel_y = -22},/turf/simulated/floor{icon_state = "cafeteria"; dir = 5},/area/medical/medbay)
 "rq" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/simulated/wall/r_wall,/area/medical/medbay)
 "rr" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 10},/turf/simulated/wall,/area)
 "rs" = (/turf/simulated/floor{tag = "icon-orangecorner"; icon_state = "orangecorner"; dir = 2},/area)
