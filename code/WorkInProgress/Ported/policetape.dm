@@ -72,7 +72,7 @@
 		while (cur!=end && can_place)
 			if(cur.density == 1)
 				can_place = 0
-			else if (istype(cur, /turf/space))
+			else if (istype(cur, /turf/simulated/floor/open))
 				can_place = 0
 			else
 				for(var/obj/O in cur)

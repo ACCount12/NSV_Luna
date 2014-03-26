@@ -36,7 +36,7 @@
 */
 
 /obj/item/stack/tile/plasteel/proc/build(turf/S as turf)
-	if (istype(S,/turf/space))
+	if (istype(S,/turf/simulated/floor/open))
 		S.ChangeTurf(/turf/simulated/floor/plating/airless)
 	else
 		S.ChangeTurf(/turf/simulated/floor/plating)

@@ -122,7 +122,7 @@ proc/make_mining_asteroid_secret(var/size = 5)
 			valid = 0
 			continue
 
-		if(locate(/turf/space) in surroundings)
+		if(locate(/turf/simulated/floor/open) in surroundings)
 			valid = 0
 			continue
 

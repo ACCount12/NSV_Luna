@@ -899,25 +899,11 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 						if(!istype(M,/mob) || istype(M, /mob/aiEye)) continue // If we need to check for more mobs, I'll add a variable
 						M.loc = X
 
-//					var/area/AR = X.loc
-
-//					if(AR.lighting_use_dynamic)							//TODO: rewrite this code so it's not messed by lighting ~Carn
-//						X.opacity = !X.opacity
-//						X.SetOpacity(!X.opacity)
-
 					toupdate += X
 
 					if(turftoleave)
 						var/turf/ttl = new turftoleave(T)
-
-//						var/area/AR2 = ttl.loc
-
-//						if(AR2.lighting_use_dynamic)						//TODO: rewrite this code so it's not messed by lighting ~Carn
-//							ttl.opacity = !ttl.opacity
-//							ttl.sd_SetOpacity(!ttl.opacity)
-
 						fromupdate += ttl
-
 					else
 						T.ChangeTurf(/turf/space)
 
@@ -931,19 +917,11 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 		for(var/turf/simulated/T1 in toupdate)
 			for(var/obj/machinery/door/D2 in T1)
 				doors += D2
-			/*if(T1.parent)
-				air_master.groups_to_rebuild += T1.parent
-			else
-				air_master.tiles_to_update += T1*/
 
 	if(fromupdate.len)
 		for(var/turf/simulated/T2 in fromupdate)
 			for(var/obj/machinery/door/D2 in T2)
 				doors += D2
-			/*if(T2.parent)
-				air_master.groups_to_rebuild += T2.parent
-			else
-				air_master.tiles_to_update += T2*/
 
 	for(var/obj/O in doors)
 		O:update_nearby_tiles(1)

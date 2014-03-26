@@ -11,7 +11,7 @@
 /obj/structure/lattice/New()
 	..()
 ///// Z-Level Stuff
-	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/floor/open)))
+	if(!istype(src.loc, /turf/simulated/floor/open))
 ///// Z-Level Stuff
 		del(src)
 	for(var/obj/structure/lattice/LAT in src.loc)
@@ -78,7 +78,7 @@
 			if(locate(/obj/structure/lattice, get_step(src, direction)))
 				dir_sum += direction
 			else
-				if(!(istype(get_step(src, direction), /turf/space)))
+				if(!(istype(get_step(src, direction), /turf/simulated/floor/open)))
 					dir_sum += direction
 
 		icon_state = "lattice[dir_sum]"

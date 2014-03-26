@@ -201,7 +201,7 @@
 /obj/effect/alien/weeds/New(pos, node)
 	..()
 	linked_node = node
-	if(istype(loc, /turf/space))
+	if(istype(loc, /turf/simulated/floor/open))
 		del(src)
 		return
 	if(icon_state == "weeds")icon_state = pick("weeds", "weeds1", "weeds2")
@@ -226,7 +226,7 @@ Alien plants should do something if theres a lot of poison
 		update()
 		return
 */
-	if (istype(U, /turf/space))
+	if (istype(U, /turf/simulated/floor/open))
 		del(src)
 		return
 

@@ -72,7 +72,7 @@
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			src.ChangeTurf(/turf/space)
+			src.ChangeTurf(/turf/simulated/floor/open)
 			return
 		if(2.0)
 			if (prob(50))

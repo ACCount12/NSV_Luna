@@ -333,7 +333,6 @@
 // attack with item - insert light (if right type), otherwise try to break the light
 
 /obj/machinery/light/attackby(obj/item/W, mob/user)
-
 	//Light replacer code
 	if(istype(W, /obj/item/device/lightreplacer))
 		var/obj/item/device/lightreplacer/LR = W
@@ -355,7 +354,6 @@
 				user << "You insert the [L.name]."
 				switchcount = L.switchcount
 				rigged = L.rigged
-				brightness = L.brightness
 				on = has_power()
 				update()
 
@@ -363,7 +361,6 @@
 				del(L)
 
 				if(on && rigged)
-
 					log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
 					message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
 
@@ -376,10 +373,7 @@
 		//If xenos decide they want to smash a light bulb with a toolbox, who am I to stop them? /N
 
 	else if(status != LIGHT_BROKEN && status != LIGHT_EMPTY)
-
-
-		if(prob(1+W.force * 5))
-
+		if(prob(10+W.force * 5))
 			user << "You hit the light, and it smashes!"
 			for(var/mob/M in viewers(src))
 				if(M == user)
@@ -491,7 +485,6 @@
 		var/mob/living/carbon/human/H = user
 
 		if(istype(H))
-
 			if(H.gloves)
 				var/obj/item/clothing/gloves/G = H.gloves
 				if(G.max_heat_protection_temperature)
@@ -513,7 +506,6 @@
 	var/obj/item/weapon/light/L = new light_type()
 	L.status = status
 	L.rigged = rigged
-	L.brightness = src.brightness
 
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount
@@ -538,7 +530,6 @@
 	var/obj/item/weapon/light/L = new light_type()
 	L.status = status
 	L.rigged = rigged
-	L.brightness = brightness
 
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount
@@ -571,7 +562,6 @@
 	if(status == LIGHT_OK)
 		return
 	status = LIGHT_OK
-	brightness = initial(brightness)
 	on = 1
 	update()
 
@@ -646,7 +636,6 @@
 	var/switchcount = 0	// number of times switched
 	m_amt = 60
 	var/rigged = 0		// true if rigged to explode
-	var/brightness = 2 //how much light it gives off
 
 /obj/item/weapon/light/tube
 	name = "light tube"
@@ -655,12 +644,10 @@
 	base_state = "ltube"
 	item_state = "c_tube"
 	g_amt = 100
-	brightness = 8
 
 /obj/item/weapon/light/tube/large
 	w_class = 2
 	name = "large light tube"
-	brightness = 15
 
 /obj/item/weapon/light/bulb
 	name = "light bulb"
@@ -669,20 +656,10 @@
 	base_state = "lbulb"
 	item_state = "contvapour"
 	g_amt = 100
-	brightness = 5
 
 /obj/item/weapon/light/throw_impact(atom/hit_atom)
 	..()
 	shatter()
-
-/obj/item/weapon/light/bulb/fire
-	name = "fire bulb"
-	desc = "A replacement fire bulb."
-	icon_state = "fbulb"
-	base_state = "fbulb"
-	item_state = "egg4"
-	g_amt = 100
-	brightness = 5
 
 // update the icon state and description of the light
 
@@ -699,16 +676,6 @@
 			desc = "A broken [name]."
 
 
-/obj/item/weapon/light/New()
-	..()
-	switch(name)
-		if("light tube")
-			brightness = rand(6,9)
-		if("light bulb")
-			brightness = rand(4,6)
-	update()
-
-
 // attack bulb/tube with object
 // if a syringe, can inject plasma to make it explode
 /obj/item/weapon/light/attackby(var/obj/item/I, var/mob/user)
@@ -719,10 +686,8 @@
 		user << "You inject the solution into the [src]."
 
 		if(S.reagents.has_reagent("plasma", 5))
-
 			log_admin("LOG: [user.name] ([user.ckey]) injected a light with plasma, rigging it to explode.")
 			message_admins("LOG: [user.name] ([user.ckey]) injected a light with plasma, rigging it to explode.")
-
 			rigged = 1
 
 		S.reagents.clear_reagents()
