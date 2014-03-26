@@ -189,8 +189,21 @@ proc/move_mining_shuttle()
 /obj/item/device/flashlight/lantern
 	name = "lantern"
 	icon_state = "lantern"
+	item_state = "lantern"
 	desc = "A mining lantern."
 	brightness_on = 6			// luminosity when on
+
+/obj/item/device/flashlight/lantern/update_brightness(var/mob/user = null)
+	..()
+	if(on)
+		item_state = "[initial(item_state)]1"
+	else
+		item_state = initial(icon_state)
+
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
 
 /*****************************Pickaxe********************************/
 

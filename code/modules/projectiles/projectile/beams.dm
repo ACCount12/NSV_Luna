@@ -12,7 +12,7 @@ var/list/beam_master = list()
 	name = "laser"
 	icon_state = "laser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
-	damage = 40
+	damage = 50
 	damage_type = BURN
 	flag = "laser"
 	eyeblur = 4
@@ -71,13 +71,13 @@ var/list/beam_master = list()
 		..()
 
 	proc/cleanup(reference) //Waits .3 seconds then removes the overlay.
-		src = null //we're getting deleted! this will keep the code running
-		spawn(3)
-			var/list/turf_master = beam_master[reference]
-			for(var/laser_state in turf_master)
-				var/list/turfs = turf_master[laser_state]
-				for(var/turf/T in turfs)
-					T.overlays -= beam_master[laser_state]
+		src = null
+		sleep(3)
+		var/list/turf_master = beam_master[reference]
+		for(var/laser_state in turf_master)
+			var/list/turfs = turf_master[laser_state]
+			for(var/turf/T in turfs)
+				T.overlays -= beam_master[laser_state]
 		return
 
 /obj/item/projectile/beam/practice
@@ -103,18 +103,18 @@ var/list/beam_master = list()
 /obj/item/projectile/beam/pulse
 	name = "pulse"
 	icon_state = "u_laser"
-	damage = 50
+	damage = 60
 
 
 /obj/item/projectile/beam/deathlaser
 	name = "death laser"
 	icon_state = "heavylaser"
-	damage = 60
+	damage = 80
 
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"
 	icon_state = "emitter"
-	damage = 50
+	damage = 20
 
 
 /obj/item/projectile/beam/lastertag/blue
@@ -129,7 +129,7 @@ var/list/beam_master = list()
 		if(istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = target
 			if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
-				M.Weaken(5)
+				M.Weaken(3)
 		return 1
 
 /obj/item/projectile/beam/lastertag/red
@@ -161,11 +161,3 @@ var/list/beam_master = list()
 			if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
 				M.Weaken(5)
 		return 1
-
-/obj/item/projectile/beam/sniper
-	name = "sniper beam"
-	icon_state = "xray"
-	damage = 60
-	stun = 5
-	weaken = 5
-	stutter = 5

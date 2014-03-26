@@ -261,10 +261,10 @@
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/device/detective_scanner(src)
 		new /obj/item/clothing/suit/armor/det_suit(src)
-		new /obj/item/ammo_magazine/c45r(src)
-		new /obj/item/ammo_magazine/c45r(src)
+		new /obj/item/ammo_magazine/box/c45(src)
+		new /obj/item/ammo_magazine/box/c45(src)
 		new /obj/item/taperoll/police(src)
-		new /obj/item/weapon/gun/projectile/detective/semiauto(src)
+		new /obj/item/weapon/gun/projectile/revolver/detective(src)
 		new /obj/item/clothing/tie/holster/armpit(src)
 		return
 

@@ -5,7 +5,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "bolt"
 	item_state = "bolt"
-	flags =  FPRINT
+	flags =  FPRINT | TABLEPASS
 	throwforce = 8
 	w_class = 3.0
 	sharp = 1
@@ -43,7 +43,7 @@
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"
 	w_class = 5.0
-	flags =  FPRINT | CONDUCT
+	flags =  FPRINT | TABLEPASS | CONDUCT |  USEDELAY
 	slot_flags = SLOT_BELT | SLOT_BACK
 
 	w_class = 3.0
@@ -77,7 +77,7 @@
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
 					arrow.throwforce = 15
 					arrow.icon_state = "metal-rod-superheated"
-					cell.use(500)
+					cell.charge -= 500
 			return
 
 	if(istype(W, /obj/item/weapon/cell))
@@ -91,7 +91,7 @@
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
 					arrow.throwforce = 15
 					arrow.icon_state = "metal-rod-superheated"
-					cell.use(500)
+					cell.charge -= 500
 		else
 			user << "<span class='notice'>[src] already has a cell installed.</span>"
 

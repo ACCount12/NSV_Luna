@@ -235,26 +235,31 @@
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive
 	name = "SRM-8 Missile Rack"
 	icon_state = "mecha_missilerack"
-	projectile = /obj/item/missile
+	projectile = /obj/item/weapon/missile
 	fire_sound = 'sound/effects/bang.ogg'
 	projectiles = 8
 	projectile_energy_cost = 1000
 	equip_cooldown = 60
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive/Fire(atom/movable/AM, atom/target, turf/aimloc)
-	var/obj/item/missile/M = AM
-	M.primed = 1
+	var/obj/item/weapon/missile/M = AM
+	M.Prime()
 	..()
 
-/obj/item/missile
+/obj/item/weapon/missile
+	name = "missile"
 	icon = 'icons/obj/grenade.dmi'
-	icon_state = "missile"
-	var/primed = null
+	icon_state = "chemr_locked"
+	var/primed = 0
 	throwforce = 15
+
+	proc/Prime()
+		primed = 1
+		icon_state = "missile"
 
 	throw_impact(atom/hit_atom)
 		if(primed)
-			explosion(hit_atom, 0, 0, 2, 4)
+			explosion(hit_atom, 0, 1, 3, 4)
 			del(src)
 		else
 			..()

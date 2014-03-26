@@ -30,7 +30,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	for(var/D in ItemList)
 		var/list/O = text2list(D, ":")
 		if(O.len>0)
-			valid_items += O[1]		
+			valid_items += O[1]
 
 
 
@@ -167,9 +167,9 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			if(istype(I,/obj/item/weapon/gun/projectile))
 				hasRevolver = 1
 
-		if(hasRevolver) randomItems.Add("/obj/item/ammo_magazine/a357") //Revolver ammo
+		if(hasRevolver) randomItems.Add("/obj/item/ammo_magazine/box/a357") //Revolver ammo
 */
-		randomItems.Add("/obj/item/ammo_magazine/a357") //Revolver ammo
+		randomItems.Add("/obj/item/ammo_magazine/box/a357") //Revolver ammo
 		randomItems.Add("/obj/item/clothing/shoes/syndigaloshes") //No-Slip Syndicate Shoes
 		randomItems.Add("/obj/item/weapon/plastique") //C4
 
@@ -200,7 +200,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			"/obj/item/weapon/card/emag" , "/obj/item/weapon/storage/box/syndie_kit/space" , "/obj/item/device/encryptionkey/binary" , \
 			"/obj/item/weapon/storage/box/syndie_kit/imp_freedom" , "/obj/item/clothing/glasses/thermal/syndi")
 				uses -= 3
-			if("/obj/item/ammo_magazine/a357" , "/obj/item/clothing/shoes/syndigaloshes" , "/obj/item/weapon/plastique", "/obj/item/weapon/card/id/syndicate")
+			if("/obj/item/ammo_magazine/box/a357" , "/obj/item/clothing/shoes/syndigaloshes" , "/obj/item/weapon/plastique", "/obj/item/weapon/card/id/syndicate")
 				uses -= 2
 			if("/obj/item/weapon/soap/syndie" , "/obj/item/weapon/storage/toolbox/syndicate")
 				uses -= 1
@@ -256,7 +256,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			feedback_add_details("traitor_uplink_items_bought","FI")
 		if("/obj/item/clothing/glasses/thermal/syndi")
 			feedback_add_details("traitor_uplink_items_bought","TM")
-		if("/obj/item/ammo_magazine/a357")
+		if("/obj/item/ammo_magazine/box/a357")
 			feedback_add_details("traitor_uplink_items_bought","RA")
 		if("/obj/item/clothing/shoes/syndigaloshes")
 			feedback_add_details("traitor_uplink_items_bought","SH")

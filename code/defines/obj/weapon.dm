@@ -609,6 +609,7 @@
 
 /obj/item/weapon/stock_parts/capacitor/adv
 	name = "advanced capacitor"
+	icon_state = "adv_capacitor"
 	desc = "An advanced capacitor used in the construction of a variety of devices."
 	origin_tech = "powerstorage=3"
 	rating = 2
@@ -653,6 +654,7 @@
 
 /obj/item/weapon/stock_parts/capacitor/super
 	name = "super capacitor"
+	icon_state = "super_capacitor"
 	desc = "A super-high capacity capacitor used in the construction of a variety of devices."
 	origin_tech = "powerstorage=5;materials=4"
 	rating = 3

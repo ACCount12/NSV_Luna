@@ -1,7 +1,5 @@
 /obj/item/weapon/gun/rocketlauncher
-	var/projectile
 	name = "rocket launcher"
-	desc = "MAGGOT."
 	icon_state = "rocket"
 	item_state = "rocket"
 	w_class = 4.0
@@ -11,11 +9,10 @@
 	flags =  FPRINT | CONDUCT | USEDELAY
 	slot_flags = 0
 	origin_tech = "combat=8;materials=5"
-	projectile = /obj/item/missile
 	var/missile_speed = 2
 	var/missile_range = 30
 	var/max_rockets = 1
-	var/list/rockets = new/list()
+	var/list/rockets = list()
 
 /obj/item/weapon/gun/rocketlauncher/examine()
 	set src in view()
@@ -24,7 +21,7 @@
 	usr << "\blue [rockets.len] / [max_rockets] rockets."
 
 /obj/item/weapon/gun/rocketlauncher/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/ammo_casing/rocket))
+	if(istype(I, /obj/item/weapon/missile))
 		if(rockets.len < max_rockets)
 			user.drop_item()
 			I.loc = src
@@ -39,15 +36,14 @@
 
 /obj/item/weapon/gun/rocketlauncher/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
 	if(rockets.len)
-		var/obj/item/ammo_casing/rocket/I = rockets[1]
-		var/obj/item/missile/M = new projectile(user.loc)
+		var/obj/item/weapon/missile/I = rockets[1]
 		playsound(user.loc, 'sound/effects/bang.ogg', 50, 1)
-		M.primed = 1
-		M.throw_at(target, missile_range, missile_speed)
+		I.loc = get_turf(src)
+		I.Prime()
+		I.throw_at(target, missile_range, missile_speed)
 		message_admins("[key_name_admin(user)] fired a rocket from a rocket launcher ([src.name]).")
 		log_game("[key_name_admin(user)] used a rocket launcher ([src.name]).")
 		rockets -= I
-		del(I)
 		return
 	else
 		usr << "\red [src] is empty."

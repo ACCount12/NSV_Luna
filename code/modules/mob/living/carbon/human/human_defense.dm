@@ -56,10 +56,10 @@ emp_act
 
 		var/armor = checkarmor(organ, "bullet")
 
-		if((P.embed && prob(20 + max(P.damage - armor, -10))) && P.damage_type == BRUTE)
+		if((P.embed && prob(20 + max(P.damage - armor, -20))) && P.damage_type == BRUTE)
 			var/obj/item/weapon/shard/shrapnel/SP = new()
 			(SP.name) = "[P.name] shrapnel"
-			(SP.desc) = "[SP.desc] It looks like it was fired from [P.shot_from]."
+			(SP.desc) = "[SP.desc] It looks like it was a [P.name]."
 			(SP.loc) = organ
 			organ.implants += SP
 			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
