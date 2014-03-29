@@ -18,8 +18,8 @@
 
 /obj/machinery/power/apc
 	name = "area power controller"
-
-	icon_state = "apc0"
+	icon = 'icons/obj/apc.dmi'
+	icon_state = "apc"
 	anchored = 1
 	use_power = 0
 	req_access = list(access_engine_equip)
@@ -58,14 +58,13 @@
 	var/beenhit = 0 // used for counting how many times it has been hit, used for Aliens at the moment
 	var/mob/living/silicon/ai/occupant = null
 	var/list/apcwirelist = list(
-		"Orange" = 1,
-		"Dark red" = 2,
-		"White" = 3,
-		"Yellow" = 4,
+		"Red" = 1,
+		"Green" = 2,
+		"Blue" = 3,
+		"Cyan" = 4,
 	)
 	var/longtermpower = 10
 	var/updating_icon = 0
-	//var/debug = 0
 
 /proc/RandomAPCWires()
 	//to make this not randomize the wires, just set index to 1 and increment it in the flag for loop (after doing everything else).
@@ -151,62 +150,73 @@
 
 /obj/machinery/power/apc/examine()
 	set src in oview(1)
+	..()
+	usr << "A control terminal for the area electrical systems."
+	if(stat & BROKEN)
+		usr << "Looks broken."
+		return
+	if(opened)
+		if(has_electronics && terminal)
+			usr << "The cover is [opened==2?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
+		else if (!has_electronics && terminal)
+			usr << "There are some wires but no any electronics."
+		else if (has_electronics && !terminal)
+			usr << "Electronics installed but not wired."
+		else /* if (!has_electronics && !terminal) */
+			usr << "There is no electronics nor connected wires."
 
-	if(usr /*&& !usr.stat*/)
-		usr << "A control terminal for the area electrical systems."
-		if(stat & BROKEN)
-			usr << "Looks broken."
-			return
-		if(opened)
-			if(has_electronics && terminal)
-				usr << "The cover is [opened==2?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
-			else if (!has_electronics && terminal)
-				usr << "There are some wires but no any electronics."
-			else if (has_electronics && !terminal)
-				usr << "Electronics installed but not wired."
-			else /* if (!has_electronics && !terminal) */
-				usr << "There is no electronics nor connected wires."
-
+	else
+		if (stat & MAINT)
+			usr << "The cover is closed. Something wrong with it: it doesn't work."
+		else if (malfhack)
+			usr << "The cover is broken. It may be hard to force it open."
 		else
-			if (stat & MAINT)
-				usr << "The cover is closed. Something wrong with it: it doesn't work."
-			else if (malfhack)
-				usr << "The cover is broken. It may be hard to force it open."
-			else
-				usr << "The cover is closed."
+			usr << "The cover is closed."
 
 
 // update the APC icon to show the three base states
 // also add overlays for indicator lights
 /obj/machinery/power/apc/update_icon()
-
 	overlays.Cut()
-	if(opened)
-		var/basestate = "apc[ cell ? "2" : "1" ]"	// if opened, show cell if it's inserted
-		if (opened==1)
-			if (stat & (MAINT|BROKEN))
-				icon_state = "apcmaint" //disassembled APC cannot hold cell
-			else
-				icon_state = basestate
-		else if (opened == 2)
-			icon_state = "[basestate]-nocover"
-	else if (stat & BROKEN)
-		icon_state = "apc-b"
-	else if(emagged || malfai)
-		icon_state = "apcemag"
-	else if(wiresexposed)
-		icon_state = "apcewires"
+	if (stat & BROKEN)
+		icon_state = "broken"
+		return
 	else
-		icon_state = "apc0"
-		// if closed, update overlays for channel status
-		if(!(stat & (BROKEN|MAINT)))
-			overlays.Add("apcox-[locked]","apco3-[charging]")	// 0=blue 1=red // 0=red, 1=yellow/black 2=green
-			if(operating)
-				overlays.Add("apco0-[equipment]","apco1-[lighting]","apco2-[environ]")	// 0=red, 1=green, 2=blue
+		icon_state = "apc"
+
+	if(wiresexposed) overlays.Add("wires")
+
+	if(opened)
+		overlays.Add("open")
+
+		if(has_electronics)	overlays.Add("open_circ")
+		if(cell)			overlays.Add("open_cell")
+
+	if(emagged || malfai)
+		overlays.Add("emag")
+	else if(!(stat & (BROKEN|MAINT)))
+		overlays.Add("charging[charging]")
+		var/light = get_lightlevel()
+
+		if(light)
+			overlays.Add("power[light]")
+			if(cell.percent() > 30)
+				overlays.Add("powerport")
+
+/obj/machinery/power/apc/proc/get_lightlevel()
+	if(!cell) return 0
+
+	switch(round(cell.percent()))
+		if(-1 to 19)		return 0
+		if(20 to 39)		return 1
+		if(40 to 49)		return 2
+		if(50 to 59)		return 3
+		if(60 to 69)		return 4
+		if(70 to 79)		return 5
+		if(80 to INFINITY)	return 6
 
 // Used in process so it doesn't update the icon too much
 /obj/machinery/power/apc/proc/queue_icon_update()
-
 	if(!updating_icon)
 		updating_icon = 1
 		// Start the update
@@ -217,7 +227,6 @@
 //attack with an item - open/close cover, insert cell, or (un)lock interface
 
 /obj/machinery/power/apc/attackby(obj/item/W, mob/user)
-
 	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
 		return src.attack_hand(user)
 	src.add_fingerprint(user)
@@ -241,12 +250,12 @@
 						"\red [user.name] has removed the power control board from [src.name]!",\
 						"You remove the power control board.")
 					new /obj/item/weapon/module/power_control(loc)
-		else if (opened!=2) //cover isn't removed
+		else
 			opened = 0
 			update_icon()
-	else if (istype(W, /obj/item/weapon/crowbar) && !((stat & BROKEN) || malfhack) )
+	else if (istype(W, /obj/item/weapon/crowbar) && !(stat & BROKEN))
 		if(coverlocked && !(stat & MAINT))
-			user << "\red The cover is locked and cannot be opened."
+			user << "\red The cover is locked."
 			return
 		else
 			opened = 1
@@ -299,8 +308,6 @@
 			user << "The interface is broken."
 		else if(opened)
 			user << "You must close the cover to swipe an ID card."
-		else if(wiresexposed)
-			user << "You must close the panel"
 		else if(stat & (BROKEN|MAINT))
 			user << "Nothing happens."
 		else
@@ -313,12 +320,10 @@
 	else if (istype(W, /obj/item/weapon/card/emag) && !(emagged || malfhack))		// trying to unlock with an emag card
 		if(opened)
 			user << "You must close the cover to swipe an ID card."
-		else if(wiresexposed)
-			user << "You must close the panel first"
 		else if(stat & (BROKEN|MAINT))
 			user << "Nothing happens."
 		else
-			flick("apc-spark", src)
+			flick("sparks", src)
 			if (do_after(user,6))
 				if(prob(50))
 					emagged = 1

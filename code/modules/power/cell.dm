@@ -20,6 +20,7 @@
 		overlays += image('icons/obj/power.dmi', "cell-o1")
 
 /obj/item/weapon/cell/proc/percent()		// return % charge of cell
+	if(maxcharge == 0) return 0 // NO!
 	return 100.0*charge/maxcharge
 
 // use power from a cell

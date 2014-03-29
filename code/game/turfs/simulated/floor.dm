@@ -43,8 +43,7 @@ var/list/dirty_tiles_suff = list("_g1", "_g2")
 /turf/simulated/Clean(var/power)
 	var/suff = copytext(icon_state, -3)
 	if(suff in dirty_tiles_suff)
-		icon_state = copytext(icon_state, 1, length(icon_state)-3)
-		world << icon_state
+		icon_state = copytext(icon_state, 1, length(icon_state)-2)
 
 	if(power)
 		for(var/turf/simulated/T in orange(1))
@@ -58,8 +57,7 @@ var/list/dirty_tiles_suff = list("_g1", "_g2")
 		icon_regular_floor = icon_state
 
 	if(copytext(icon_state, -3) in dirty_tiles_suff)
-		icon_regular_floor = copytext(icon_state, 1, length(icon_state)-3)
-		world << icon_regular_floor
+		icon_regular_floor = copytext(icon_state, 1, length(icon_state)-2)
 
 //turf/simulated/floor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 //	if ((istype(mover, /obj/machinery/vehicle) && !(src.burnt)))

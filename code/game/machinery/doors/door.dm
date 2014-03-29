@@ -190,7 +190,6 @@
 		icon_state = "door0"
 	return
 
-
 /obj/machinery/door/proc/do_animate(animation)
 	switch(animation)
 		if("opening")
@@ -215,7 +214,6 @@
 	if(!operating)		operating = 1
 
 	do_animate("opening")
-	icon_state = "door0"
 	src.SetOpacity(0)
 	sleep(10)
 	src.layer = 2.8

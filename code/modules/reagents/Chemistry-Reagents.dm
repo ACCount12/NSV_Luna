@@ -914,7 +914,7 @@ datum
 				return
 
 		space_cleaner
-			name = "Space cleaner"
+			name = "ultra cleaner"
 			id = "cleaner"
 			description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
 			reagent_state = LIQUID

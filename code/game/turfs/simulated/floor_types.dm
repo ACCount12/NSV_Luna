@@ -220,3 +220,11 @@
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return
+
+/turf/simulated/floor/plating/catwalk
+	icon_state = "catwalk"
+	name = "catwalk"
+	desc = "Cats really don't like these things."
+
+/turf/simulated/floor/plating/catwalk/ex_act(severity)
+	return

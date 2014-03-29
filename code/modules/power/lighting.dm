@@ -206,7 +206,7 @@
 	var/fitting = "tube"
 	var/switchcount = 0			// count of number of times switched on/off
 								// this is used to calc the probability the light burns out
-
+	var/brightness_changing = 0
 	var/rigged = 0				// true if rigged to explode
 
 // the smaller bulb light fixture
@@ -306,6 +306,21 @@
 	active_power_usage = (luminosity * 10)
 	if(on != on_gs)
 		on_gs = on
+
+/obj/machinery/light/proc/set_brightness(var/bri)
+	if(bri == brightness)	return
+	if(brightness_changing)	return
+
+	brightness_changing = 1
+
+	sleep(rand(1, 20))
+	seton(0)
+	update()
+
+	sleep(rand(1, 20))
+	brightness = bri
+	seton(1)
+	brightness_changing = 0
 
 
 // attempt to set the light's on/off status

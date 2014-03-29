@@ -702,7 +702,7 @@ datum
 			result_amount = 2
 
 		space_cleaner
-			name = "Space cleaner"
+			name = "ultra cleaner"
 			id = "cleaner"
 			result = "cleaner"
 			required_reagents = list("ammonia" = 1, "water" = 1)

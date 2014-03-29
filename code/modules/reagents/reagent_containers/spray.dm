@@ -100,10 +100,10 @@
 		reagents.reaction(usr.loc)
 		spawn(5) src.reagents.clear_reagents()
 
-//space cleaner
+//ultra cleaner
 /obj/item/weapon/reagent_containers/spray/cleaner
-	name = "space cleaner"
-	desc = "BLAM!-brand non-foaming space cleaner!"
+	name = "ultra cleaner"
+	desc = "BLAM!-brand non-foaming ultra cleaner!"
 
 
 /obj/item/weapon/reagent_containers/spray/cleaner/New()

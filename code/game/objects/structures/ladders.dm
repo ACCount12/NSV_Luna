@@ -71,3 +71,26 @@
 
 /obj/structure/ladder/attackby(obj/item/weapon/W, mob/user as mob)
 	return attack_hand(user)
+
+/obj/structure/ladder/broken
+	icon_state = "ladder10_b"
+
+	update_icon()
+		..()
+		icon_state += "_b"
+
+
+/obj/structure/ladder/hatch
+	icon_state = "ladder01_h"
+
+	update_icon()
+		..()
+		icon_state += "_h"
+
+	initialize()
+		..()
+		var/turf/T = loc
+		hide(T.intact)
+
+	hide(var/intact)
+		invisibility = intact ? 101 : 0

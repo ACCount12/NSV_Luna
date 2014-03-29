@@ -101,6 +101,12 @@ obj/structure/door_assembly
 		airlock_type = "/highsecurity"
 		glass = -1
 
+	door_assembly_highsecurity_dark
+		base_icon_state = "highsecblack"
+		base_name = "Heavy Airlock"
+		airlock_type = "/highsecurity/dark"
+		glass = -1
+
 	multi_tile
 		icon = 'icons/obj/doors/door_assembly2x1.dmi'
 		dir = EAST

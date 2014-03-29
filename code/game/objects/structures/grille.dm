@@ -12,6 +12,19 @@
 	var/health = 10
 	var/destroyed = 0
 
+/obj/structure/grille/special
+	health = 100000
+	ex_act(severity)
+		return
+	blob_act()
+		return
+
+
+/obj/structure/grille/broken
+	icon_state = "brokengrille"
+	health = 0
+	destroyed = 1
+	density = 0
 
 /obj/structure/grille/ex_act(severity)
 	del(src)
@@ -41,7 +54,7 @@
 	if(HULK in user.mutations)
 		health -= 5
 	else
-		health -= 3
+		health -= 1
 	healthcheck()
 
 /obj/structure/grille/attack_alien(mob/user as mob)
@@ -167,7 +180,7 @@
 			if("fire")
 				health -= W.force
 			if("brute")
-				health -= W.force * 0.1
+				health -= W.force * 0.5
 	healthcheck()
 	..()
 	return
