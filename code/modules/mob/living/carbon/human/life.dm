@@ -186,7 +186,7 @@
 						emote("drool")
 		*/
 
-		if(stat != 2)
+		if(stat != DEAD)
 			var/rn = rand(0, 200)
 			if(getBrainLoss() >= 5)
 				if(0 <= rn && rn <= 3)
@@ -274,7 +274,7 @@
 						damage = 1
 						if(prob(1))
 							src << "\red You mutate!"
-							randmutb(src)
+							randmutg(src)
 							domutcheck(src,null)
 							emote("gasp")
 						updatehealth()
@@ -574,7 +574,7 @@
 			//world << "Loc temp: [loc_temp] - Body temp: [bodytemperature] - Fireloss: [getFireLoss()] - Thermal protection: [get_thermal_protection()] - Fire protection: [thermal_protection + add_fire_protection(loc_temp)] - Heat capacity: [environment_heat_capacity] - Location: [loc] - src: [src]"
 
 			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
-			if(stat != 2)
+			if(stat != DEAD)
 				stabilize_temperature_from_calories()
 
 	//		log_debug("Adjusting to atmosphere.")

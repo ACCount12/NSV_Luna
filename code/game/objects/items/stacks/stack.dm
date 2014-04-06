@@ -163,6 +163,8 @@
 	return
 
 /obj/item/stack/proc/use(var/amount)
+	if(src.amount < amount)
+		return 0
 	src.amount-=amount
 	if (src.amount<=0)
 		var/oldsrc = src
@@ -170,7 +172,7 @@
 		if(usr)
 			usr.before_take_item(oldsrc)
 		del(oldsrc)
-	return
+	return 1
 
 /obj/item/stack/proc/add_to_stacks(mob/usr as mob)
 	var/obj/item/stack/oldsrc = src

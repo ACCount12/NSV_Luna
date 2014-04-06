@@ -467,7 +467,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly,
 					/obj/item/solar_assembly, // 21 Solar Assemblies. 1 Extra for the controller
-					/obj/item/weapon/circuitboard/solar_control,
+					/obj/item/weapon/circuitboard/computer/solar_control,
 					/obj/item/weapon/tracker_electronics,
 					/obj/item/weapon/paper/solar)
 	cost = 20
@@ -960,7 +960,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_engine
 
 /datum/supply_packs/shield_gen
-	contains = list(/obj/item/weapon/circuitboard/shield_gen)
+	contains = list(/obj/item/weapon/circuitboard/computer/shield_gen)
 	name = "Experimental shield generator circuitry"
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
@@ -988,7 +988,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Engineering" */
 
 /datum/supply_packs/shield_cap
-	contains = list(/obj/item/weapon/circuitboard/shield_cap)
+	contains = list(/obj/item/weapon/circuitboard/computer/shield_cap)
 	name = "Experimental shield capacitor circuitry"
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure

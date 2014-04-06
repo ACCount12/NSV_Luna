@@ -9,8 +9,7 @@
 	var/obj/machinery/sleeper/connected = null
 	anchored = 1 //About time someone fixed this.
 	density = 1
-	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
-
+	dir = EAST
 
 /obj/machinery/sleep_console/process()
 	if(stat & (NOPOWER|BROKEN))
@@ -35,12 +34,7 @@
 /obj/machinery/sleep_console/New()
 	..()
 	spawn( 5 )
-		if(orient == "RIGHT")
-			icon_state = "sleeperconsole-r"
-			src.connected = locate(/obj/machinery/sleeper, get_step(src, EAST))
-		else
-			src.connected = locate(/obj/machinery/sleeper, get_step(src, WEST))
-
+		src.connected = locate(/obj/machinery/sleeper, orange(1))
 		return
 	return
 
@@ -151,10 +145,9 @@
 /obj/machinery/sleeper
 	name = "Sleeper"
 	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "sleeper_0"
+	icon_state = "sleeper"
 	density = 1
 	anchored = 1
-	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
 	var/mob/living/carbon/human/occupant = null
 	var/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "paracetamol" = "Paracetamol", "anti_toxin" = "Dylovene", "dexalin" = "Dexalin")
 	var/amounts = list(5, 10)
@@ -164,16 +157,9 @@
 	New()
 		..()
 		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large()
-		spawn( 5 )
-			if(orient == "RIGHT")
-				icon_state = "sleeper_0-r"
-			return
-		return
-
 
 	allow_drop()
 		return 0
-
 
 	process()
 		if(filtering > 0)
@@ -233,10 +219,8 @@
 					M.client.perspective = EYE_PERSPECTIVE
 					M.client.eye = src
 				M.loc = src
-				src.occupant = M
-				src.icon_state = "sleeper_1"
-				if(orient == "RIGHT")
-					icon_state = "sleeper_1-r"
+				occupant = M
+				update_icon()
 
 				M << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
 
@@ -255,14 +239,12 @@
 					A.loc = src.loc
 					ex_act(severity)
 				del(src)
-				return
 			if(2.0)
 				if(prob(50))
 					for(var/atom/movable/A as mob|obj in src)
 						A.loc = src.loc
 						ex_act(severity)
 					del(src)
-					return
 			if(3.0)
 				if(prob(25))
 					for(var/atom/movable/A as mob|obj in src)
@@ -307,15 +289,13 @@
 	proc/go_out()
 		if(filtering)
 			toggle_filter()
-		if(!src.occupant)
+		if(!occupant)
 			return
-		if(src.occupant.client)
-			src.occupant.client.eye = src.occupant.client.mob
-			src.occupant.client.perspective = MOB_PERSPECTIVE
-		src.occupant.loc = src.loc
-		src.occupant = null
-		if(orient == "RIGHT")
-			icon_state = "sleeper_0-r"
+		if(occupant.client)
+			occupant.client.eye = src.occupant.client.mob
+			occupant.client.perspective = MOB_PERSPECTIVE
+		occupant.loc = src.loc
+		occupant = null
 		return
 
 
@@ -364,8 +344,6 @@
 		set src in oview(1)
 		if(usr.stat != 0)
 			return
-		if(orient == "RIGHT")
-			icon_state = "sleeper_0-r"
 		src.icon_state = "sleeper_0"
 		src.go_out()
 		add_fingerprint(usr)
@@ -392,7 +370,7 @@
 		if(usr.stat != 0 || !(ishuman(usr) || ismonkey(usr)))
 			return
 
-		if(src.occupant)
+		if(occupant)
 			usr << "\blue <B>The sleeper is already occupied!</B>"
 			return
 
@@ -402,17 +380,15 @@
 				return
 		visible_message("[usr] starts climbing into the sleeper.", 3)
 		if(do_after(usr, 20))
-			if(src.occupant)
+			if(occupant)
 				usr << "\blue <B>The sleeper is already occupied!</B>"
 				return
 			usr.stop_pulling()
 			usr.client.perspective = EYE_PERSPECTIVE
 			usr.client.eye = src
 			usr.loc = src
-			src.occupant = usr
-			src.icon_state = "sleeper_1"
-			if(orient == "RIGHT")
-				icon_state = "sleeper_1-r"
+			occupant = usr
+			update_icon()
 
 			usr << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
 
@@ -421,3 +397,11 @@
 			src.add_fingerprint(usr)
 			return
 		return
+
+/obj/machinery/sleeper/update_icon()
+	icon_state = initial(icon_state)
+	if(occupant)
+		icon_state += "_1"
+
+/obj/machinery/sleeper/old
+	icon_state = "syndipod"

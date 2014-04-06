@@ -179,7 +179,7 @@ var/global/list/autolathe_recipes_hidden = list( \
 		if (opened)
 			if(istype(O, /obj/item/weapon/crowbar))
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
+				var/obj/structure/constructable_frame/machine/M = new /obj/structure/constructable_frame/machine(src.loc)
 				M.state = 2
 				M.icon_state = "box_1"
 				for(var/obj/I in component_parts)
@@ -338,7 +338,7 @@ var/global/list/autolathe_recipes_hidden = list( \
 	New()
 		..()
 		component_parts = list()
-		component_parts += new /obj/item/weapon/circuitboard/autolathe(src)
+		component_parts += new /obj/item/weapon/circuitboard/computer/autolathe(src)
 		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)

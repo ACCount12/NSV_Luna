@@ -1,8 +1,5 @@
-
-
-/obj/machinery/rust_fuel_assembly_port
+/obj/machinery/rust/fuel_assembly_port
 	name = "Fuel Assembly Port"
-	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/rust.dmi'
 	icon_state = "port2"
 	density = 0
 	var/obj/item/weapon/fuel_assembly/cur_assembly
@@ -12,7 +9,7 @@
 	var/opened = 1 //0=closed, 1=opened
 	var/has_electronics = 0 // 0 - none, bit 1 - circuitboard, bit 2 - wires
 
-/obj/machinery/rust_fuel_assembly_port/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/rust/fuel_assembly_port/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I,/obj/item/weapon/fuel_assembly) && !opened)
 		if(cur_assembly)
 			user << "\red There is already a fuel rod assembly in there!"
@@ -23,7 +20,7 @@
 			icon_state = "port1"
 			user << "\blue You insert [I] into [src]. Touch the panel again to insert [I] into the injector."
 
-/obj/machinery/rust_fuel_assembly_port/attack_hand(mob/user)
+/obj/machinery/rust/fuel_assembly_port/attack_hand(mob/user)
 	add_fingerprint(user)
 	if(stat & (BROKEN|NOPOWER) || opened)
 		return
@@ -41,7 +38,7 @@
 	else
 		user << "\red \icon[src] [src] was unable to draw a fuel rod assembly from an injector."
 
-/obj/machinery/rust_fuel_assembly_port/proc/try_insert_assembly()
+/obj/machinery/rust/fuel_assembly_port/proc/try_insert_assembly()
 	var/success = 0
 	if(cur_assembly)
 		var/turf/check_turf = get_step(get_turf(src), src.dir)
@@ -62,14 +59,14 @@
 
 	return success
 
-/obj/machinery/rust_fuel_assembly_port/proc/eject_assembly()
+/obj/machinery/rust/fuel_assembly_port/proc/eject_assembly()
 	if(cur_assembly)
 		cur_assembly.loc = src.loc//get_step(get_turf(src), src.dir)
 		cur_assembly = null
 		icon_state = "port0"
 		return 1
 
-/obj/machinery/rust_fuel_assembly_port/proc/try_draw_assembly()
+/obj/machinery/rust/fuel_assembly_port/proc/try_draw_assembly()
 	var/success = 0
 	if(!cur_assembly)
 		var/turf/check_turf = get_step(get_turf(src), src.dir)
@@ -93,7 +90,7 @@
 
 	return success
 
-/obj/machinery/rust_fuel_assembly_port/verb/eject_assembly_verb()
+/obj/machinery/rust/fuel_assembly_port/verb/eject_assembly_verb()
 	set name = "Eject assembly from port"
 	set category = "Object"
 	set src in oview(1)

@@ -99,7 +99,7 @@ display round(lastgen) and plasmatank amount
 	var/max_sheets = 100
 	var/sheet_name = ""
 	var/sheet_path = /obj/item/stack/sheet/mineral/plasma
-	var/board_path = "/obj/item/weapon/circuitboard/pacman"
+	var/board_path = "/obj/item/weapon/circuitboard/computer/pacman"
 	var/sheet_left = 0 // How much is left of the sheet
 	var/time_per_sheet = 40
 	var/heat = 0
@@ -236,7 +236,7 @@ display round(lastgen) and plasmatank amount
 			else
 				user << "\blue You close the access panel."
 		else if(istype(O, /obj/item/weapon/crowbar) && open)
-			var/obj/machinery/constructable_frame/machine_frame/new_frame = new /obj/machinery/constructable_frame/machine_frame(src.loc)
+			var/obj/structure/constructable_frame/machine/new_frame = new /obj/structure/constructable_frame/machine(src.loc)
 			for(var/obj/item/I in component_parts)
 				if(I.reliability < 100)
 					I.crit_fail = 1
@@ -330,7 +330,7 @@ display round(lastgen) and plasmatank amount
 	sheet_path = /obj/item/stack/sheet/mineral/uranium
 	power_gen = 15000
 	time_per_sheet = 65
-	board_path = "/obj/item/weapon/circuitboard/pacman/super"
+	board_path = "/obj/item/weapon/circuitboard/computer/pacman/super"
 	overheat()
 		explosion(src.loc, 3, 3, 3, -1)
 
@@ -340,6 +340,6 @@ display round(lastgen) and plasmatank amount
 	sheet_path = /obj/item/stack/sheet/mineral/diamond
 	power_gen = 40000
 	time_per_sheet = 80
-	board_path = "/obj/item/weapon/circuitboard/pacman/mrs"
+	board_path = "/obj/item/weapon/circuitboard/computer/pacman/mrs"
 	overheat()
 		explosion(src.loc, 4, 4, 4, -1)

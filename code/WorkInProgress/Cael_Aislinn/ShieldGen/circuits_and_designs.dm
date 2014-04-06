@@ -2,7 +2,7 @@
 ////////////////////////////////////////
 // External Shield Generator
 
-/obj/item/weapon/circuitboard/shield_gen_ex
+/obj/item/weapon/circuitboard/computer/shield_gen_ex
 	name = "Circuit board (Experimental hull shield generator)"
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_gen/external"
@@ -28,7 +28,7 @@ datum/design/shield_gen_ex
 ////////////////////////////////////////
 // Shield Generator
 
-/obj/item/weapon/circuitboard/shield_gen
+/obj/item/weapon/circuitboard/computer/shield_gen
 	name = "Circuit board (Experimental shield generator)"
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_gen/external"
@@ -54,7 +54,7 @@ datum/design/shield_gen
 ////////////////////////////////////////
 // Shield Capacitor
 
-/obj/item/weapon/circuitboard/shield_cap
+/obj/item/weapon/circuitboard/computer/shield_cap
 	name = "Circuit board (Experimental shield capacitor)"
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_capacitor"

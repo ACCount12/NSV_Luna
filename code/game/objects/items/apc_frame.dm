@@ -1,24 +1,33 @@
 // APC HULL
-
-/obj/item/apc_frame
-	name = "APC frame"
-	desc = "Used for repairing or building APCs"
-	icon = 'icons/obj/apc_repair.dmi'
-	icon_state = "apc_frame"
+/obj/item/wallframe
 	flags = FPRINT| CONDUCT
 
-/obj/item/apc_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/metal( get_turf(src.loc), 2 )
-		del(src)
-
-/obj/item/apc_frame/proc/try_build(turf/on_wall)
+/obj/item/wallframe/proc/try_build(turf/on_wall)
 	if (get_dist(on_wall,usr)>1)
 		return
 	var/ndir = get_dir(usr,on_wall)
 	if (!(ndir in cardinal))
 		return
+
+	return 1
+
+/obj/item/wallframe/apc
+	name = "APC frame"
+	desc = "Used for repairing or building APCs"
+	icon = 'icons/obj/apc.dmi'
+	icon_state = "apc_frame"
+
+/obj/item/wallframe/apc/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if (istype(W, /obj/item/weapon/wrench))
+		new /obj/item/stack/sheet/metal( get_turf(src.loc), 2 )
+		del(src)
+
+/obj/item/wallframe/apc/try_build(turf/on_wall)
+	if(!..())
+		return
+
+	var/ndir = get_dir(usr,on_wall)
 	var/turf/loc = get_turf(usr)
 	var/area/A = loc.loc
 	if (!istype(loc, /turf/simulated/floor))

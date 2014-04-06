@@ -113,3 +113,59 @@
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel/spin()
 	set invisibility = 101
+
+
+/obj/item/weapon/gun/projectile/revolver/pipe
+	name = "pipe shotgun"
+	desc = "It looks badass."
+	icon_state = "pipeshotgun"
+	item_state = "shotgun"
+	w_class = 3
+	force = 10
+	slot_flags = null
+	origin_tech = "combat=2;materials=1"
+	mag_type = /obj/item/ammo_magazine/internal/pipe
+	var/shots = 20
+
+/obj/item/weapon/gun/projectile/revolver/pipe/attack_self(mob/living/user as mob)
+	var/num_unloaded = 0
+	user << "<span class='notice'>You begin to unload \the [src].</span>"
+	if(do_after(user, 20))
+		while (get_ammo() > 0)
+			var/obj/item/ammo_casing/CB
+			CB = magazine.get_round(0)
+			chambered = null
+			if(CB && !istype(CB, /obj/item/ammo_casing/none))
+				CB.loc = get_turf(src.loc)
+				CB.update_icon()
+				num_unloaded++
+			magazine.on_empty()
+		if(num_unloaded)
+			user << "<span class = 'notice'>You unload \the [src].</span>"
+		else
+			user << "<span class='notice'>[src] is empty.</span>"
+
+
+/obj/item/weapon/gun/projectile/revolver/pipe/attackby(var/obj/item/A as obj, mob/user as mob)
+	..()
+	if(istype(A, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = A
+		if (WT.remove_fuel(0,user) && shots)
+			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+			user << "You start welding [src]'s barrel."
+			if (do_after(user,20))
+				if(!src || !WT.isOn()) return
+				shots -= 10
+				user << "You weld [src]'s barrel."
+		else
+			return
+
+/obj/item/weapon/gun/projectile/revolver/pipe/special_check(var/mob/living/carbon/human/M)
+	if(prob(shots*3))
+		M << "<span class='danger'>[src] blows up in your face!</span>"
+		M.take_organ_damage(0,20)
+		spawn(5)
+			M.drop_item()
+			del(src)
+	shots++
+	return 1

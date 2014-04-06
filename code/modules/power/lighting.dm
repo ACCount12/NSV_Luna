@@ -11,29 +11,26 @@
 
 
 
-/obj/item/light_fixture_frame
+/obj/item/wallframe/light_fixture
 	name = "light fixture frame"
 	desc = "Used for building lights."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-item"
-	flags = FPRINT| CONDUCT
 	var/fixture_type = "tube"
 	var/obj/machinery/light/newlight = null
 	var/sheets_refunded = 2
 
-/obj/item/light_fixture_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/wallframe/light_fixture/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		new /obj/item/stack/sheet/metal( get_turf(src.loc), sheets_refunded )
 		del(src)
 		return
 	..()
 
-/obj/item/light_fixture_frame/proc/try_build(turf/on_wall)
-	if (get_dist(on_wall,usr)>1)
+/obj/item/wallframe/light_fixture/try_build(turf/on_wall)
+	if(!..())
 		return
-	var/ndir = get_dir(usr,on_wall)
-	if (!(ndir in cardinal))
-		return
+
 	var/turf/loc = get_turf_loc(usr)
 	if (!istype(loc, /turf/simulated/floor))
 		usr << "\red [src.name] cannot be placed on this spot."
@@ -58,7 +55,7 @@
 		"You attach [src] to the wall.")
 	del(src)
 
-/obj/item/light_fixture_frame/small
+/obj/item/wallframe/light_fixture/small
 	name = "small light fixture frame"
 	desc = "Used for building small lights."
 	icon = 'icons/obj/lighting.dmi'

@@ -83,6 +83,15 @@
 	attack_verb = list("HONKED")
 	var/spam_flag = 0
 
+/obj/item/weapon/bikehorn/HasEntered(AM as mob|obj)
+	if(ismob(AM))
+		var/mob/M = AM
+		M << "\red <B>You step on [src]!</B>"
+		playsound(src.loc, 'bikehorn.ogg', 50, 1)
+		spam_flag = 1
+		spawn(20)
+			spam_flag = 0
+	..()
 
 /obj/item/weapon/c_tube
 	name = "cardboard tube"
@@ -499,6 +508,7 @@
 	throw_speed = 1
 	throw_range = 3
 	w_class = 4.0
+	sharp = 1
 	flags = FPRINT | NOSHIELD
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"

@@ -12,7 +12,7 @@ var/list/beam_master = list()
 	name = "laser"
 	icon_state = "laser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
-	damage = 50
+	damage = 20
 	damage_type = BURN
 	flag = "laser"
 	eyeblur = 4
@@ -83,17 +83,19 @@ var/list/beam_master = list()
 /obj/item/projectile/beam/practice
 	name = "laser"
 	icon_state = "laser"
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
-	damage_type = BURN
-	flag = "laser"
 	eyeblur = 2
 
+
+/obj/item/projectile/beam/midlaser
+	name = "laser"
+	icon_state = "heavylaser"
+	damage = 40
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
 	icon_state = "heavylaser"
-	damage = 50
+	damage = 60
 
 /obj/item/projectile/beam/xray
 	name = "xray beam"

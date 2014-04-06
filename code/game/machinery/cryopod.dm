@@ -17,7 +17,7 @@ var/global/list/frozen_items = list()
 	desc = "An interface between crew and the cryogenic storage oversight systems."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cellconsole"
-	circuit = "/obj/item/weapon/circuitboard/cryopodcontrol"
+	circuit = "/obj/item/weapon/circuitboard/computer/cryopodcontrol"
 	var/mode = null
 
 /obj/machinery/computer/cryopod/attack_paw()
@@ -26,7 +26,7 @@ var/global/list/frozen_items = list()
 /obj/machinery/computer/cryopod/attack_ai()
 	src.attack_hand()
 
-obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
+/obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
 	if(stat & (NOPOWER|BROKEN))
 		return
 
@@ -35,7 +35,7 @@ obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
 
 	var/dat
 
-	if (!( ticker ))
+	if (!ticker )
 		return
 
 	dat += "<hr/><br/><b>Cryogenic Oversight Control</b><br/>"
@@ -48,7 +48,7 @@ obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
 	user << browse(dat, "window=cryopod_console")
 	onclose(user, "cryopod_console")
 
-obj/machinery/computer/cryopod/Topic(href, href_list)
+/obj/machinery/computer/cryopod/Topic(href, href_list)
 
 	if(..())
 		return
@@ -58,7 +58,6 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	src.add_fingerprint(user)
 
 	if(href_list["log"])
-
 		var/dat = "<b>Recently stored crewmembers</b><br/><hr/><br/>"
 		for(var/person in frozen_crew)
 			dat += "[person]<br/>"
@@ -67,7 +66,6 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		user << browse(dat, "window=cryolog")
 
 	else if(href_list["item"])
-
 		if(frozen_items.len == 0)
 			user << "\blue There is nothing to recover from storage."
 			return
@@ -84,7 +82,6 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		frozen_items -= I
 
 	else if(href_list["allitems"])
-
 		if(frozen_items.len == 0)
 			user << "\blue There is nothing to recover from storage."
 			return
@@ -101,7 +98,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	src.updateUsrDialog()
 	return
 
-/obj/item/weapon/circuitboard/cryopodcontrol
+/obj/item/weapon/circuitboard/computer/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"
 	build_path = "/obj/machinery/computer/cryopod"
 	origin_tech = "programming=3"
@@ -113,18 +110,24 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cryo_rear"
 	anchored = 1
+	dir = EAST
 
 /obj/structure/cryofeed/pipe
 	icon_state = "cryo_rear_pipe"
+	density = 0
+
+/obj/structure/cryofeed/pipe/s
+	icon_state = "cryo_rear_pipe2"
 
 //Cryopods themselves.
 /obj/machinery/cryopod
-	name = "\improper cryogenic freezer"
-	desc = "A man-sized pod for entering suspended animation."
+	name = "\improper cryogenic pod"
+	desc = "A man-sized pod for leaving suspended animation state."
 	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "body_scanner_0"
+	icon_state = "body_scanner"
 	density = 1
 	anchored = 1
+	dir = EAST
 
 	var/mob/occupant = null      // Person waiting to be despawned.
 	var/orient_right = null      // Flips the sprite.
@@ -147,18 +150,8 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		/obj/item/clothing/head/helmet/space/
 	)
 
-/obj/machinery/cryopod/right
-	orient_right = 1
-	icon_state = "body_scanner_0-r"
-
 /obj/machinery/cryopod/New()
-
 	announce = new /obj/item/device/radio/intercom(src)
-
-	if(orient_right)
-		icon_state = "body_scanner_0-r"
-	else
-		icon_state = "body_scanner_0"
 	..()
 
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
@@ -238,13 +231,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 				if ((G.fields["name"] == occupant.real_name))
 					del(G)
 
-			if(orient_right)
-				icon_state = "body_scanner_0-r"
-			else
-				icon_state = "body_scanner_0"
+			update_icon()
 
 			//TODO: Check objectives/mode, update new targets if this mob is the target, spawn new antags?
-
 			//This should guarantee that ghosts don't spawn.
 			occupant.ckey = null
 
@@ -296,10 +285,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					M.client.perspective = EYE_PERSPECTIVE
 					M.client.eye = src
 
-			if(orient_right)
-				icon_state = "body_scanner_1-r"
-			else
-				icon_state = "body_scanner_1"
+			icon_state = "body_scanner_1"
 
 			M << "\blue You feel cool air surround you. You go numb as your senses turn inward."
 			M << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
@@ -320,10 +306,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	if(usr.stat != 0)
 		return
 
-	if(orient_right)
-		icon_state = "body_scanner_0-r"
-	else
-		icon_state = "body_scanner_0"
+	update_icon()
 
 	src.go_out()
 	add_fingerprint(usr)
@@ -363,10 +346,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		usr.loc = src
 		src.occupant = usr
 
-		if(orient_right)
-			icon_state = "body_scanner_1-r"
-		else
-			icon_state = "body_scanner_1"
+		update_icon()
 
 		usr << "\blue You feel cool air surround you. You go numb as your senses turn inward."
 		usr << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
@@ -378,7 +358,6 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	return
 
 /obj/machinery/cryopod/proc/go_out()
-
 	if(!occupant)
 		return
 
@@ -388,13 +367,14 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 	occupant.loc = get_turf(src)
 	occupant = null
-
-	if(orient_right)
-		icon_state = "body_scanner_0-r"
-	else
-		icon_state = "body_scanner_0"
+	update_icon()
 
 	return
+
+/obj/machinery/cryopod/update_icon()
+	icon_state = initial(icon_state)
+	if(occupant)
+		icon_state += "_1"
 
 
 //Attacks/effects.

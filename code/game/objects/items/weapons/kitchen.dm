@@ -181,6 +181,7 @@
 	throwforce = 8.0
 	throw_speed = 3
 	throw_range = 6
+	sharp = 1
 	m_amt = 12000
 	origin_tech = "materials=1"
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")

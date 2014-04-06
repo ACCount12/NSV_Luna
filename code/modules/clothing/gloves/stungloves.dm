@@ -10,7 +10,6 @@
 				if(C.amount >= 2)
 					C.use(2)
 					wired = 1
-					siemens_coefficient = 3.0
 					user << "<span class='notice'>You wrap some wires around [src].</span>"
 					update_icon()
 				else
@@ -33,8 +32,6 @@
 			user << "<span class='notice'>[src] already have a cell.</span>"
 
 	else if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
-
-
 		wired = null
 
 		if(cell)
@@ -66,11 +63,34 @@
 			return
 		if(wired) //wires disappear into the void because fuck that shit
 			wired = 0
-			siemens_coefficient = initial(siemens_coefficient)
 			user << "<span class='notice'>You cut the wires away from [src].</span>"
 			update_icon()
 		..()
 	return
+
+/obj/item/clothing/gloves/Touch(A, proximity, var/mob/living/carbon/user)
+	if(!user)		return 0
+	if(!proximity)	return 0
+	if(!cell)		return 0
+
+	if(iscarbon(A) && user.a_intent == "hurt")
+		var/mob/living/carbon/M = A
+		visible_message("\red <B>[A] has been touched with the stun gloves by [user]!</B>")
+		if(cell.use(2500))
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Stungloved [M.name] ([M.ckey])</font>")
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [user.name] ([user.ckey])</font>")
+			msg_admin_attack("[user.name] ([user.ckey]) stungloved [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+			M.apply_effects(5,5,0,0,5,0,0,M.run_armor_check(user.zone_sel.selecting, "energy"))
+			return 1
+		else
+			user << "\red Not enough charge!"
+	/*
+	else if(istype(A, /obj/machinery/power/apc) && user.a_intent == "grab")
+		Maybe place stungloves charging code here?
+	*/
+	return 0
+
+
 
 /obj/item/clothing/gloves/update_icon()
 	..()

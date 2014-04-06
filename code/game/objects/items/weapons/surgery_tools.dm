@@ -383,6 +383,7 @@ LOOK FOR SURGERY.DM*/
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
+	sharp = 1
 	m_amt = 10000
 	g_amt = 5000
 	origin_tech = "materials=1;biotech=1"
@@ -635,6 +636,7 @@ LOOK FOR SURGERY.DM*/
 	throwforce = 9.0
 	throw_speed = 3
 	throw_range = 5
+	sharp = 1
 	m_amt = 20000
 	g_amt = 10000
 	origin_tech = "materials=1;biotech=1"

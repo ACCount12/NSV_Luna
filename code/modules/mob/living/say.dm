@@ -82,13 +82,10 @@ var/list/department_radio_keys = list(
 		if(dongle.translate_binary) return 1
 
 /mob/living/say(var/message)
-
 	/*
 		Formatting and sanitizing.
 	*/
-
 	message = trim(copytext(sanitize_multi(message), 1, MAX_MESSAGE_LEN))
-
 	/*
 		Sanity checking and speech failure.
 	*/
@@ -99,7 +96,7 @@ var/list/department_radio_keys = list(
 	if(silent)
 		return
 
-	if (stat == 2) // Dead.
+	if(stat == DEAD)
 		return say_dead(message)
 	else if (stat) // Unconcious.
 		return
@@ -402,6 +399,15 @@ var/list/department_radio_keys = list(
 
 		var/message_b
 		message_b = stars(message)
+		if(ishuman(src))
+			var/mob/living/carbon/human/H = src
+			if(istype(H.species, /datum/species/zombie))
+				message_b = pick("BRAAINZ!", "Graagh", "Empleh", "Uuuhh...",
+				"Graaaagh", "Grrrh", "Brnhr", "Harrah", "ARRRRH!!!")
+				message_b += pick("!", "!!", "!!!", "", "...", "...", "...", "?")
+				if(prob(30))
+					message_b = uppertext(message_b)
+
 		message_b = say_quote(message_b,speaking)
 
 		if (italics)

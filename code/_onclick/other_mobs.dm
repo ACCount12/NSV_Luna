@@ -10,10 +10,11 @@
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
-	if(proximity && istype(G) && G.Touch(A,1))
+	if(proximity && istype(G) && G.Touch(A, 1, src))
 		return
 
 	A.attack_hand(src)
+
 /atom/proc/attack_hand(mob/user as mob)
 	return
 
@@ -26,7 +27,7 @@
 	if((LASER in mutations) && a_intent == "harm")
 		LaserEyes(A) // moved into a proc below
 
-	else if(istype(G) && G.Touch(A,0)) // for magic gloves
+	else if(istype(G) && G.Touch(A, 0, src)) // for magic gloves
 		return
 
 	else if(TK in mutations)

@@ -1,13 +1,14 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
-/obj/machinery/constructable_frame //Made into a seperate type to make future revisions easier.
-	name = "machine frame"
+/obj/structure/constructable_frame
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "box_0"
 	density = 1
 	anchored = 1
-	use_power = 0
-	var/obj/item/weapon/circuitboard/circuit = null
+
+/obj/structure/constructable_frame/machine //Made into a seperate type to make future revisions easier.
+	name = "machine frame"
+	var/obj/item/weapon/circuitboard/computer/circuit = null
 	var/list/components = null
 	var/list/req_components = null
 	var/list/req_component_names = null
@@ -27,7 +28,7 @@
 			D += "."
 		desc = D
 
-/obj/machinery/constructable_frame/machine_frame
+/obj/structure/constructable_frame/machine
 	attackby(obj/item/P as obj, mob/user as mob)
 		if(P.crit_fail)
 			user << "\red This part is faulty, you cannot add this to the machine!"
@@ -53,8 +54,8 @@
 						new /obj/item/stack/sheet/metal(src.loc, 5)
 						del(src)
 			if(2)
-				if(istype(P, /obj/item/weapon/circuitboard))
-					var/obj/item/weapon/circuitboard/B = P
+				if(istype(P, /obj/item/weapon/circuitboard/computer))
+					var/obj/item/weapon/circuitboard/computer/B = P
 					if(B.board_type == "machine")
 						playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 						user << "\blue You add the circuit board to the frame."
@@ -163,7 +164,7 @@ micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
 Note: Once everything is added to the public areas, will add m_amt and g_amt to circuit boards since autolathe won't be able
 to destroy them and players will be able to make replacements.
 */
-/obj/item/weapon/circuitboard/destructive_analyzer
+/obj/item/weapon/circuitboard/computer/destructive_analyzer
 	name = "Circuit board (Destructive Analyzer)"
 	build_path = "/obj/machinery/r_n_d/destructive_analyzer"
 	board_type = "machine"
@@ -174,7 +175,7 @@ to destroy them and players will be able to make replacements.
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser" = 1)
 
-/obj/item/weapon/circuitboard/autolathe
+/obj/item/weapon/circuitboard/computer/autolathe
 	name = "Circuit board (Autolathe)"
 	build_path = "/obj/machinery/autolathe"
 	board_type = "machine"
@@ -185,7 +186,7 @@ to destroy them and players will be able to make replacements.
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
 							"/obj/item/weapon/stock_parts/console_screen" = 1)
 
-/obj/item/weapon/circuitboard/protolathe
+/obj/item/weapon/circuitboard/computer/protolathe
 	name = "Circuit board (Protolathe)"
 	build_path = "/obj/machinery/r_n_d/protolathe"
 	board_type = "machine"
@@ -197,7 +198,7 @@ to destroy them and players will be able to make replacements.
 							"/obj/item/weapon/reagent_containers/glass/beaker" = 2)
 
 
-/obj/item/weapon/circuitboard/circuit_imprinter
+/obj/item/weapon/circuitboard/computer/circuit_imprinter
 	name = "Circuit board (Circuit Imprinter)"
 	build_path = "/obj/machinery/r_n_d/circuit_imprinter"
 	board_type = "machine"
@@ -208,7 +209,7 @@ to destroy them and players will be able to make replacements.
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
 							"/obj/item/weapon/reagent_containers/glass/beaker" = 2)
 
-/obj/item/weapon/circuitboard/pacman
+/obj/item/weapon/circuitboard/computer/pacman
 	name = "Circuit Board (PACMAN-type Generator)"
 	build_path = "/obj/machinery/power/port_gen/pacman"
 	board_type = "machine"
@@ -220,17 +221,17 @@ to destroy them and players will be able to make replacements.
 							"/obj/item/weapon/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/capacitor" = 1)
 
-/obj/item/weapon/circuitboard/pacman/super
+/obj/item/weapon/circuitboard/computer/pacman/super
 	name = "Circuit Board (SUPERPACMAN-type Generator)"
 	build_path = "/obj/machinery/power/port_gen/pacman/super"
 	origin_tech = "programming=3;powerstorage=4;engineering=4"
 
-/obj/item/weapon/circuitboard/pacman/mrs
+/obj/item/weapon/circuitboard/computer/pacman/mrs
 	name = "Circuit Board (MRSPACMAN-type Generator)"
 	build_path = "/obj/machinery/power/port_gen/pacman/mrs"
 	origin_tech = "programming=3;powerstorage=5;engineering=5"
 
-obj/item/weapon/circuitboard/rdserver
+/obj/item/weapon/circuitboard/computer/rdserver
 	name = "Circuit Board (R&D Server)"
 	build_path = "/obj/machinery/r_n_d/server"
 	board_type = "machine"
@@ -240,7 +241,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/scanning_module" = 1)
 
-/obj/item/weapon/circuitboard/mechfab
+/obj/item/weapon/circuitboard/computer/mechfab
 	name = "Circuit board (Exosuit Fabricator)"
 	build_path = "/obj/machinery/mecha_part_fabricator"
 	board_type = "machine"
@@ -252,7 +253,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/micro_laser" = 1,
 							"/obj/item/weapon/stock_parts/console_screen" = 1)
 
-/obj/item/weapon/circuitboard/clonepod
+/obj/item/weapon/circuitboard/computer/clonepod
 	name = "Circuit board (Clone Pod)"
 	build_path = "/obj/machinery/clonepod"
 	board_type = "machine"
@@ -264,7 +265,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
 							"/obj/item/weapon/stock_parts/console_screen" = 1)
 
-/obj/item/weapon/circuitboard/clonescanner
+/obj/item/weapon/circuitboard/computer/clonescanner
 	name = "Circuit board (Cloning Scanner)"
 	build_path = "/obj/machinery/dna_scannernew"
 	board_type = "machine"
@@ -280,7 +281,7 @@ obj/item/weapon/circuitboard/rdserver
 
 // Telecomms circuit boards:
 
-/obj/item/weapon/circuitboard/telecomms/receiver
+/obj/item/weapon/circuitboard/computer/telecomms/receiver
 	name = "Circuit Board (Subspace Receiver)"
 	build_path = "/obj/machinery/telecomms/receiver"
 	board_type = "machine"
@@ -292,7 +293,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
 							"/obj/item/weapon/stock_parts/micro_laser" = 1)
 
-/obj/item/weapon/circuitboard/telecomms/hub
+/obj/item/weapon/circuitboard/computer/telecomms/hub
 	name = "Circuit Board (Hub Mainframe)"
 	build_path = "/obj/machinery/telecomms/hub"
 	board_type = "machine"
@@ -303,7 +304,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 2)
 
-/obj/item/weapon/circuitboard/telecomms/relay
+/obj/item/weapon/circuitboard/computer/telecomms/relay
 	name = "Circuit Board (Relay Mainframe)"
 	build_path = "/obj/machinery/telecomms/relay"
 	board_type = "machine"
@@ -314,7 +315,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 2)
 
-/obj/item/weapon/circuitboard/telecomms/bus
+/obj/item/weapon/circuitboard/computer/telecomms/bus
 	name = "Circuit Board (Bus Mainframe)"
 	build_path = "/obj/machinery/telecomms/bus"
 	board_type = "machine"
@@ -325,7 +326,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/cable_coil" = 1,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1)
 
-/obj/item/weapon/circuitboard/telecomms/processor
+/obj/item/weapon/circuitboard/computer/telecomms/processor
 	name = "Circuit Board (Processor Unit)"
 	build_path = "/obj/machinery/telecomms/processor"
 	board_type = "machine"
@@ -339,7 +340,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/subspace/amplifier" = 1)
 
-/obj/item/weapon/circuitboard/telecomms/server
+/obj/item/weapon/circuitboard/computer/telecomms/server
 	name = "Circuit Board (Telecommunication Server)"
 	build_path = "/obj/machinery/telecomms/server"
 	board_type = "machine"
@@ -350,7 +351,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/cable_coil" = 1,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1)
 
-/obj/item/weapon/circuitboard/telecomms/broadcaster
+/obj/item/weapon/circuitboard/computer/telecomms/broadcaster
 	name = "Circuit Board (Subspace Broadcaster)"
 	build_path = "/obj/machinery/telecomms/broadcaster"
 	board_type = "machine"

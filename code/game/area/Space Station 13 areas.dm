@@ -96,7 +96,7 @@ var/list/ghostteleportlocs = list()
 	requires_power = 0
 
 /area/arrival/start
-	name = "\improper Arrival Area"
+	name = "\improper Cryogenic Storage"
 	icon_state = "start"
 
 /area/admin
@@ -2157,7 +2157,7 @@ var/list/ghostteleportlocs = list()
 				mysound.status = SOUND_PAUSED | SOUND_UPDATE
 				Obj << mysound
 
-	proc/process()
+	process()
 		set background = 1
 
 		var/sound/S = null
@@ -2280,7 +2280,7 @@ var/list/the_station_areas = list (
 				mysound.status = SOUND_PAUSED | SOUND_UPDATE
 				Obj << mysound
 
-	proc/process()
+	process()
 		set background = 1
 
 		var/sound/S = null

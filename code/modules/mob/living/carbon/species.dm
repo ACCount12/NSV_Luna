@@ -112,6 +112,36 @@
 
 	flesh_color = "#AFA59E"
 
+/datum/species/zombie
+	name = "Zombie"
+	icobase = 'icons/mob/human_races/r_zombie.dmi'
+	deform = 'icons/mob/human_races/r_zombie.dmi'
+	language = "BRAAINZ"
+	attack_verb = "claw"
+	punch_damage = 12
+	darksight = 8
+	primitive = null
+	brute_mod = 2
+	burn_mod = 4 // 4x burn, yay!
+
+	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_TONE | NO_SCAN | NO_BREATHE | NO_PAIN
+
+/datum/species/zombie/handle_post_spawn(var/mob/living/carbon/human/H)
+	var/datum/organ/internal/brain/sponge = H.internal_organs["brain"]
+	sponge.take_damage(1000, 1) // RETARDED AS FUCK
+	H.languages.Cut()
+
+	H.add_language("BRAAINZ")
+	return ..()
+
+/datum/language/zombie
+	name = "BRAAINZ"
+	desc = "The way zombies speak."
+	speech_verb = "growls"
+	colour = "rough"
+	key = "2"
+	flags = RESTRICTED
+
 /datum/species/skrell
 	name = "Skrell"
 	icobase = 'icons/mob/human_races/r_skrell.dmi'

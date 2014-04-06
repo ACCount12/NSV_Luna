@@ -3,7 +3,7 @@
 	desc = "Does not support Pin ball."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "arcade"
-	circuit = "/obj/item/weapon/circuitboard/arcade"
+	circuit = "/obj/item/weapon/circuitboard/computer/arcade"
 	var/enemy_name = "Space Villian"
 	var/temp = "Winners Don't Use Spacedrugs" //Temporary message, for attack messages, etc
 	var/player_hp = 30 //Player health/attack points
@@ -241,8 +241,8 @@
 	else if(istype(I, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
-			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-			var/obj/item/weapon/circuitboard/arcade/M = new /obj/item/weapon/circuitboard/arcade( A )
+			var/obj/structure/constructable_frame/computer/A = new /obj/structure/constructable_frame/computer( src.loc )
+			var/obj/item/weapon/circuitboard/computer/arcade/M = new /obj/item/weapon/circuitboard/computer/arcade( A )
 			for (var/obj/C in src)
 				C.loc = src.loc
 			A.circuit = M

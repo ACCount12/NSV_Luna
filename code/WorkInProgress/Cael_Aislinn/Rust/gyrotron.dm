@@ -3,7 +3,6 @@
 /obj/item/projectile/beam/ehf_beam
 
 /obj/machinery/rust/gyrotron
-	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/rust.dmi'
 	icon_state = "emitter-off"
 	name = "Gyrotron"
 	anchored = 1

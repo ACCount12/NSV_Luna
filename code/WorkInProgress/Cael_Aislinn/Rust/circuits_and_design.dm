@@ -2,7 +2,7 @@
 //////////////////////////////////////
 // RUST Core Control computer
 
-/obj/item/weapon/circuitboard/rust_core_control
+/obj/item/weapon/circuitboard/computer/rust_core_control
 	name = "Circuit board (RUST core controller)"
 	build_path = "/obj/machinery/computer/rust_core_control"
 	origin_tech = "programming=4;engineering=4"
@@ -14,12 +14,12 @@ datum/design/rust_core_control
 	req_tech = list("programming" = 4, "engineering" = 4)
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
-	build_path = "/obj/item/weapon/circuitboard/rust_core_control"
+	build_path = "/obj/item/weapon/circuitboard/computer/rust_core_control"
 
 //////////////////////////////////////
 // RUST Fuel Control computer
 
-/obj/item/weapon/circuitboard/rust_fuel_control
+/obj/item/weapon/circuitboard/computer/rust_fuel_control
 	name = "Circuit board (RUST fuel controller)"
 	build_path = "/obj/machinery/computer/rust_fuel_control"
 	origin_tech = "programming=4;engineering=4"
@@ -31,7 +31,7 @@ datum/design/rust_fuel_control
 	req_tech = list("programming" = 4, "engineering" = 4)
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
-	build_path = "/obj/item/weapon/circuitboard/rust_fuel_control"
+	build_path = "/obj/item/weapon/circuitboard/computer/rust_fuel_control"
 
 //////////////////////////////////////
 // RUST Fuel Port board
@@ -70,7 +70,7 @@ datum/design/rust_fuel_compressor
 //////////////////////////////////////
 // RUST Tokamak Core board
 
-/obj/item/weapon/circuitboard/rust_core
+/obj/item/weapon/circuitboard/computer/rust_core
 	name = "Internal circuitry (RUST tokamak core)"
 	build_path = "/obj/machinery/power/rust_core"
 	board_type = "machine"
@@ -91,12 +91,12 @@ datum/design/rust_core
 	build_type = IMPRINTER
 	reliability_base = 79
 	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 3000, "$diamond" = 2000)
-	build_path = "/obj/item/weapon/circuitboard/rust_core"
+	build_path = "/obj/item/weapon/circuitboard/computer/rust_core"
 
 //////////////////////////////////////
 // RUST Fuel Injector board
 
-/obj/item/weapon/circuitboard/rust_injector
+/obj/item/weapon/circuitboard/computer/rust_injector
 	name = "Internal circuitry (RUST fuel injector)"
 	build_path = "/obj/machinery/power/rust_fuel_injector"
 	board_type = "machine"
@@ -117,4 +117,4 @@ datum/design/rust_injector
 	build_type = IMPRINTER
 	reliability_base = 79
 	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 3000, "$uranium" = 2000)
-	build_path = "/obj/item/weapon/circuitboard/rust_core"
+	build_path = "/obj/item/weapon/circuitboard/computer/rust_core"

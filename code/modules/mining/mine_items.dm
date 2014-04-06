@@ -114,7 +114,7 @@ proc/move_mining_shuttle()
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_mining)
-	circuit = "/obj/item/weapon/circuitboard/mining_shuttle"
+	circuit = "/obj/item/weapon/circuitboard/computer/mining_shuttle"
 	var/hacked = 0
 	var/location = 0 //0 = station, 1 = mining base
 
@@ -165,8 +165,8 @@ proc/move_mining_shuttle()
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
-			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-			var/obj/item/weapon/circuitboard/mining_shuttle/M = new /obj/item/weapon/circuitboard/mining_shuttle( A )
+			var/obj/structure/constructable_frame/computer/A = new /obj/structure/constructable_frame/computer( src.loc )
+			var/obj/item/weapon/circuitboard/computer/mining_shuttle/M = new /obj/item/weapon/circuitboard/computer/mining_shuttle( A )
 			for (var/obj/C in src)
 				C.loc = src.loc
 			A.circuit = M
@@ -270,6 +270,7 @@ proc/move_mining_shuttle()
 		w_class = 3.0 //it is smaller than the pickaxe
 		damtype = "fire"
 		digspeed = 20 //Can slice though normal walls, all girders, or be used in reinforced wall deconstruction/ light thermite on fire
+		sharp = 1
 		origin_tech = "materials=4;plasmatech=3;engineering=3"
 		desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 
@@ -310,6 +311,7 @@ proc/move_mining_shuttle()
 	item_state = "shovel"
 	w_class = 3.0
 	m_amt = 50
+	sharp = 1
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 

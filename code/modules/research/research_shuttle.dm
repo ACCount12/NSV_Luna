@@ -65,7 +65,7 @@ proc/move_research_shuttle()
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_research)
-	circuit = "/obj/item/weapon/circuitboard/research_shuttle"
+	circuit = "/obj/item/weapon/circuitboard/computer/research_shuttle"
 	var/hacked = 0
 	var/location = 0 //0 = station, 1 = research base
 
@@ -107,8 +107,8 @@ proc/move_research_shuttle()
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
-			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-			var/obj/item/weapon/circuitboard/research_shuttle/M = new /obj/item/weapon/circuitboard/research_shuttle( A )
+			var/obj/structure/constructable_frame/computer/A = new /obj/structure/constructable_frame/computer( src.loc )
+			var/obj/item/weapon/circuitboard/computer/research_shuttle/M = new /obj/item/weapon/circuitboard/computer/research_shuttle( A )
 			for (var/obj/C in src)
 				C.loc = src.loc
 			A.circuit = M

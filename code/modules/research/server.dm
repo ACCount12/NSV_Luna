@@ -17,7 +17,7 @@
 /obj/machinery/r_n_d/server/New()
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/rdserver(src)
+	component_parts += new /obj/item/weapon/circuitboard/computer/rdserver(src)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
 	component_parts += new /obj/item/weapon/cable_coil(src)
 	component_parts += new /obj/item/weapon/cable_coil(src)
@@ -139,7 +139,7 @@
 		if(istype(O, /obj/item/weapon/crowbar))
 			griefProtection()
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-			var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
+			var/obj/structure/constructable_frame/machine/M = new /obj/structure/constructable_frame/machine(src.loc)
 			M.state = 2
 			M.icon_state = "box_1"
 			for(var/obj/I in component_parts)
@@ -337,9 +337,9 @@
 		if(do_after(user, 20))
 			if (src.stat & BROKEN)
 				user << "\blue The broken glass falls out."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
+				var/obj/structure/constructable_frame/computer/A = new /obj/structure/constructable_frame/computer( src.loc )
 				new /obj/item/weapon/shard( src.loc )
-				var/obj/item/weapon/circuitboard/rdservercontrol/M = new /obj/item/weapon/circuitboard/rdservercontrol( A )
+				var/obj/item/weapon/circuitboard/computer/rdservercontrol/M = new /obj/item/weapon/circuitboard/computer/rdservercontrol( A )
 				for (var/obj/C in src)
 					C.loc = src.loc
 				A.circuit = M
@@ -349,8 +349,8 @@
 				del(src)
 			else
 				user << "\blue You disconnect the monitor."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				var/obj/item/weapon/circuitboard/rdservercontrol/M = new /obj/item/weapon/circuitboard/rdservercontrol( A )
+				var/obj/structure/constructable_frame/computer/A = new /obj/structure/constructable_frame/computer( src.loc )
+				var/obj/item/weapon/circuitboard/computer/rdservercontrol/M = new /obj/item/weapon/circuitboard/computer/rdservercontrol( A )
 				for (var/obj/C in src)
 					C.loc = src.loc
 				A.circuit = M

@@ -1170,7 +1170,7 @@ table tr:first-child th:first-child { border: none;}
 
 			else if(istype(W, /obj/item/weapon/wrench))
 				user << "You remove the fire alarm assembly from the wall!"
-				var/obj/item/alarm_frame/frame = new /obj/item/alarm_frame()
+				var/obj/item/wallframe/alarm/frame = new /obj/item/wallframe/alarm()
 				frame.loc = user.loc
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				del(src)
@@ -1210,28 +1210,24 @@ AIR ALARM ITEM
 Handheld air alarm frame, for placing on walls
 Code shamelessly copied from apc_frame
 */
-/obj/item/alarm_frame
+/obj/item/wallframe/alarm
 	name = "air alarm frame"
 	desc = "Used for building Air Alarms"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm_bitem"
-	flags = FPRINT| CONDUCT
 
-/obj/item/alarm_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/wallframe/alarm/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		new /obj/item/stack/sheet/metal( get_turf(src.loc), 2 )
 		del(src)
 		return
 	..()
 
-/obj/item/alarm_frame/proc/try_build(turf/on_wall)
-	if (get_dist(on_wall,usr)>1)
+/obj/item/wallframe/alarm/try_build(turf/on_wall)
+	if(!..())
 		return
 
 	var/ndir = get_dir(on_wall,usr)
-	if (!(ndir in cardinal))
-		return
-
 	var/turf/loc = get_turf_loc(usr)
 	var/area/A = loc.loc
 	if (!istype(loc, /turf/simulated/floor))
@@ -1361,7 +1357,7 @@ FIRE ALARM
 
 				else if(istype(W, /obj/item/weapon/wrench))
 					user << "You remove the fire alarm assembly from the wall!"
-					var/obj/item/firealarm_frame/frame = new /obj/item/firealarm_frame()
+					var/obj/item/wallframe/firealarm/frame = new /obj/item/wallframe/firealarm()
 					frame.loc = user.loc
 					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 					del(src)
@@ -1539,27 +1535,24 @@ FIRE ALARM ITEM
 Handheld fire alarm frame, for placing on walls
 Code shamelessly copied from apc_frame
 */
-/obj/item/firealarm_frame
+/obj/item/wallframe/firealarm
 	name = "fire alarm frame"
 	desc = "Used for building Fire Alarms"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "fire_bitem"
-	flags = FPRINT| CONDUCT
 
-/obj/item/firealarm_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/wallframe/firealarm/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		new /obj/item/stack/sheet/metal( get_turf(src.loc), 2 )
 		del(src)
 		return
 	..()
 
-/obj/item/firealarm_frame/proc/try_build(turf/on_wall)
-	if (get_dist(on_wall,usr)>1)
+/obj/item/wallframe/firealarm/try_build(turf/on_wall)
+	if(!..())
 		return
 
 	var/ndir = get_dir(on_wall,usr)
-	if (!(ndir in cardinal))
-		return
 
 	var/turf/loc = get_turf_loc(usr)
 	var/area/A = loc.loc

@@ -12,7 +12,6 @@
 // may be opened to change power cell
 // three different channels (lighting/equipment/environ) - may each be set to on, off, or auto
 
-
 //NOTE: STUFF STOLEN FROM AIRLOCK.DM thx
 
 
@@ -155,6 +154,7 @@
 	if(stat & BROKEN)
 		usr << "Looks broken."
 		return
+
 	if(opened)
 		if(has_electronics && terminal)
 			usr << "The cover is [opened==2?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
@@ -172,6 +172,11 @@
 			usr << "The cover is broken. It may be hard to force it open."
 		else
 			usr << "The cover is closed."
+
+	if(can_charge())
+		usr << "The charging port is working."
+	else
+		usr << "The charging port is off."
 
 
 // update the APC icon to show the three base states
@@ -200,7 +205,7 @@
 
 		if(light)
 			overlays.Add("power[light]")
-			if(cell.percent() > 30)
+			if(can_charge())
 				overlays.Add("powerport")
 
 /obj/machinery/power/apc/proc/get_lightlevel()
@@ -214,6 +219,12 @@
 		if(60 to 69)		return 4
 		if(70 to 79)		return 5
 		if(80 to INFINITY)	return 6
+
+/obj/machinery/power/apc/proc/can_charge()
+	if(!cell) return 0
+
+	if(cell.percent() > 30)
+		return 1
 
 // Used in process so it doesn't update the icon too much
 /obj/machinery/power/apc/proc/queue_icon_update()
@@ -399,14 +410,14 @@
 					"You disassembled the broken APC frame.",\
 					"\red You hear welding.")
 			else
-				new /obj/item/apc_frame(loc)
+				new /obj/item/wallframe/apc(loc)
 				user.visible_message(\
 					"\red [src] has been cut from the wall by [user.name] with the weldingtool.",\
 					"You cut the APC frame from the wall.",\
 					"\red You hear welding.")
 			del(src)
 			return
-	else if (istype(W, /obj/item/apc_frame) && opened && emagged)
+	else if (istype(W, /obj/item/wallframe/apc) && opened && emagged)
 		emagged = 0
 		if (opened==2)
 			opened = 1
@@ -415,7 +426,7 @@
 			"You replace the damaged APC frontal panel with a new one.")
 		del(W)
 		update_icon()
-	else if (istype(W, /obj/item/apc_frame) && opened && ((stat & BROKEN) || malfhack))
+	else if (istype(W, /obj/item/wallframe/apc) && opened && ((stat & BROKEN) || malfhack))
 		if (has_electronics)
 			user << "You cannot repair this APC until you remove the electronics still inside."
 			return

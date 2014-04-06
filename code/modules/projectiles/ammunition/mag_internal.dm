@@ -78,3 +78,10 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	caliber = ".12"
 	max_ammo = 2
+
+/obj/item/ammo_magazine/internal/pipe
+	name = "pipe"
+	desc = "Oh god, this is too badass to be here!"
+	ammo_type = null
+	caliber = ".12"
+	max_ammo = 1

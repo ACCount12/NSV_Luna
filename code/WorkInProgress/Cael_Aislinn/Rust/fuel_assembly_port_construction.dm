@@ -1,21 +1,16 @@
-
 //frame assembly
-
-/obj/item/rust_fuel_assembly_port_frame
+/obj/item/wallframe/rust/fuel_assembly_port
 	name = "Fuel Assembly Port frame"
-	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/rust.dmi'
 	icon_state = "port2"
-	w_class = 4
-	flags = FPRINT| CONDUCT
 
-/obj/item/rust_fuel_assembly_port_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/wallframe/rust/fuel_assembly_port/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		new /obj/item/stack/sheet/plasteel( get_turf(src.loc), 12 )
 		del(src)
 		return
 	..()
 
-/obj/item/rust_fuel_assembly_port_frame/proc/try_build(turf/on_wall)
+/obj/item/wallframe/rust/fuel_assembly_port/try_build(turf/on_wall)
 	if (get_dist(on_wall,usr)>1)
 		return
 	var/ndir = get_dir(usr,on_wall)
@@ -29,11 +24,11 @@
 	if (A.requires_power == 0 || A.name == "Space")
 		usr << "\red Port cannot be placed in this area."
 		return
-	new /obj/machinery/rust_fuel_assembly_port(loc, ndir, 1)
+	new /obj/machinery/rust/fuel_assembly_port(loc, ndir, 1)
 	del(src)
 
 //construction steps
-/obj/machinery/rust_fuel_assembly_port/New(turf/loc, var/ndir, var/building=0)
+/obj/machinery/rust/fuel_assembly_port/New(turf/loc, var/ndir, var/building=0)
 	..()
 
 	// offset 24 pixels in direction of dir
@@ -49,8 +44,7 @@
 	pixel_x = (dir & 3)? 0 : (dir == 4 ? 32 : -32)
 	pixel_y = (dir & 3)? (dir ==1 ? 32 : -32) : 0
 
-/obj/machinery/rust_fuel_assembly_port/attackby(obj/item/W, mob/user)
-
+/obj/machinery/rust/fuel_assembly_port/attackby(obj/item/W, mob/user)
 	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
 		return src.attack_hand(user)
 	if (istype(W, /obj/item/weapon/crowbar))
@@ -122,7 +116,7 @@
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(do_after(user, 50))
 			if(!src || !WT.remove_fuel(3, user)) return
-			new /obj/item/rust_fuel_assembly_port_frame(loc)
+			new /obj/item/wallframe/rust/fuel_assembly_port(loc)
 			user.visible_message(\
 				"\red [src] has been cut away from the wall by [user.name].",\
 				"You detached the port frame.",\

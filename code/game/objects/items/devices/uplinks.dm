@@ -121,7 +121,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	//Sorry for all the ifs, but it makes it 1000 times easier for other people/servers to add or remove items from this list
 	//Add only items the player can afford:
 	if(uses > 19)
-		randomItems.Add("/obj/item/weapon/circuitboard/teleporter") //Teleporter Circuit Board (costs 20, for nuke ops)
+		randomItems.Add("/obj/item/weapon/circuitboard/computer/teleporter") //Teleporter Circuit Board (costs 20, for nuke ops)
 
 	if(uses > 9)
 		randomItems.Add("/obj/item/toy/syndicateballoon")//Syndicate Balloon
@@ -184,7 +184,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		var/buyItem = pick(randomItems)
 
 		switch(buyItem) //Ok, this gets a little messy, sorry.
-			if("/obj/item/weapon/circuitboard/teleporter")
+			if("/obj/item/weapon/circuitboard/computer/teleporter")
 				uses -= 20
 			if("/obj/item/toy/syndicateballoon" , "/obj/item/weapon/storage/box/syndie_kit/imp_uplink" , "/obj/item/weapon/storage/box/syndicate")
 				uses -= 10
@@ -212,7 +212,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	if(!boughtItem) return
 
 	switch(boughtItem)
-		if("/obj/item/weapon/circuitboard/teleporter")
+		if("/obj/item/weapon/circuitboard/computer/teleporter")
 			feedback_add_details("traitor_uplink_items_bought","TP")
 		if("/obj/item/toy/syndicateballoon")
 			feedback_add_details("traitor_uplink_items_bought","BS")

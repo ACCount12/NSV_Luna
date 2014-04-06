@@ -1,5 +1,5 @@
 /obj/machinery/door/poddoor
-	name = "Podlock"
+	name = "blast door"
 	desc = "Why it no open!!!"
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = "pdoor1"
@@ -8,7 +8,6 @@
 	explosion_resistance = 25
 
 /obj/machinery/door/poddoor/blast
-	name = "blast door"
 	icon = 'icons/obj/doors/blastdoor.dmi'
 	explosion_resistance = 50
 

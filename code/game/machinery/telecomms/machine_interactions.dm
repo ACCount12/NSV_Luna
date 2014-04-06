@@ -74,7 +74,7 @@
 						// If the machine wasn't made during runtime, probably doesn't have components:
 						// manually find the components and drop them!
 						var/newpath = text2path(circuitboard)
-						var/obj/item/weapon/circuitboard/C = new newpath
+						var/obj/item/weapon/circuitboard/computer/C = new newpath
 						for(var/I in C.req_components)
 							for(var/i = 1, i <= C.req_components[I], i++)
 								newpath = text2path(I)
@@ -88,7 +88,7 @@
 						C.loc = user.loc
 
 					// Create a machine frame and delete the current machine
-					var/obj/machinery/constructable_frame/machine_frame/F = new
+					var/obj/structure/constructable_frame/machine/F = new
 					F.loc = src.loc
 					del(src)
 

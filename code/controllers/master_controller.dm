@@ -303,6 +303,16 @@ datum/controller/game_controller/proc/process_nano()
 			continue
 		nanomanager.processing_uis.Cut(i,i+1)
 
+datum/controller/game_controller/proc/process_areas()
+	var/i = 1
+	while(i<=all_areas.len)
+		var/area/A = all_areas[i]
+		if(A)
+			A.process()
+			i++
+			continue
+		all_areas.Cut(i,i+1)
+
 datum/controller/game_controller/proc/process_events()
 	last_thing_processed = /datum/event
 	var/i = 1

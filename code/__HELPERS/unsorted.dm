@@ -810,6 +810,9 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 
 	if(!A || !src) return 0
 
+	if(!turftoleave)
+		turftoleave = /turf/simulated/floor/open
+
 	var/list/turfs_src = get_area_turfs(src.type)
 	var/list/turfs_trg = get_area_turfs(A.type)
 
@@ -905,7 +908,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 						var/turf/ttl = new turftoleave(T)
 						fromupdate += ttl
 					else
-						T.ChangeTurf(/turf/space)
+						T.ChangeTurf(turftoleave)
 
 					refined_src -= T
 					refined_trg -= B

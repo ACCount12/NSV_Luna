@@ -16,15 +16,15 @@
 	var/time_coeff = 1.5 //can be upgraded with research
 	var/resource_coeff = 1.5 //can be upgraded with research
 	var/list/resources = list(
-										"metal"=0,
-										"glass"=0,
-										"gold"=0,
-										"silver"=0,
-										"diamond"=0,
-										"plasma"=0,
-										"uranium"=0,
-										//"bananium"=0 No need to state what it can no longer hold
-										)
+									"metal"=0,
+									"glass"=0,
+									"gold"=0,
+									"silver"=0,
+									"diamond"=0,
+									"plasma"=0,
+									"uranium"=0,
+									//"bananium"=0 No need to state what it can no longer hold
+									)
 	var/res_max_amount = 200000
 	var/datum/research/files
 	var/id
@@ -140,7 +140,7 @@
 /obj/machinery/mecha_part_fabricator/New()
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/mechfab(src)
+	component_parts += new /obj/item/weapon/circuitboard/computer/mechfab(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
@@ -719,7 +719,7 @@
 	if (opened)
 		if(istype(W, /obj/item/weapon/crowbar))
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-			var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
+			var/obj/structure/constructable_frame/machine/M = new /obj/structure/constructable_frame/machine(src.loc)
 			M.state = 2
 			M.icon_state = "box_1"
 			for(var/obj/I in component_parts)

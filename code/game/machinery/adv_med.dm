@@ -6,9 +6,10 @@
 	var/locked
 	name = "Body Scanner"
 	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "body_scanner_0"
+	icon_state = "body_scanner"
 	density = 1
 	anchored = 1
+	dir = EAST
 
 /*/obj/machinery/bodyscanner/allow_drop()
 	return 0*/
@@ -48,32 +49,29 @@
 	usr.client.eye = src
 	usr.loc = src
 	src.occupant = usr
-	src.icon_state = "body_scanner_1"
+	update_icon()
 	for(var/obj/O in src)
-		//O = null
 		del(O)
-		//Foreach goto(124)
 	src.add_fingerprint(usr)
 	return
 
 /obj/machinery/bodyscanner/proc/go_out()
-	if ((!( src.occupant ) || src.locked))
+	if (!src.occupant || src.locked)
 		return
 	for(var/obj/O in src)
 		O.loc = src.loc
-		//Foreach goto(30)
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
 	src.occupant.loc = src.loc
 	src.occupant = null
-	src.icon_state = "body_scanner_0"
+	update_icon()
 	return
 
 /obj/machinery/bodyscanner/attackby(obj/item/weapon/grab/G as obj, user as mob)
-	if ((!( istype(G, /obj/item/weapon/grab) ) || !( ismob(G.affecting) )))
+	if (!istype(G, /obj/item/weapon/grab) || !ismob(G.affecting))
 		return
-	if (src.occupant)
+	if (occupant)
 		user << "\blue <B>The scanner is already occupied!</B>"
 		return
 	if (G.affecting.abiotic())
@@ -85,12 +83,10 @@
 		M.client.eye = src
 	M.loc = src
 	src.occupant = M
-	src.icon_state = "body_scanner_1"
+	update_icon()
 	for(var/obj/O in src)
 		O.loc = src.loc
-		//Foreach goto(154)
 	src.add_fingerprint(user)
-	//G = null
 	del(G)
 	return
 
@@ -100,8 +96,6 @@
 			for(var/atom/movable/A as mob|obj in src)
 				A.loc = src.loc
 				ex_act(severity)
-				//Foreach goto(35)
-			//SN src = null
 			del(src)
 			return
 		if(2.0)
@@ -109,8 +103,6 @@
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-					//Foreach goto(108)
-				//SN src = null
 				del(src)
 				return
 		if(3.0)
@@ -118,8 +110,6 @@
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-					//Foreach goto(181)
-				//SN src = null
 				del(src)
 				return
 		else
@@ -131,23 +121,24 @@
 			A.loc = src.loc
 		del(src)
 
-/obj/machinery/body_scanconsole/ex_act(severity)
+/obj/machinery/bodyscanner/update_icon()
+	icon_state = initial(icon_state)
+	if(occupant)
+		icon_state += "_1"
 
+
+/obj/machinery/body_scanconsole/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			//SN src = null
 			del(src)
 			return
 		if(2.0)
 			if (prob(50))
-				//SN src = null
 				del(src)
 				return
-		else
 	return
 
 /obj/machinery/body_scanconsole/blob_act()
-
 	if(prob(50))
 		del(src)
 
@@ -172,12 +163,12 @@
 	icon_state = "body_scannerconsole"
 	density = 1
 	anchored = 1
-
+	dir = EAST
 
 /obj/machinery/body_scanconsole/New()
 	..()
 	spawn( 5 )
-		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, WEST))
+		src.connected = locate(/obj/machinery/bodyscanner, orange(1))
 		return
 	return
 
@@ -185,27 +176,6 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	use_power(250) // power stuff
-
-//	var/mob/M //occupant
-//	if (!( src.status )) //remove this
-//		return
-//	if ((src.connected && src.connected.occupant)) //connected & occupant ok
-//		M = src.connected.occupant
-//	else
-//		if (istype(M, /mob))
-//		//do stuff
-//		else
-///			src.temphtml = "Process terminated due to lack of occupant in scanning chamber."
-//			src.status = null
-//	src.updateDialog()
-//	return
-
-
-/obj/machinery/body_scanconsole/attack_paw(user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/body_scanconsole/attack_ai(user as mob)
-	return src.attack_hand(user)
 
 /obj/machinery/body_scanconsole/attack_hand(user as mob)
 	if(..())

@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser gun"
-	desc = "a basic weapon designed kill with concentrated energy bolts"
+	desc = "A basic weapon designed kill with concentrated energy bolts"
 	icon_state = "laser"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
@@ -15,10 +15,11 @@
 	projectile_type = "/obj/item/projectile/beam/practice"
 	clumsy_check = 0
 
-obj/item/weapon/gun/energy/laser/retro
-	name ="retro laser"
+/obj/item/weapon/gun/energy/laser/icon
 	icon_state = "retro"
-	desc = "An older model of the basic lasergun, no longer used by Nanotrasen's security or military forces. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
+
+/obj/item/weapon/gun/energy/laser/icon/h
+	icon_state = "laser_h"
 
 
 /obj/item/weapon/gun/energy/laser/captain
@@ -62,14 +63,13 @@ obj/item/weapon/gun/energy/laser/retro
 	return 0
 
 
-
 /obj/item/weapon/gun/energy/lasercannon
 	name = "laser cannon"
 	desc = "With the L.A.S.E.R. cannon, the lasing medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
 	icon_state = "lasercannon"
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 	origin_tech = "combat=4;materials=3;powerstorage=3"
-	projectile_type = "/obj/item/projectile/beam/heavylaser"
+	projectile_type = /obj/item/projectile/beam/heavylaser
 
 	fire_delay = 20
 
@@ -95,6 +95,51 @@ obj/item/weapon/gun/energy/laser/retro
 	origin_tech = "combat=5;materials=3;magnets=2;syndicate=2"
 	projectile_type = "/obj/item/projectile/beam/xray"
 	charge_cost = 50
+
+
+/obj/item/weapon/gun/energy/laser/arm
+	name = "laser arm"
+	desc = "A cyborg's laser arm."
+	icon_state = "laserarm"
+	force = 12
+	w_class = 4
+	projectile_type = /obj/item/projectile/beam
+	charge_cost = 200
+	var/obj/item/weapon/stock_parts/capacitor/C
+
+/obj/item/weapon/gun/energy/laser/arm/New()
+	C = new(src)
+	update_icon()
+
+/obj/item/weapon/gun/energy/laser/arm/process_chambered()
+	if(!C) return 0
+
+	if(isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		if(R.cell)
+			R.cell.use(100)
+			in_chamber = new projectile_type(src)
+			return 1
+		return 0
+	else
+		return ..()
+
+/obj/item/weapon/gun/energy/laser/arm/update_icon()
+	overlays.Cut()
+	if(C)
+		overlays.Add("laserarm_c[C.rating]")
+		charge_cost = 200*C.rating
+		switch(C.rating)
+			if(1)
+				projectile_type = /obj/item/projectile/beam
+				fire_sound = 'sound/weapons/Laser.ogg'
+			if(2)
+				projectile_type = /obj/item/projectile/beam/midlaser
+				fire_sound = 'sound/weapons/laser3.ogg'
+			if(3)
+				projectile_type = /obj/item/projectile/beam/heavylaser
+				fire_sound = 'sound/weapons/lasercannonfire.ogg'
+
 
 
 ////////Laser Tag////////////////////

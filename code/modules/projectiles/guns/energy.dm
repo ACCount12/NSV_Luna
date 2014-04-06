@@ -11,7 +11,8 @@
 	var/modifystate
 
 	emp_act(severity)
-		power_supply.use(round(power_supply.maxcharge / severity))
+		if(power_supply)
+			power_supply.use(round(power_supply.maxcharge / severity))
 		update_icon()
 		..()
 
@@ -27,7 +28,7 @@
 
 
 	process_chambered()
-		if(in_chamber)	return 1
+		if(in_chamber)		return 1
 		if(!power_supply)	return 0
 		if(!power_supply.use(charge_cost))	return 0
 		if(!projectile_type)	return 0

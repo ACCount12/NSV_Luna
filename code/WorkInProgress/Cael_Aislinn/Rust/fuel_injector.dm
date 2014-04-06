@@ -264,7 +264,7 @@
 	var/rev_dir = reverse_direction(dir)
 	var/turf/mid = get_step(src, rev_dir)
 	var/success = 0
-	for(var/obj/machinery/rust_fuel_assembly_port/check_port in get_step(mid, rev_dir))
+	for(var/obj/machinery/rust/fuel_assembly_port/check_port in get_step(mid, rev_dir))
 		if(cur_assembly)
 			if(!check_port.cur_assembly)
 				check_port.cur_assembly = cur_assembly

@@ -93,7 +93,7 @@ var/list/mechtoys = list(
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "supply"
 	req_access = list(access_cargo)
-	circuit = "/obj/item/weapon/circuitboard/supplycomp"
+	circuit = "/obj/item/weapon/circuitboard/computer/supplycomp"
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/hacked = 0
@@ -104,7 +104,7 @@ var/list/mechtoys = list(
 	name = "Supply ordering console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "request"
-	circuit = "/obj/item/weapon/circuitboard/ordercomp"
+	circuit = "/obj/item/weapon/circuitboard/computer/ordercomp"
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/last_viewed_group = "categories"
@@ -502,9 +502,9 @@ var/list/mechtoys = list(
 		if(do_after(user, 20))
 			if (stat & BROKEN)
 				user << "\blue The broken glass falls out."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( loc )
+				var/obj/structure/constructable_frame/computer/A = new /obj/structure/constructable_frame/computer( loc )
 				new /obj/item/weapon/shard( loc )
-				var/obj/item/weapon/circuitboard/supplycomp/M = new /obj/item/weapon/circuitboard/supplycomp( A )
+				var/obj/item/weapon/circuitboard/computer/supplycomp/M = new /obj/item/weapon/circuitboard/computer/supplycomp( A )
 				for (var/obj/C in src)
 					C.loc = loc
 				A.circuit = M
@@ -514,8 +514,8 @@ var/list/mechtoys = list(
 				del(src)
 			else
 				user << "\blue You disconnect the monitor."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( loc )
-				var/obj/item/weapon/circuitboard/supplycomp/M = new /obj/item/weapon/circuitboard/supplycomp( A )
+				var/obj/structure/constructable_frame/computer/A = new /obj/structure/constructable_frame/computer( loc )
+				var/obj/item/weapon/circuitboard/computer/supplycomp/M = new /obj/item/weapon/circuitboard/computer/supplycomp( A )
 				if(can_order_contraband)
 					M.contraband_enabled = 1
 				for (var/obj/C in src)

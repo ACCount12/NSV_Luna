@@ -1,10 +1,9 @@
 /obj/machinery/atmospherics/unary/generator_input
-	icon = 'icons/obj/atmospherics/heat_exchanger.dmi'
+	icon = 'icons/obj/teg.dmi'
 	icon_state = "intact"
 	density = 1
 
-	name = "Generator Input"
-	desc = "Placeholder"
+	name = "generator input"
 
 	var/update_cycle
 
@@ -13,7 +12,6 @@
 			icon_state = "intact"
 		else
 			icon_state = "exposed"
-
 		return
 
 	proc

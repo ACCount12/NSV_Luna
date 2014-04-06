@@ -1,4 +1,3 @@
-
 /obj/item/weapon/fuel_assembly
 	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/rust.dmi'
 	icon_state = "fuel_assembly"

@@ -1,7 +1,6 @@
 var/const/max_assembly_amount = 300
 
-/obj/machinery/rust_fuel_compressor
-	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/rust.dmi'
+/obj/machinery/rust/fuel_compressor
 	icon_state = "fuel_compressor1"
 	name = "Fuel Compressor"
 	var/list/new_assembly_quantities = list("Deuterium" = 150,"Tritium" = 150,"Rodinium-6" = 0,"Stravium-7" = 0, "Pergium" = 0, "Dilithium" = 0)
@@ -13,23 +12,23 @@ var/const/max_assembly_amount = 300
 	var/locked = 0
 	var/has_electronics = 0 // 0 - none, bit 1 - circuitboard, bit 2 - wires
 
-/obj/machinery/rust_fuel_compressor/attack_ai(mob/user)
+/obj/machinery/rust/fuel_compressor/attack_ai(mob/user)
 	attack_hand(user)
 
-/obj/machinery/rust_fuel_compressor/attack_hand(mob/user)
+/obj/machinery/rust/fuel_compressor/attack_hand(mob/user)
 	add_fingerprint(user)
 	/*if(stat & (BROKEN|NOPOWER))
 		return*/
 	interact(user)
 
-/obj/machinery/rust_fuel_compressor/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/rust/fuel_compressor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/rcd_ammo))
 		compressed_matter += 10
 		del(W)
 		return
 	..()
 
-/obj/machinery/rust_fuel_compressor/interact(mob/user)
+/obj/machinery/rust/fuel_compressor/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
 		if (!istype(user, /mob/living/silicon))
 			user.unset_machine()
@@ -56,7 +55,7 @@ var/const/max_assembly_amount = 300
 	//var/locked
 	//var/coverlocked
 
-/obj/machinery/rust_fuel_compressor/Topic(href, href_list)
+/obj/machinery/rust/fuel_compressor/Topic(href, href_list)
 	..()
 	if( href_list["close"] )
 		usr << browse(null, "window=fuelcomp")

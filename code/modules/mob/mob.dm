@@ -726,6 +726,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 				if("holdervar")
 					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
 
+	for(var/obj/O in src)
+		O.Stat()
+
 
 
 // facing verbs

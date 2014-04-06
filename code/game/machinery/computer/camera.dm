@@ -91,9 +91,9 @@
 			if(do_after(user, 20))
 				if (stat & BROKEN)
 					user << "\blue The broken glass falls out."
-					var/obj/structure/computerframe/CF = new /obj/structure/computerframe(loc)
+					var/obj/structure/constructable_frame/computer/CF = new /obj/structure/constructable_frame/computer(loc)
 					new /obj/item/weapon/shard(loc)
-					var/obj/item/weapon/circuitboard/security/CB = new /obj/item/weapon/circuitboard/security(CF)
+					var/obj/item/weapon/circuitboard/computer/security/CB = new /obj/item/weapon/circuitboard/computer/security(CF)
 					CB.network = network
 					for (var/obj/C in src)
 						C.loc = loc
@@ -104,8 +104,8 @@
 					del(src)
 				else
 					user << "\blue You disconnect the monitor."
-					var/obj/structure/computerframe/CF = new /obj/structure/computerframe( loc )
-					var/obj/item/weapon/circuitboard/security/CB = new /obj/item/weapon/circuitboard/security(CF)
+					var/obj/structure/constructable_frame/computer/CF = new /obj/structure/constructable_frame/computer( loc )
+					var/obj/item/weapon/circuitboard/computer/security/CB = new /obj/item/weapon/circuitboard/computer/security(CF)
 					CB.network = network
 					for (var/obj/C in src)
 						C.loc = loc

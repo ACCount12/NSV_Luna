@@ -8,6 +8,7 @@
 	force = 15
 	throwforce = 10
 	w_class = 3
+	sharp = 1
 	var/charged = 1
 
 

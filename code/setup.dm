@@ -477,7 +477,7 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 var/list/liftable_structures = list(\
 
 	/obj/machinery/autolathe, \
-	/obj/machinery/constructable_frame, \
+	/obj/structure/constructable_frame/machine, \
 	/obj/machinery/hydroponics, \
 	/obj/machinery/computer, \
 	/obj/machinery/optable, \
