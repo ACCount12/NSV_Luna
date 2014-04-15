@@ -13,6 +13,11 @@
 	icon_state = "bed"
 	var/mob/living/buckled_mob
 
+/obj/structure/stool/bed/brig
+	name = "bed"
+	desc = "This is used to lie in, sleep in or strap on."
+	icon_state = "brigbed"
+
 /obj/structure/stool/bed/psych
 	name = "psych bed"
 	desc = "For prime comfort during psychiatric evaluations."
