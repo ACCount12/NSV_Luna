@@ -1148,6 +1148,38 @@ proc/get_mob_with_client_list()
 		location = location.loc
 	return null
 
+/proc/get_turf_down(atom/location)
+	var/turf/source = get_turf(location)
+	if(!istype(source))
+		return
+
+	var/turf/controllerlocation = locate(1, 1, source.z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(!controller.down)
+			return null
+		else
+			var/turf/floorbelow = locate(source.x, source.y, controller.down_target)
+			if(istype(floorbelow))
+				return floorbelow
+			return
+	return
+
+/proc/get_turf_up(atom/location)
+	var/turf/source = get_turf(location)
+	if(!istype(source))
+		return
+
+	var/turf/controllerlocation = locate(1, 1, source.z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(!controller.up)
+			return null
+		else
+			var/turf/floorbelow = locate(source.x, source.y, controller.up_target)
+			if(istype(floorbelow))
+				return floorbelow
+			return
+	return
+
 /proc/get(atom/loc, type)
 	while(loc)
 		if(istype(loc, type))
