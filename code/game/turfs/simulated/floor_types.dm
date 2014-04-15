@@ -207,12 +207,6 @@
 						FF.update_icon() //so siding get updated properly
 
 
-
-/turf/simulated/floor/plating/ironsand/New()
-	..()
-	name = "Iron Sand"
-	icon_state = "ironsand[rand(1,15)]"
-
 /turf/simulated/floor/plating/snow
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
