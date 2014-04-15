@@ -127,6 +127,9 @@
 	mag_type = /obj/item/ammo_magazine/internal/pipe
 	var/shots = 20
 
+/obj/item/weapon/gun/projectile/revolver/pipe/spin()
+	set invisibility = 101
+
 /obj/item/weapon/gun/projectile/revolver/pipe/attack_self(mob/living/user as mob)
 	var/num_unloaded = 0
 	user << "<span class='notice'>You begin to unload \the [src].</span>"
