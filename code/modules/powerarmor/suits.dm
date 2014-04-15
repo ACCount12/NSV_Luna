@@ -16,10 +16,34 @@
 		atmoseal.add_to(src)
 		..()
 
+
+// HEV
 /obj/item/clothing/suit/powered/spawnable/hev
+	name = "HEV"
+	icon_state = "HEVsuit"
 
 
-//SYNDIE
+// BATMAN
+/obj/item/clothing/suit/powered/spawnable/full/batman
+	name = "batsuit"
+	icon_state = "batmansuit"
+
+/obj/item/clothing/head/powered/spawnable/batman
+	name = "batmask"
+	icon_state = "batmask"
+	brightness_on = 0
+
+
+// orderly_riot
+/obj/item/clothing/suit/powered/spawnable/full/orderly_riot
+	icon_state = "orderly_riot"
+
+/obj/item/clothing/head/powered/spawnable/orderly_riot
+	icon_state = "orderly_riot"
+	brightness_on = 0
+
+
+// SYNDIE
 /obj/item/clothing/head/powered/spawnable/syndie
 	icon_state = "powered0-syndie"
 	item_color = "syndie"
@@ -28,7 +52,7 @@
 	icon_state = "powered-syndie"
 
 
-//DEATHSQUAD
+// DEATHSQUAD
 /obj/item/clothing/head/powered/spawnable/deathsquad
 	icon_state = "powered0-deathsquad"
 	item_color = "deathsquad"
