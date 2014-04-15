@@ -416,51 +416,36 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 	if ((istype(W, /obj/item/weapon/shovel)))
 		var/turf/T = user.loc
-		if (!( istype(T, /turf) ))
+		if (!istype(T, /turf))
 			return
 
-		if (dug)
+		if(dug && !get_turf_down(src))
 			user << "\red This area has already been dug"
 			return
 
 		user << "\red You start digging."
 		playsound(loc, 'sound/effects/rustle1.ogg', 50, 1) //russle sounds sounded better
 
-		sleep(40)
+		sleep(40 * (dug ? 6 : 1))
 		if ((user.loc == T && user.get_active_hand() == W))
 			user << "\blue You dug a hole."
 			gets_dug()
 
-	if ((istype(W,/obj/item/weapon/pickaxe/drill)))
+	if((istype(W,/obj/item/weapon/pickaxe/drill)))
 		var/turf/T = user.loc
 		if (!( istype(T, /turf) ))
 			return
 
-		if (dug)
+		var/obj/item/weapon/pickaxe/drill/D = W
+
+		if(dug && !get_turf_down(src))
 			user << "\red This area has already been dug"
 			return
 
 		user << "\red You start digging."
 		playsound(loc, 'sound/effects/rustle1.ogg', 50, 1) //russle sounds sounded better
 
-		sleep(30)
-		if ((user.loc == T && user.get_active_hand() == W))
-			user << "\blue You dug a hole."
-			gets_dug()
-
-	if ((istype(W,/obj/item/weapon/pickaxe/diamonddrill)) || (istype(W,/obj/item/weapon/pickaxe/borgdrill)))
-		var/turf/T = user.loc
-		if (!( istype(T, /turf) ))
-			return
-
-		if (dug)
-			user << "\red This area has already been dug"
-			return
-
-		user << "\red You start digging."
-		playsound(loc, 'sound/effects/rustle1.ogg', 50, 1) //russle sounds sounded better
-
-		sleep(0)
+		sleep(0.2 * D.digspeed * (dug ? 6 : 1))
 		if ((user.loc == T && user.get_active_hand() == W))
 			user << "\blue You dug a hole."
 			gets_dug()
@@ -478,6 +463,15 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/floor/plating/asteroid/proc/gets_dug()
 	if(dug)
+		var/turf/turfdown = get_turf_down(src)
+		if(!turfdown)
+			return
+		else if(istype(turfdown, /turf/simulated/wall) || istype(turfdown, /turf/simulated/shuttle))
+			ChangeTurf(/turf/simulated/floor/plating)
+		else if(istype(turfdown, /turf/simulated/floor) && !istype(turfdown, /turf/simulated/floor/plating/asteroid))
+			ChangeTurf(/turf/simulated/floor/plating)
+		else
+			ChangeTurf(/turf/simulated/floor/open)
 		return
 	new/obj/item/weapon/ore/glass(src)
 	new/obj/item/weapon/ore/glass(src)
@@ -490,7 +484,6 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	return
 
 /turf/simulated/floor/plating/asteroid/proc/updateMineralOverlays()
-
 	overlays.Cut()
 
 	if(istype(get_step(src, NORTH), /turf/simulated/mineral))
