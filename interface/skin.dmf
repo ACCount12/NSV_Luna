@@ -230,6 +230,10 @@ macro "hotkeymode"
 		command = "a-intent hurt"
 		is-disabled = false
 	elem 
+		name = "CTRL+H"
+		command = "holster"
+		is-disabled = false
+	elem 
 		name = "F1"
 		command = "adminhelp"
 		is-disabled = false
