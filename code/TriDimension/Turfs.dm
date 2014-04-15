@@ -13,7 +13,7 @@
 		getbelow()
 		spawn(5) // So stuff falls down
 			for(var/atom/movable/AM in src.contents)
-				if(!AM.anchored || istype(AM, /obj/mech)) 	// Dat goddamn mechs!
+				if(!AM.anchored || istype(AM, /obj/mecha)) 	// Dat goddamn mechs!
 					src.Enter(AM)
 		return
 
