@@ -13,7 +13,8 @@
 		getbelow()
 		spawn(5) // So stuff falls down
 			for(var/atom/movable/AM in src.contents)
-				src.Enter(AM)
+				if(!AM.anchored || istype(AM, /obj/mech)) 	// Dat goddamn mechs!
+					src.Enter(AM)
 		return
 
 	Enter(var/atom/movable/AM)
@@ -25,9 +26,6 @@
 						return
 				if(AM)
 					var/blocked = 0
-
-					if(AM.anchored) // NO!
-						blocked = 1
 
 					for(var/atom/A in src.contents)
 						if(istype(A, /obj/structure/lattice))
