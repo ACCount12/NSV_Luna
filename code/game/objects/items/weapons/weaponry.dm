@@ -185,7 +185,10 @@
 		del(I)
 		del(src)*/
 
-	else if(istype(I, /obj/item/weapon/shard))
+	else if(istype(I, /obj/item/pipe))
+		var/obj/item/pipe/P = I
+		if(P.pipe_type != 0)
+			return
 		var/obj/item/weapon/gun/projectile/revolver/pipe/S = new /obj/item/weapon/gun/projectile/revolver/pipe
 
 		user.unEquip(I)
