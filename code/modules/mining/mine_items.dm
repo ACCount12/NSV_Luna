@@ -282,7 +282,7 @@ proc/move_mining_shuttle()
 		origin_tech = "materials=6;engineering=4"
 		desc = "A pickaxe with a diamond pick head, this is just like minecraft."
 
-	diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
+	drill/diamond //When people ask about the badass leader of the mining tools, they are talking about ME!
 		name = "diamond mining drill"
 		icon_state = "diamonddrill"
 		item_state = "jackhammer"
@@ -290,9 +290,9 @@ proc/move_mining_shuttle()
 		origin_tech = "materials=6;powerstorage=4;engineering=5"
 		desc = "Yours is the drill that will pierce the heavens!"
 
-	borgdrill
+	drill/borg
 		name = "cyborg mining drill"
-		icon_state = "diamonddrill"
+		icon_state = "borgdrill"
 		item_state = "jackhammer"
 		digspeed = 15
 		desc = ""
