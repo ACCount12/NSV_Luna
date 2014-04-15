@@ -11,6 +11,9 @@
 	New()
 		..()
 		getbelow()
+		spawn(5) // So stuff falls down
+			for(var/atom/movable/AM in src.contents)
+				src.Enter(AM)
 		return
 
 	Enter(var/atom/movable/AM)
@@ -21,8 +24,16 @@
 					if(!getbelow())
 						return
 				if(AM)
-					var/area/areacheck = get_area(src)
 					var/blocked = 0
+
+					if(AM.anchored) // NO!
+						blocked = 1
+
+					for(var/atom/A in src.contents)
+						if(istype(A, /obj/structure/lattice))
+							blocked = 1
+							break
+
 					for(var/atom/A in floorbelow.contents)
 						if(A.density)
 							blocked = 1
@@ -36,7 +47,7 @@
 
 							//dont break here, since we still need to be sure that it isnt blocked
 
-					if (!blocked && !(areacheck.name == "Space"))
+					if (!blocked)
 						AM.Move(floorbelow)
 						if ( istype(AM, /mob/living/carbon/human))
 							if(AM:back && istype(AM:back, /obj/item/weapon/tank/jetpack))
